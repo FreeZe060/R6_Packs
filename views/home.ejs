@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>R6 Case</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
+    <body>
+
+        <header>
+            <!-- Barre de navigation (navbar) -->
+            <div class="navbar">
+                <a href="#">Home</a>
+                <a href="#">Cases</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </header>
+
+        <div class="case-container">
+            <h1 class="case-title">Dark Theme Case Opening</h1>
+            <p>Click the button to open the case!</p>
+            <button class="case-button" onclick="openCase()">Open Case</button>
+            <div id="result"></div>
+        </div>
+
+        <!-- <video autoplay muted loop>
+            <source src="../static/video/foret-magique-coloree-small-memory-hd-fond-ecran.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+
+    </body>
+
+    <script>
+
+        function openCase() {
+            // Add your case opening logic here
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = 'Congratulations! You got something awesome!';
+        }
+
+    </script>
+</html>
