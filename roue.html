@@ -35,23 +35,21 @@
     }
 
     .cursor {
+      width: 2px;
+      height: 100px;
+      background-color: red;
       position: absolute;
-      top: 50%;
+      top: 0;
       left: 50%;
-      transform: translate(-50%, -50%);
-      color: red;
-      width: 10%;
-      height: 10%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      transform: translateX(-50%);
+      z-index: 2;
+  }
   </style>
 </head>
 <body>
 
-<div id="wheel-container">
   <div class="cursor"></div>
+<div id="wheel-container">
   <div id="wheel">
     <!-- Ajoutez 50 divs ici -->
     <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
