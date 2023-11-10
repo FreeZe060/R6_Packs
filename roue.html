@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body{
-      display:flex;
+    body {
+      display: flex;
       justify-content: center;
       align-items: center;
     }
@@ -21,16 +21,16 @@
 
     #wheel {
       display: flex;
+      transition: left 2s ease-in-out; /* Ajout de la transition CSS */
     }
 
     .wheel-slice {
       flex: 0 0 11%;
     }
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .wheel-slice div {
+      width: 100px;
+      height: 100px;
     }
 
     @keyframes scroll {
@@ -47,29 +47,29 @@
 
 <div id="wheel-container">
   <div id="wheel">
-    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140); width: 100px; height: 100px;"></div></div>
-    <div class="wheel-slice"><div style="background-color: red; width: 100px; height: 100px;"></div></div>
-    <div class="wheel-slice"><div style="background-color: green; width: 100px; height: 100px;"></div></div>
-    <div class="wheel-slice"><div style="background-color: blue; width: 100px; height: 100px;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: green;"></div></div>
+    <div class="wheel-slice"><div style="background-color: blue;"></div></div>
     <!-- Ajoute autant de slices que nécessaire avec des images différentes -->
   </div>
 </div>
 
 <script>
   const wheel = document.getElementById('wheel');
+  const slices = document.querySelectorAll('.wheel-slice');
+
+  let currentIndex = 0;
 
   function spinWheel() {
-    // Déplace la roue de la fortune de gauche à droite
-    wheel.style.left = '-100%';
-
-    // Réinitialise la position après un délai
-    setTimeout(() => {
-      wheel.style.left = '0';
-    }, 5000); // Ajuste la durée du mouvement ici (en millisecondes)
+    currentIndex = (currentIndex + 1) % slices.length;
+    const leftValue = `-${currentIndex * 11}%`;
+    wheel.style.left = leftValue;
   }
 
-  // Appelle la fonction spinWheel au chargement de la page (à titre d'exemple)
-  window.onload = spinWheel;
+  window.onload = function () {
+    setInterval(spinWheel, 5000);
+  };
 </script>
 
 </body>
