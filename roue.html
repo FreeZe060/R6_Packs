@@ -11,6 +11,7 @@
     }
 
     #wheel-container {
+      position: relative;
       display: flex;
       padding: 2vh;
       width: 800px;
@@ -21,11 +22,11 @@
 
     #wheel {
       display: flex;
-      transition: left 2s ease-in-out; /* Ajout de la transition CSS */
+      position: absolute;
     }
 
     .wheel-slice {
-      flex: 0 0 11%;
+      flex: 0 0 2%;
     }
 
     .wheel-slice div {
@@ -33,42 +34,91 @@
       height: 100px;
     }
 
-    @keyframes scroll {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-100%);
-      }
+    .cursor {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: red;
+      width: 10%;
+      height: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
 <body>
 
 <div id="wheel-container">
+  <div class="cursor"></div>
   <div id="wheel">
+    <!-- Ajoutez 50 divs ici -->
     <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
     <div class="wheel-slice"><div style="background-color: red;"></div></div>
-    <div class="wheel-slice"><div style="background-color: green;"></div></div>
-    <div class="wheel-slice"><div style="background-color: blue;"></div></div>
-    <!-- Ajoute autant de slices que nécessaire avec des images différentes -->
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div><div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+    <div class="wheel-slice"><div style="background-color: red;"></div></div>
+    <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
   </div>
 </div>
 
 <script>
+  const wheelContainer = document.getElementById('wheel-container');
   const wheel = document.getElementById('wheel');
-  const slices = document.querySelectorAll('.wheel-slice');
+  const slices = document.querySelectorAll('.wheel-slice'); // Correction de la classe ici
+  const cursor = document.querySelector('.cursor');
 
-  let currentIndex = 0;
+  let startTime = null;
 
-  function spinWheel() {
-    currentIndex = (currentIndex + 1) % slices.length;
-    const leftValue = `-${currentIndex * 11}%`;
-    wheel.style.left = leftValue;
+  function spinWheel(timestamp) {
+    if (!startTime) {
+      startTime = timestamp;
+    }
+
+    const progress = timestamp - startTime;
+
+    // Défilement fluide
+    wheel.style.transform = `translateX(-${progress / 5}px)`; // Ajustez la vitesse en modifiant le dénominateur
+
+    // Positionne le curseur au milieu de la roue
+    const middleIndex = Math.floor(slices.length / 2);
+    const middleSlice = slices[middleIndex];
+    const middlePosition = middleSlice.offsetLeft + middleSlice.offsetWidth / 2;
+    cursor.style.left = `${wheelContainer.offsetLeft + middlePosition}px`;
+
+    // Arrête le défilement après 5000 ms (5 secondes)
+    if (progress < 5000) {
+      requestAnimationFrame(spinWheel);
+    }
   }
 
   window.onload = function () {
-    setInterval(spinWheel, 5000);
+    requestAnimationFrame(spinWheel);
   };
 </script>
 

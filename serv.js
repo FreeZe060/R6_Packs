@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
             console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
             return;
         }
+        console.log(results);
         res.render('home', { packs: results });
     });
 });

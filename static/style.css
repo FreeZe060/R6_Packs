@@ -3,8 +3,7 @@ body {
     background-color: #121212;
     font-family: 'Arial', sans-serif;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100vh;
     margin: 0;
 }
@@ -12,26 +11,32 @@ body {
 /******************************** navbar **********************************************/
 
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    padding: 2vh;
     background-color: #333;
     overflow: hidden;
     display: inline-flex;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .navbar a {
+    margin-right: 1vh;
     float: left;
     display: block;
     color: #fff;
+    border-radius: 20px;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    transition: 0.3s ease-in-out;
 }
 
 .navbar a:hover {
     background-color: #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #333;
 }
 
@@ -90,6 +95,34 @@ body {
 .case-button:hover {
     background-color: #2980b9;
 }
+
+
+/* ============================PACK==================================== */
+
+.pack-container-title {
+    display: flex;
+    margin-left: 16vh;
+    margin-top: 45vh;
+    flex-direction: column;
+    text-align: center;
+    align-items: flex-start;
+}
+
+.pack-container{
+    display: flex;
+    text-align: center;
+    align-items: flex-end;
+    background-color: #1e1e1e;
+    padding: 4vh 8vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.pack{
+    margin-right: 4vh;
+}
+
+/* ============================VIDEO BACK==================================== */
 
 /* video {
     position: fixed;

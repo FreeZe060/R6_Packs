@@ -18,7 +18,7 @@
             </div>
         </header>
         
-        <div class="search-bar">
+        <!-- <div class="search-bar">
             <input type="text" class="search" id="search" name="search" placeholder="Nom de la case">
             <button class="button" id="button">Rechercher</button>
         </div>
@@ -28,12 +28,23 @@
             <p>Click the button to open the case!</p>
             <button class="case-button" onclick="openCase()">Open Case</button>
             <div id="result"></div>
+        </div> -->
+        <div class="pack-container-title">
+            <h1>Tous nos Packs:</h1>
+            <div class="pack-container">
+                <% packs.forEach(function(pack) { %>
+                    <div class="pack">
+                        <a href="/pack/<%= pack.id %>">
+                            <img class="img_pack" src="../assets/image_pack/<%= pack.image %>" alt="Image du Pack">
+                        </a>
+                        <p class="name"><%= pack.name %></p>
+                        <button class="case-button" onclick="openCase()">Open Case for <%= pack.price %>¤</button>
+                    </div>
+                <% }); %>
+            </div>
         </div>
 
-        <!-- <video autoplay muted loop>
-            <source src="../static/video/foret-magique-coloree-small-memory-hd-fond-ecran.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video> -->
+
         <div class="video-container">
             <video autoplay muted loop id="video-background">
                 <source src="mylivewallpapers.com-Rainbow-6-Siege.mp4" type="video/mp4">
