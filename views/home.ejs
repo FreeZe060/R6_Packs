@@ -17,7 +17,12 @@
                 <a href="#">Contact</a>
             </div>
         </header>
-
+        
+        <div class="search-bar">
+            <input type="text" class="search" id="search" name="search" placeholder="Nom de la case">
+            <button class="button" id="button">Rechercher</button>
+        </div>
+        
         <div class="case-container">
             <h1 class="case-title">Dark Theme Case Opening</h1>
             <p>Click the button to open the case!</p>
@@ -29,16 +34,93 @@
             <source src="../static/video/foret-magique-coloree-small-memory-hd-fond-ecran.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video> -->
+        <div class="video-container">
+            <video autoplay muted loop id="video-background">
+                <source src="foret-magique-coloree-small-memory-hd-fond-ecran.mp4" type="video/mp4">
+                <!-- Ajoutez des sources supplémentaires pour la compatibilité avec différents navigateurs -->
+                Votre navigateur ne prend pas en charge la balise vidéo.
+            </video>
+        </div>
 
     </body>
 
     <script>
 
         function openCase() {
-            // Add your case opening logic here
+            
+            // Exemple d'utilisation
+            const dropRates = {
+                "skin1": 0.01,
+                "skin2": 0.15,
+                "skin3": 0.10,
+                "skin4": 0.74
+                // Ajoute d'autres skins avec leurs pourcentages
+            };
+    
+            const totalSkinsToGenerate = 100;
+            const generatedSkins = generateSkinList(dropRates, totalSkinsToGenerate);
+    
+            console.log(generatedSkins);
+            console.log(count_element(generatedSkins, "skin4"));
+
+            const randomIndex = Math.floor(Math.random() * totalSkinsToGenerate);
+
             const resultContainer = document.getElementById('result');
-            resultContainer.innerHTML = 'Congratulations! You got something awesome!';
+            resultContainer.innerHTML = 'Congratulations! You got something awesome! U got ' + generatedSkins[randomIndex]; ;
         }
+
+        function generateSkinList(dropRates, totalSkins) {
+            // Initialisation de la liste des skins
+            let skinList = [];
+
+            // Calcul de la somme totale des pourcentages
+            const totalPercentage = Object.values(dropRates).reduce((acc, rate) => acc + rate, 0);
+            if (totalPercentage != 1){
+                throw new Error("Pourcentage must be 100 percent");
+            }
+
+            // Calcul du nombre d'éléments à générer pour chaque skin ("skin4:74")
+            const skinCounts = Object.fromEntries(Object.entries(dropRates).map(([skin, rate]) => [skin, Math.round((rate / totalPercentage) * totalSkins)]));
+
+            // Correction du nombre d'éléments pour s'assurer que le total est exactement égal à totalSkins
+            const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
+            if (diff !== 0) {
+                // Ajouter ou retirer la différence à un skin (le premier trouvé)
+                for (let skin in skinCounts) {
+                    skinCounts[skin] += diff;
+                    break;
+                }
+            }
+
+            // Génération de la liste finale
+            for (let skin in skinCounts) {
+                for (let i = 0; i < skinCounts[skin]; i++) {
+                    skinList.push(skin);
+                }
+            }
+
+            // Mélanger la liste pour plus d'aléatoire
+            skinList.sort(() => Math.random() - 0.5);
+
+            return skinList;
+        }
+
+        
+        function count_element(liste, element){
+            
+            count=0;
+            for (let i in liste) {
+                if (liste[i] == element){
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        window.onload = function () {
+      
+            
+        };
 
     </script>
 </html>
