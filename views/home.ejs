@@ -12,10 +12,22 @@
         <header>
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
-                <a href="#">Home</a>
-                <a href="#">Cases</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
+                <a id="lien" href="#">Home</a>
+                <a id="lien" href="#">Cases</a>
+                <a id="lien" href="#">About</a>
+                <a id="lien" href="#">Contact</a>
+                <% if (profile) { %>
+                    <!-- Afficher l'image de l'utilisateur -->
+                    <div class="profile-container">
+                        <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                    </div>
+                <% } else { %>
+                    <!-- Afficher le bouton de connexion -->
+                    <div class="log-container">
+                        <a class="case-button" href="/profiles">LogIn</a>
+                    </div>
+                <% } %>
+                
             </div>
         </header>
         
@@ -30,8 +42,9 @@
             <button class="case-button" onclick="openCase()">Open Case</button>
             <div id="result"></div>
         </div> -->
+
         <div class="pack-container-title">
-            <h1>Tous nos Packs:</h1>
+            <h1>All our Packs:</h1>
             <div class="pack-container">
                 <% packs.forEach(function(pack) { %>
                     <div class="pack">

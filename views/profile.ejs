@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>R6 Case</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <link rel="icon" href="r6_profile.png" type="image/x-icon">
+    </head>
+    <body>
+
+        <header>
+            <!-- Barre de navigation (navbar) -->
+            <div class="navbar">
+                <a id="lien" href="/">Home</a>
+                <a id="lien" href="/">Cases</a>
+                <a id="lien" href="#">About</a>
+                <a id="lien" href="#">Contact</a>
+            </div>
+        </header>
+
+        <div id="container-profiles">
+            <% profiles.forEach(function(profile) { %>
+                <div class="profile-container" onclick="choixUser()">
+                    <a href="/">
+                        <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image du profile">
+                    </a>
+                    <p class="name"><%= profile.name %></p>
+                    
+                </div>
+            <% }); %>
+        </div>
+
+
+
+    </body>
+</html>

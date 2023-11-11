@@ -14,16 +14,17 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    padding: 2vh;
+    width: 98.7%;
+    padding: 20px;
     background-color: #333;
     overflow: hidden;
     display: inline-flex;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: space-between;
 }
 
-.navbar a {
-    margin-right: 1vh;
+.navbar a#lien {
     float: left;
     display: block;
     color: #fff;
@@ -34,11 +35,16 @@ body {
     transition: 0.3s ease-in-out;
 }
 
-.navbar a:hover {
+.navbar a#lien:hover {
     background-color: #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #333;
 }
+
+.log-container{
+    
+}
+
 
 /******************************** search-bar **********************************************/
 
@@ -89,6 +95,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
@@ -120,6 +127,14 @@ body {
 
 .pack{
     margin-right: 4vh;
+}
+
+/* ============================PROFILE =========================================*/
+
+.img_user{
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 /* ============================VIDEO BACK==================================== */

@@ -1,5 +1,6 @@
-//npm install express mysql path ejs
+//npm install express-session express mysql path ejs
 const express = require('express');
+const session = require('express-session');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
@@ -34,17 +35,57 @@ connection.connect((err) => {
     }
 });
 
+/* Definition de l'user */
+
+app.use(session({
+    secret: 'votre_clé_secrète',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use((req, res, next) => {
+    // Middleware pour rendre l'ID de l'utilisateur disponible dans toutes les routes
+    res.locals.userId = req.session.userId;
+    next();
+});
+
 /* Routes */
 
 app.get('/', (req, res) => {
-    connection.query('SELECT packs.* FROM packs', (error, results) => {
+    connection.query('SELECT packs.* FROM packs', (error, Packresults) => {
         if (error) {
             console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
             return;
         }
-        console.log(results);
-        res.render('home', { packs: results });
+        // console.log(Packresults);
+        const userId = req.session.userId;
+
+        if (userId != undefined){
+            connection.query('SELECT profile.* FROM profile WHERE id = ?',[userId], (error, Profileresults) => {
+                if (error) {
+                    console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+                    return;
+                }
+                console.log(Profileresults);
+                console.log(userId);
+                res.render('home', { packs: Packresults, profile: Profileresults });
+            });;
+        }else{
+            res.render('home', { packs: Packresults, profile: null });
+        }
+
     });
+});
+
+app.get('/profiles', (req, res) => {
+    connection.query('SELECT profile.* FROM profile', (error, Profilesresults) => {
+        if (error) {
+            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+            return;
+        }
+        console.log(Profilesresults);
+        res.render('profile', { profiles: Profilesresults });
+    });;
 });
 
 
