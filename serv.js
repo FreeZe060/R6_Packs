@@ -1,6 +1,7 @@
-//npm install express-session express mysql path ejs
+//npm install express-session express mysql path ejs body-parser
 const express = require('express');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
@@ -36,6 +37,7 @@ connection.connect((err) => {
 });
 
 /* Definition de l'user */
+
 app.use(session({
     secret: 'votre_clé_secrète',
     resave: false,
@@ -47,7 +49,12 @@ app.use((req, res, next) => {
     next();
 });
 
-/* Routes */
+/*Encodage de l'url*/
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+/* Routes GET*/
 
 app.get('/', (req, res) => {
     connection.query('SELECT packs.* FROM packs', (error, Packresults) => {
@@ -83,6 +90,16 @@ app.get('/profiles', (req, res) => {
 });
 
 
+/*Routes POST*/
+
+app.post('/setUserId', (req, res) => {
+    const reqUserID = req.body.userId;
+    console.log(reqUserID);
+    res.locals.userId = reqUserID;
+    
+    res.json({ message: 'Id utilisateur mis à jour', data: reqUserID});
+    // res.redirect("/")
+});
 
 /*END*/
 

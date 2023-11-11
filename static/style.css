@@ -8,6 +8,11 @@ body {
     margin: 0;
 }
 
+a{
+    text-decoration: none;
+    font-style: normal;
+}
+
 /******************************** navbar **********************************************/
 
 .navbar {
@@ -105,7 +110,7 @@ body {
 
 .pack-container-title {
     display: flex;
-    margin-left: 16vh;
+    margin-left: 10vh;
     margin-top: 40vh;
     flex-direction: column;
     text-align: center;
@@ -126,28 +131,41 @@ body {
     margin-right: 4vh;
 }
 
+.img_pack{
+
+}
+
 /* ============================PROFILE =========================================*/
+
+.profiles-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profiles-container div{
+    margin: 4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 20px 60px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.profiles-container #name {
+    font-size:20px;
+    color: white;
+}
 
 .img_user{
     border-radius: 100px;
     width: 200px;
     height: 200px;
 }
-
-
-/* ============================VIDEO BACK==================================== */
-
-/* video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-} */
 
 /* ============================ VIDEO BACK ==================================== */
 

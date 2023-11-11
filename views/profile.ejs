@@ -17,16 +17,34 @@
                 <a id="lien" href="#">Contact</a>
             </div>
         </header>
-        <div id="container-profiles">
+        <div class="profiles-container">
             <% profiles.forEach(function(profile) { %>
-                <div class="profile-container" onclick="choixUser()">
-                    <a href="/">
-                        <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image du profile">
-                    </a>
-                    <p class="name"><%= profile.name %></p>
-                    
+                <div id-user="<%= profile.id %>" onclick="choixUser(this)">
+
+                    <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image du profile">
+                    <p id="name"><%= profile.name %></p>
+
                 </div>
             <% }); %>
         </div>
     </body>
+
+    <script src="/script.js" defer></script>
+    <!-- <script>
+        function choixUser(element) {
+
+            const userId = element.getAttribute('user-id');
+          
+            // Envoyer l'id_user au serveur (par exemple, avec une requête AJAX)
+            // Vous devrez ajuster cela en fonction de votre architecture et de la manière dont vous gérez les sessions sur le serveur
+            fetch(`/setUserId?userId=${userId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Vous pouvez gérer la réponse du serveur ici
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la communication avec le serveur:', error);
+            });
+        }
+    </script> -->
 </html>
