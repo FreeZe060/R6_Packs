@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>R6 Case</title>
         <link rel="stylesheet" type="text/css" href="/style.css">
-        <link rel="icon" href="../assets/icone-r6.jpg" type="image/x-icon">
+        <link rel="icon" href="r6_pack.png" type="image/x-icon">
     </head>
     <body>
 
@@ -36,7 +36,7 @@
                 <% packs.forEach(function(pack) { %>
                     <div class="pack">
                         <a href="/pack/<%= pack.id %>">
-                            <img class="img_pack" src="../assets/image_pack/<%= pack.image %>" alt="Image du Pack">
+                            <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="Image du Pack">
                         </a>
                         <p class="name"><%= pack.name %></p>
                         <button class="case-button" onclick="openCase()">Open Case for <%= pack.price %>¤</button>

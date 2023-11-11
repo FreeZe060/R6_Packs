@@ -8,6 +8,8 @@ const port = 8000;
 const dir = path.join(__dirname, '/');
 app.use(express.static('static'));
 
+app.use(express.static('assets'));
+
 /* EJS */ 
 
 app.set('view engine', 'ejs');
