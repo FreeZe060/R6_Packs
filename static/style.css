@@ -16,10 +16,14 @@ body {
     left: 0;
     width: 100%;
     padding: 2vh;
+    width: 98.7%;
+    padding: 25px;
     background-color: #333;
     overflow: hidden;
     display: inline-flex;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navbar a#lien {
@@ -44,7 +48,7 @@ body {
 
 .search-bar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -102,7 +106,7 @@ body {
 .pack-container-title {
     display: flex;
     margin-left: 16vh;
-    margin-top: 45vh;
+    margin-top: 40vh;
     flex-direction: column;
     text-align: center;
     align-items: flex-start;
