@@ -314,3 +314,38 @@ a{
     flex-direction: column;
     margin: 0 auto;
 }
+
+.container_result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 9;
+    width: 30vh;
+    height: 30vh;
+}
+
+.container_result button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5vh 0 0 0;
+}
+
+
+.container_result button:hover {
+    background-color: #2980b9;
+}
+
+#results{
+    text-align: center;
+    font-size: 1em;
+    color: black;
+}
