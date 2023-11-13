@@ -20,6 +20,10 @@
                     <!-- Afficher l'image de l'utilisateur -->
                     <div class="profile-container" onclick="showpop_profile()"><!-- finir-->
                         <p><%= profile.name %></p><img class="img_user" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                        <div class="popup" style="display: none;">
+                            <a id="profil" href="/">Home</a>
+                            <a id="deconnexion" href="/">Cases</a>
+                        </div>
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->

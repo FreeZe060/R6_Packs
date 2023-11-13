@@ -26,7 +26,7 @@
 
             <div class="container_result" id="result" style="display: none;">
               <p id="results">vous</p>
-              <button id="ok"> ok</button>
+              <button id="ok" onclick="buttonresult()"> ok</button>
             </div>
             
             <div id="wheel-container" style="display: none;">
@@ -212,6 +212,13 @@
         
         function resetWinningSliceIndex() {
           winningSliceIndex = -1;
+        }
+
+        function buttonresult(){
+          const resultContainer = document.getElementById('result');
+          wheelContainer.style.display = "none";
+          resultContainer.style.display = "none";
+          pack.style.display = "flex";
         }
     
       function openCase() {

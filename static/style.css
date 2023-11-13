@@ -209,6 +209,56 @@ a{
 
 /* ================================= PAGE OPENING ========================================== */
 
+
+/* ===================== FOR ALL/PACK/BUTTON ============================ */
+
+
+.for_all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.loterie {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5vh 0 0 0;
+}
+
+.loterie:hover {
+    background-color: #2980b9;
+}
+
+.open_packs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_packs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+
+/* ===================== LOTERIE/CURSOR/BUTTON ============================ */
+
+
+#wheel {
+    display: flex;
+    position: absolute;
+}
+
 #wheel-container {
     position: relative;
     display: flex;
@@ -221,9 +271,13 @@ a{
     border: 3px solid #3498db;
 }
 
-#wheel {
+.loterie_container{
     display: flex;
-    position: absolute;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .wheel-slice {
@@ -245,31 +299,9 @@ a{
     z-index: 9;
 }
 
-.loterie_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
-}
 
-.loterie {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5vh 0 0 0;
-}
+/* ===================== SKIN ============================ */
 
-
-.loterie:hover {
-    background-color: #2980b9;
-}
 
 .container_skins{
     display: flex;
@@ -290,30 +322,13 @@ a{
     margin: 2vh 0 2vh 4vh;
 }
 
-.img_packs{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-}
-
-.open_packs{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container_skins p{
     text-align: center;
 }
 
-.for_all{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 auto;
-}
+
+/* ===================== RESULT ============================ */
+
 
 .container_result{
     display: flex;
@@ -338,7 +353,6 @@ a{
     transition: background-color 0.3s ease;
     margin: 5vh 0 0 0;
 }
-
 
 .container_result button:hover {
     background-color: #2980b9;
