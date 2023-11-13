@@ -4,7 +4,7 @@ function choixUser(element) {
 
     console.log(userId);
 
-    fetch(`/setUserId?userId=${userId}`, { method: 'POST'})
+    fetch(`/UserId?userId=${userId}`, { method: 'POST'})
         .then(response => response.json())
         .then(data => {
             console.log(data); // Vous pouvez gérer la réponse du serveur ici

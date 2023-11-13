@@ -93,11 +93,11 @@ app.get('/profiles', (req, res) => {
 /*Routes POST*/
 
 app.post('/setUserId', (req, res) => {
-    const reqUserID = req.body.userId;
-    console.log(reqUserID);
+    const reqUserID = req.query.userId;
+    console.log("serv.js ::",reqUserID);
     res.locals.userId = reqUserID;
     
-    res.json({ message: 'Id utilisateur mis à jour', data: reqUserID});
+    res.json({ message: 'Id utilisateur récuperer : '+reqUserID});
     // res.redirect("/")
 });
 
