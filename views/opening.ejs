@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="icon" href="/image_pack/AlphaPack.jpg" type="image/x-icon">
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <link rel="icon" href="/image_pack/AlphaPack.jpg" type="image/x-icon">
+    </head>
+    <body>
 
     <header>
         <!-- Barre de navigation (navbar) -->
@@ -15,8 +15,19 @@
             <a id="lien" href="/">Cases</a>
             <a id="lien" href="#">About</a>
             <a id="lien" href="#">Contact</a>
-          </div>
-        </header>
+            <% if (profile != undefined) { %>
+                <!-- Afficher l'image de l'utilisateur -->
+                <div class="profile-container" onclick="showpop_profile()"><!-- finir-->
+                    <p><%= profile.name %></p><img class="img_user" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                </div>
+            <% } else { %>
+                <!-- Afficher le bouton de connexion -->
+                <div class="log-container">
+                    <a class="case-button" href="/profiles">LogIn</a>
+                </div>
+            <% } %>
+        </div>
+    </header>
         
         <div class="for_all">
           <div class="loterie_container">

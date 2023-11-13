@@ -16,7 +16,7 @@
                 <a id="lien" href="/">Cases</a>
                 <a id="lien" href="#">About</a>
                 <a id="lien" href="#">Contact</a>
-                <% if (profile) { %>
+                <% if (profile != undefined) { %>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div class="profile-container" onclick="showpop_profile()"><!-- finir-->
                         <p><%= profile.name %></p><img class="img_user" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">

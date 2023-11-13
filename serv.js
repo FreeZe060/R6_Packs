@@ -45,7 +45,7 @@ app.use(session({
 }));
 app.use((req, res, next) => {
     // Middleware pour rendre l'ID de l'utilisateur disponible dans toutes les routes
-    res.locals.userId = req.session.userId;
+    res.locals.logUser = req.session.logUser;
     next();
 });
 
@@ -62,19 +62,8 @@ app.get('/', (req, res) => {
             console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
             return;
         }
-        // console.log(Packresults);
-        const userId = res.locals.userId;
-        if (userId != undefined){
-            connection.query('SELECT profile.* FROM profile WHERE id = ?',[userId], (error, Profileresults) => {
-                if (error) {
-                    console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
-                    return;
-                }
-                res.render('home', { packs: Packresults, profile: Profileresults[0] });
-            });;
-        }else{
-            res.render('home', { packs: Packresults, profile: null });
-        }
+        const logUser = res.locals.logUser;
+        res.render('home', { packs: Packresults, profile: logUser});
     });
 });
 
@@ -90,24 +79,25 @@ app.get('/profiles', (req, res) => {
 
 
 app.get('/opening', (req, res) => {
-    // connection.query('SELECT profile.* FROM profile', (error, Profilesresults) => {
-    //     if (error) {
-    //         console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
-    //         return;
-    //     }
-    //     res.render('profile', { profiles: Profilesresults });
-    // });;
-    res.render('opening');
+    const logUser = res.locals.logUser;
+    res.render('opening', {profile: logUser});
 });
 
 
 /*Routes POST*/
 
 app.post('/UserId', (req, res) => {
-    const reqUserID = req.body.userId;
-    req.session.userId = reqUserID;
+    const reqUserId = req.body.userId;
     console.log("{ message: 'Id utilisateur chargé :",req.body.userId,"}");
-    res.redirect('/');
+    connection.query('SELECT profile.* FROM profile WHERE id = ?',[reqUserId], (error, Profileresults) => {
+        if (error) {
+            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+            return;
+        }
+        req.session.logUser = Profileresults[0];
+        res.redirect('/');
+    });;
+    
 });
 
 /*END*/
