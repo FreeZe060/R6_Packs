@@ -21,6 +21,10 @@ async function choixUser(element) {
     window.location.href = "/";
 }
 
+function showpop_profile(){
+    const pop_profile = document.getElementById('pop-profile');
+}
+
 function openCase() {
             
     // Exemple d'utilisation

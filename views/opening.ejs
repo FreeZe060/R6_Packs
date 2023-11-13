@@ -18,89 +18,90 @@
           </div>
         </header>
         
-        <div class="loterie_container">
-          <div class="open_packs">
-              <img src="../assets/image_pack/AlphaPack.jpg" alt="">
+        <div class="for_all">
+            <div class="loterie_container">
+              <div class="open_packs" id="open_packs">
+                  <img class="img_packs" src="/image_pack/AlphaPack.jpg" alt="">
+              </div>
+              <div id="wheel-container" style="display: none;">
+              <div class="cursor"></div>
+              <div id="wheel">
+                <!-- Ajoutez 50 divs ici -->
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
+              </div>
+            </div>
+            <button class="loterie" onclick="startAnimation()">Lancer l'animation</button>
           </div>
-          <div id="wheel-container" style="display: none;">
-        <div class="cursor"></div>
-        <div id="wheel">
-          <!-- Ajoutez 50 divs ici -->
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-          <div class="wheel-slice"><div style="background-color: red;"></div></div>
-          <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
+    
+          <div class="container_skins">
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+          </div>
         </div>
-      </div>
-      <button class="loterie" onclick="startAnimation()">Lancer l'animation</button>
-    </div>
-
-
-      <div class="container_skins">
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-          <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-    </div>
 
     <script>
         const wheelContainer = document.getElementById('wheel-container');
