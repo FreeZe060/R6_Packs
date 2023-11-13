@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="icon" href="r6_pack.png" type="image/x-icon">
+    <link rel="icon" href="/image_pack/AlphaPack.jpg" type="image/x-icon">
   </head>
   <body>
 
@@ -90,21 +90,22 @@
           </div>
     
           <div class="container_skins">
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
-              <div><img class="img_skins" src="r6_pack.png" alt=""></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div> 
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
           </div>
         </div>
 
     <script>
         const wheelContainer = document.getElementById('wheel-container');
+        const pack = document.getElementById('open_packs');
         const wheel = document.getElementById('wheel');
         const cursor = document.querySelector('.cursor');
         const slices = document.querySelectorAll('.wheel-slice');
@@ -161,6 +162,7 @@
       
         function startAnimation() {
           wheelContainer.style.display = "flex";
+          pack.style.display = "none";
           // Réinitialise la position de la roue
           wheel.style.transform = 'translateX(0)';
           
