@@ -63,14 +63,14 @@ app.get('/', (req, res) => {
             return;
         }
         // console.log(Packresults);
-        const userId = req.session.userId;
+        const userId = res.locals.userId;
         if (userId != undefined){
             connection.query('SELECT profile.* FROM profile WHERE id = ?',[userId], (error, Profileresults) => {
                 if (error) {
                     console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
                     return;
                 }
-                res.render('home', { packs: Packresults, profile: Profileresults });
+                res.render('home', { packs: Packresults, profile: Profileresults[0] });
             });;
         }else{
             res.render('home', { packs: Packresults, profile: null });
@@ -84,21 +84,30 @@ app.get('/profiles', (req, res) => {
             console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
             return;
         }
-        console.log(Profilesresults);
         res.render('profile', { profiles: Profilesresults });
     });;
 });
 
 
+app.get('/opening', (req, res) => {
+    // connection.query('SELECT profile.* FROM profile', (error, Profilesresults) => {
+    //     if (error) {
+    //         console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+    //         return;
+    //     }
+    //     res.render('profile', { profiles: Profilesresults });
+    // });;
+    res.render('opening');
+});
+
+
 /*Routes POST*/
 
-app.post('/setUserId', (req, res) => {
+app.post('/UserId', (req, res) => {
     const reqUserID = req.body.userId;
-    console.log(reqUserID);
-    res.locals.userId = reqUserID;
-    
-    res.json({ message: 'Id utilisateur mis à jour', data: reqUserID});
-    // res.redirect("/")
+    req.session.userId = reqUserID;
+    console.log("{ message: 'Id utilisateur chargé :",req.body.userId,"}");
+    res.redirect('/');
 });
 
 /*END*/

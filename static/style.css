@@ -17,24 +17,17 @@ a{
 
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    padding: 2vh;
-    width: 98.7%;
-    padding: 25px;
+    padding: 20px 0;
     background-color: #333;
     overflow: hidden;
-    display: inline-flex;
+    display: flex;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    justify-content: space-evenly;
     align-items: center;
-    justify-content: space-between;
 }
 
 .navbar a#lien {
-    margin-right: 1vh;
-    float: left;
-    display: block;
     color: #fff;
     border-radius: 20px;
     text-align: center;
@@ -49,6 +42,15 @@ a{
     color: #333;
 }
 
+.profile-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container p{
+    margin-right: 1vh;
+}
 /******************************** search-bar **********************************************/
 
 .search-bar {
@@ -132,7 +134,7 @@ a{
 }
 
 .img_pack{
-
+    width: 50%;
 }
 
 /* ============================PROFILE =========================================*/
@@ -205,16 +207,18 @@ a{
 }
 
 
-/* ================================================================= PAGE OPENING ==================================================================== */
+/* ================================= PAGE OPENING ========================================== */
 
 #wheel-container {
     position: relative;
     display: flex;
-    padding: 2vh;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
     width: 800px;
     height: 100px;
     overflow: hidden;
-    border: 3px solid #ccc;
+    border: 3px solid #3498db;
 }
 
 #wheel {
@@ -234,10 +238,114 @@ a{
 .cursor {
     width: 2px;
     height: 100px;
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+}
+
+.loterie_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.loterie {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5vh 0 0 0;
+}
+
+
+.loterie:hover {
+    background-color: #2980b9;
+}
+
+.container_skins{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    margin: 5vh 0 0 0;
+    width: 80%;
+}
+
+.img_skins{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 2vh 0 2vh 4vh;
+}
+
+.img_packs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.open_packs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_skins p{
+    text-align: center;
+}
+
+.for_all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.container_result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 9;
+    width: 30vh;
+    height: 30vh;
+}
+
+.container_result button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5vh 0 0 0;
+}
+
+
+.container_result button:hover {
+    background-color: #2980b9;
+}
+
+#results{
+    text-align: center;
+    font-size: 1em;
+    color: black;
 }
