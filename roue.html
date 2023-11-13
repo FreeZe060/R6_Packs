@@ -3,48 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      #wheel-container {
-        position: relative;
-        display: flex;
-        padding: 2vh;
-        width: 800px;
-        height: 100px;
-        overflow: hidden;
-        border: 3px solid #ccc;
-      }
-
-      #wheel {
-        display: flex;
-        position: absolute;
-      }
-
-      .wheel-slice {
-        flex: 0 0 2%;
-      }
-
-      .wheel-slice div {
-        width: 100px;
-        height: 100px;
-      }
-
-      .cursor {
-        width: 2px;
-        height: 100px;
-        background-color: red;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-      }
-    </style>
   </head>
   <body>
 
@@ -79,7 +37,6 @@
         <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
         <div class="wheel-slice"><div style="background-color: red;"></div></div>
         <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-        <div class="wheel-slice"><div style="background-color: red;"></div></div><div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
         <div class="wheel-slice"><div style="background-color: red;"></div></div>
         <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
         <div class="wheel-slice"><div style="background-color: red;"></div></div>
@@ -108,7 +65,6 @@
         <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
         <div class="wheel-slice"><div style="background-color: red;"></div></div>
         <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-        <div class="wheel-slice"><div style="background-color: red;"></div></div><div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
         <div class="wheel-slice"><div style="background-color: red;"></div></div>
         <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
       </div>
@@ -226,7 +182,7 @@
         for (let i = 0; i < dropRates.length; i++) {
           const img = document.createElement('img');
           const skin = generatedSkins[i];
-          img.src = `path/to/${skin}.jpg`; // Remplacez "path/to/" par le chemin réel
+          img.src = `/image_user/hallexxx.jpg`; // Remplacez "path/to/" par le chemin réel
           img.alt = skin;
           resultContainer.appendChild(img);
         }
