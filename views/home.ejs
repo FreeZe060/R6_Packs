@@ -12,14 +12,14 @@
         <header>
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
-                <a id="lien" href="#">Home</a>
-                <a id="lien" href="#">Cases</a>
+                <a id="lien" href="/">Home</a>
+                <a id="lien" href="/">Cases</a>
                 <a id="lien" href="#">About</a>
                 <a id="lien" href="#">Contact</a>
                 <% if (profile) { %>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div class="profile-container">
-                        <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                        <p><%= profile.name %></p><img class="img_user" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->
@@ -52,7 +52,7 @@
                             <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="Image du Pack">
                         </a>
                         <p class="name"><%= pack.name %></p>
-                        <button class="case-button" onclick="openCase()">Preview the Pack</button> <!--<%= pack.price %>¤-->
+                        <a class="case-button" href="/opening">Preview the Pack</a> <!--<%= pack.price %>¤-->
                     </div>
                 <% }); %>
             </div>
