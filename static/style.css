@@ -25,6 +25,7 @@ a{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     justify-content: space-evenly;
     align-items: center;
+    z-index: 1;
 }
 
 .navbar a#lien {
@@ -46,11 +47,68 @@ a{
     display:flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    z-index: 99;
 }
 
 .profile-container p{
     margin-right: 1vh;
 }
+
+#imgHover{
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#imgHover:hover + .popup {
+    display: flex;
+}
+
+.popup {
+    display: inline-flex;
+    position: fixed;
+    top: 9vh;
+    z-index: 100;
+    margin: 1vh 0 0 0;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 10vh;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup a {
+    text-align: center;
+    margin: 1vh 0 0 0;
+    color: black;
+}
+
+.hover-underline-animation {
+    position: relative;
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: blue;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.popup a:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
 /******************************** search-bar **********************************************/
 
 .search-bar {
