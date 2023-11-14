@@ -92,16 +92,20 @@ app.get('/inventaire', (req, res) => {
 
 app.post('/UserId', (req, res) => {
     const reqUserId = req.body.userId;
-    console.log("{ message: 'Id utilisateur chargé :",req.body.userId,"}");
-    connection.query('SELECT profile.* FROM profile WHERE id = ?',[reqUserId], (error, Profileresults) => {
-        if (error) {
-            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
-            return;
-        }
-        req.session.logUser = Profileresults[0];
-        res.redirect('/');
-    });;
-    
+    console.log(reqUserId);
+    if (reqUserId != -1){
+        console.log("{ message: 'Id utilisateur chargé :",req.body.userId,"}");
+        connection.query('SELECT profile.* FROM profile WHERE id = ?',[reqUserId], (error, Profileresults) => {
+            if (error) {
+                console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+                return;
+            }
+            req.session.logUser = Profileresults[0];
+            res.redirect('/');
+        });;
+    }else{
+        req.session.logUser = undefined;
+    }
 });
 
 /*END*/

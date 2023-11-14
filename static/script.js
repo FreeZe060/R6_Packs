@@ -20,6 +20,18 @@ async function choixUser(element) {
     })
     window.location.href = "/";
 }
+
+async function decoProfile() {
+        
+    await fetch('/UserId', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: -1 }),
+    })
+    window.location.reload();
+}
         
 function showpop_profile(){
     const pop_profile = document.getElementById('pop-profile');
