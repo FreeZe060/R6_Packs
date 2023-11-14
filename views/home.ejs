@@ -13,15 +13,16 @@
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
-                <a id="lien" href="/inventaire">Cases</a>
+                <a id="lien" href="/">Skins</a>
                 <a id="lien" href="#">About</a>
                 <a id="lien" href="#">Contact</a>
                 <% if (profile != undefined) { %>
                     <!-- Afficher l'image de l'utilisateur -->
-                    <div class="profile-container" onclick="showpop_profile()"><!-- finir-->
+                    <div id="profile-container" class="profile-container" onclick="showpop_profile()"><!-- finir-->
                         <p><%= profile.name %></p><img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                         <div class="popup" id="popup" style="display: none;">
                             <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
                             <a id="deconnexion" href="/"><span class="hover-underline-animation">Sign out</span></a>
                         </div>
                     </div>

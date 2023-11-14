@@ -97,7 +97,7 @@ function count_element(liste, element){
 }
         
 document.addEventListener('DOMContentLoaded', function () {
-    var imgHover = document.getElementById('imgHover');
+    var imgHover = document.getElementById('profile-container');
     var popup = document.getElementById('popup');
     var timer;
 

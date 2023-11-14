@@ -47,8 +47,7 @@ a{
     display:flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    z-index: 99;
+    flex-direction: row;
 }
 
 .profile-container p{
@@ -67,15 +66,13 @@ a{
 .popup {
     display: inline-flex;
     position: fixed;
-    top: 9vh;
+    top: 9.5vh;
     z-index: 100;
-    margin: 1vh 0 0 0;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
+    background-color: #1e1e1e;
+    padding: 20px 30px;
     width: 10vh;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -83,8 +80,8 @@ a{
 
 .popup a {
     text-align: center;
-    margin: 1vh 0 0 0;
-    color: black;
+    margin: 1vh 0 1vh 0;
+    color: white;
 }
 
 .hover-underline-animation {
@@ -99,7 +96,7 @@ a{
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: blue;
+    background-color: #3498db;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
@@ -187,12 +184,12 @@ a{
     align-items: flex-end;
     background-color: #1e1e1e;
     padding: 4vh 8vh;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .pack{
-    margin-right: 4vh;
+    margin-right: 2ch 0 2vh 0;
 }
 
 .img_pack{

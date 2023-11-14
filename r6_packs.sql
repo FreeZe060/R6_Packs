@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `drops` (
   CONSTRAINT `drops_ibfk_2` FOREIGN KEY (`id_pack`) REFERENCES `packs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.drops : ~0 rows (environ)
+-- Listage des données de la table r6_packs.drops : ~1 rows (environ)
 DELETE FROM `drops`;
 INSERT INTO `drops` (`id_pack`, `id_skin`, `droprate`) VALUES
 	(1, 1, 0.05);
@@ -78,21 +78,24 @@ CREATE TABLE IF NOT EXISTS `packs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.packs : ~0 rows (environ)
+-- Listage des données de la table r6_packs.packs : ~1 rows (environ)
 DELETE FROM `packs`;
 INSERT INTO `packs` (`id`, `name`, `price`, `image`) VALUES
-	(1, 'Alpha Pack', 2500, 'AlphaPack.webp');
+	(1, 'Alpha Pack', 2500, 'AlphaPack.jpg');
 
 -- Listage de la structure de table r6_packs. profile
 CREATE TABLE IF NOT EXISTS `profile` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
   `money` int NOT NULL,
+  `image` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.profile : ~0 rows (environ)
+-- Listage des données de la table r6_packs.profile : ~1 rows (environ)
 DELETE FROM `profile`;
+INSERT INTO `profile` (`id`, `name`, `money`, `image`) VALUES
+	(1, 'Hallexxx', 1000, 'hallexxx.jpg');
 
 -- Listage de la structure de table r6_packs. rarity
 CREATE TABLE IF NOT EXISTS `rarity` (
@@ -101,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `rarity` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.rarity : ~0 rows (environ)
+-- Listage des données de la table r6_packs.rarity : ~5 rows (environ)
 DELETE FROM `rarity`;
 INSERT INTO `rarity` (`id`, `name`) VALUES
 	(1, 'LEGENDARY'),
@@ -148,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `skins` (
   CONSTRAINT `skins_ibfk_1` FOREIGN KEY (`id_rarity`) REFERENCES `rarity` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.skins : ~0 rows (environ)
+-- Listage des données de la table r6_packs.skins : ~1 rows (environ)
 DELETE FROM `skins`;
 INSERT INTO `skins` (`id`, `price`, `name`, `image`, `id_rarity`) VALUES
 	(1, 5000, 'Black Ice L85A2', 'BI_L85A2.webp', 2);
