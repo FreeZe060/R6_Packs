@@ -35,95 +35,96 @@
     </header>
         
         <div class="for_all">
-          <div class="loterie_container">
-            <div class="open_packs" id="open_packs">
-              <img class="img_packs" src="/image_pack/AlphaPack.jpg" alt="">
-            </div>
+            <div class="loterie_container">
+                <div class="open_packs" id="open_packs">
+                    <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="">
+                    <span><%= pack.name %></span>
+                </div>
 
-            <div class="container_result" id="result" style="display: none;">
-              <p id="results">vous</p>
-              <button id="ok" onclick="buttonresult()"> ok</button>
+                <div class="container_result" id="result" style="display: none;">
+                    <p id="results">vous</p>
+                    <button id="ok" onclick="buttonresult()"> OK</button>
+                </div>
+                
+                <div id="wheel-container" style="display: none;">
+                    <div class="cursor"></div>
+                        <div id="wheel">
+                            <!-- Ajoutez 50 divs ici -->
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
+                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
+                            <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
+                        </div>
+                    </div>
+                <button class="loterie" onclick="startAnimation()">Lancer l'animation</button>
             </div>
-            
-            <div id="wheel-container" style="display: none;">
-              <div class="cursor"></div>
-              <div id="wheel">
-                <!-- Ajoutez 50 divs ici -->
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
-              </div>
-            </div>
-            <button class="loterie" onclick="startAnimation()">Lancer l'animation</button>
-          </div>
           
 
-          <div class="container_skins">
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div> 
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-              <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-          </div>
+            <div class="container_skins">
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div> 
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
+            </div>
         </div>
 
     <script>
@@ -181,12 +182,14 @@
             displayResultUnderCursor();
             
             if (winningSliceIndex !== -1) {
-              console.log("oui");
-              const resultContainer = document.getElementById('result');
-              const resultContainers = document.getElementById('results');  // Modifié 'results' au lieu de 'result'
-              resultContainer.style.display = "flex";
-              resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
-              wheelContainer.style.display = "none";
+              timer = setTimeout(function () {
+                console.log("oui");
+                const resultContainer = document.getElementById('result');
+                const resultContainers = document.getElementById('results');  // Modifié 'results' au lieu de 'result'
+                resultContainer.style.display = "flex";
+                resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
+                wheelContainer.style.display = "none";
+            }, 1000);
           }
             // Affiche le résultat sous le curseur
           }

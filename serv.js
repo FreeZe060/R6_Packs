@@ -78,10 +78,29 @@ app.get('/profiles', (req, res) => {
 });
 
 
-app.get('/opening', (req, res) => {
+app.get('/opening:id', (req, res) => {
+    const id_pack = req.params.id;
     const logUser = res.locals.logUser;
-    res.render('opening', {profile: logUser});
+    connection.query('SELECT packs.* FROM packs WHERE packs.id = ?',[id_pack], (error, Packresults) => {
+        if (error) {
+            console.error('Erreur lors de la récupération des packs : ' + error.message);
+            return;
+        }
+        connection.query('SELECT skins.*, rarity.name as rarity_name, armes.name as arme_name FROM drops JOIN skins ON drops.id_skin = skins.id ' + 
+        'JOIN rarity ON skins.id_rarity = rarity.id ' +
+        'JOIN relations_skins_armes ON skins.id = relations_skins_armes.id_skin ' +
+        'JOIN armes ON relations_skins_armes.id_arme = armes.id ' + 
+        'WHERE drops.id_pack =  ?',[id_pack], (error, Dropsresults) => {
+            if (error) {
+                console.error('Erreur lors de la récupération des packs : ' + error.message);
+                return;
+            }
+            console.log(Dropsresults);
+            res.render('opening', { profile: logUser, pack: Packresults[0], Drops: Dropsresults });
+        });;
+    });;
 });
+
 
 app.get('/inventaire', (req, res) => {
     const logUser = res.locals.logUser;
@@ -92,7 +111,6 @@ app.get('/inventaire', (req, res) => {
 
 app.post('/UserId', (req, res) => {
     const reqUserId = req.body.userId;
-    console.log(reqUserId);
     if (reqUserId != -1){
         console.log("{ message: 'Id utilisateur chargé :",req.body.userId,"}");
         connection.query('SELECT profile.* FROM profile WHERE id = ?',[reqUserId], (error, Profileresults) => {
@@ -104,7 +122,9 @@ app.post('/UserId', (req, res) => {
             res.redirect('/');
         });;
     }else{
+        console.log("{ message: 'Utilisateur deco' }");
         req.session.logUser = undefined;
+        res.redirect('/');
     }
 });
 
