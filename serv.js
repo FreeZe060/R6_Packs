@@ -100,6 +100,17 @@ app.get('/opening', (req, res) => {
     res.render('opening');
 });
 
+app.get('/inventaire', (req, res) => {
+    // connection.query('SELECT profile.* FROM profile', (error, Profilesresults) => {
+    //     if (error) {
+    //         console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+    //         return;
+    //     }
+    //     res.render('profile', { profiles: Profilesresults });
+    // });;
+    res.render('inventaire');
+});
+
 
 /*Routes POST*/
 

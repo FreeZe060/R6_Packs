@@ -109,6 +109,10 @@ a{
     transform-origin: bottom left;
 }
 
+.title{
+    top: 0;
+}
+
 /******************************** search-bar **********************************************/
 
 .search-bar {
