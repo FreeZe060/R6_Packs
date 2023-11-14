@@ -370,19 +370,62 @@ a{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
     margin: 5vh 0 0 0;
-    width: 80%;
+    padding: 2vh;
 }
 
-.img_skins{
+.container_skin{
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    margin: 2vh 0 2vh 4vh;
+    border-top: 5px solid;
+    border-radius: 4px;
+    margin: 1vh;
+    padding: 20px;
 }
 
-.container_skins p{
-    text-align: center;
+.img_skin{
+    width: 200px;
+    height: 98px;
+}
+
+.container_skins #droprate{
+    position: absolute;
+    right:10px;
+    bottom:-10px;
+    font-size: 14px;
+    color: gray;
+}
+
+.container_skins #skin_name{
+    position: absolute;
+    left:10px;
+    bottom:1px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.container_skins #arme_name{
+    position: absolute;
+    left:10px;
+    bottom:-10px;
+    font-size: 14px;
+    color: gray;
+}
+
+.container_skins #prix{
+    position: absolute;
+    left:7px;
+    top:-5px;
+    font-size: 12px;
+    color: rgb(255, 230, 0);
+}
+
+.container_skins #rarity{
+    position: absolute;
+    right:10px;
+    top:-10px;
+    font-size: 14px;
 }
 
 

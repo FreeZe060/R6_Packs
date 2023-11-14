@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="icon" href="r6_pack.png" type="image/x-icon">
-  </head>
-  <body>
+</head>
+
+<body>
 
     <header>
         <!-- Barre de navigation (navbar) -->
@@ -15,117 +17,253 @@
             <a id="lien" href="/">Skins</a>
             <a id="lien" href="#">About</a>
             <a id="lien" href="#">Contact</a>
-            <% if (profile != undefined) { %>
+            <% if (profile !=undefined) { %>
                 <!-- Afficher l'image de l'utilisateur -->
                 <div id="profile-container" class="profile-container">
-                    <p><%= profile.name %></p><img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                    <p>
+                        <%= profile.name %>
+                    </p><img class="img_user" id="imgHover" style="width: 60px; height: 60px;"
+                        src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                     <div class="popup" id="popup" style="display: none;">
                         <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
-                        <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
-                        <a id="deconnexion" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
+                        <a id="inventaire" href="/inventaire"><span
+                                class="hover-underline-animation">Inventaire</span></a>
+                        <a id="deconnexion" onclick="decoProfile()"><span class="hover-underline-animation">Sign
+                                out</span></a>
                     </div>
                 </div>
-            <% } else { %>
-                <!-- Afficher le bouton de connexion -->
-                <div class="log-container">
-                    <a class="case-button" href="/profiles">LogIn</a>
-                </div>
-            <% } %>
+                <% } else { %>
+                    <!-- Afficher le bouton de connexion -->
+                    <div class="log-container">
+                        <a class="case-button" href="/profiles">LogIn</a>
+                    </div>
+                    <% } %>
         </div>
     </header>
-        
-        <div class="for_all">
-            <div class="loterie_container">
-                <div class="open_packs" id="open_packs">
-                    <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="">
-                    <span><%= pack.name %></span>
-                </div>
 
-                <div class="container_result" id="result" style="display: none;">
-                    <p id="results">vous</p>
-                    <button id="ok" onclick="buttonresult()"> OK</button>
-                </div>
-                
-                <div id="wheel-container" style="display: none;">
-                    <div class="cursor"></div>
-                        <div id="wheel">
-                            <!-- Ajoutez 50 divs ici -->
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <div class="wheel-slice"><div style="background-color: rgb(255, 255, 140);"></div></div>
-                            <div class="wheel-slice"><div style="background-color: red;"></div></div>
-                            <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
-                        </div>
+    <div class="for_all">
+        <div class="loterie_container">
+            <div class="open_packs" id="open_packs">
+                <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="">
+                <span>
+                    <%= pack.name %>
+                </span>
+            </div>
+
+            <div class="container_result" id="result" style="display: none;">
+                <p id="results">vous</p>
+                <button id="ok" onclick="buttonresult()"> OK</button>
+            </div>
+
+            <div id="wheel-container" style="display: none;">
+                <div class="cursor"></div>
+                <div id="wheel">
+                    <!-- Ajoutez 50 divs ici -->
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
                     </div>
-                <button class="loterie" onclick="startAnimation()">Lancer l'animation</button>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: rgb(255, 255, 140);"></div>
+                    </div>
+                    <div class="wheel-slice">
+                        <div style="background-color: red;"></div>
+                    </div>
+                    <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
+                </div>
             </div>
-          
-
-            <div class="container_skins">
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div> 
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                <div><img class="img_skins" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-            </div>
+            <button class="loterie" onclick="startAnimation()">Lancer l'animation</button>
         </div>
+
+
+        <div class="container_skins">
+            <% drops.forEach(function(drop) { %>
+                <div class="container_skin">
+                    <% if (drop.rarity_name == "LEGENDARY") { %>
+                        <p style="color: orange;" id="rarity"><%= drop.rarity_name %></p>
+                        <img class="img_skin" style="border-color: orange;" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
+                    <% }else if (drop.rarity_name == "EPIC") { %>
+                        <p style="color: blueviolet;" id="rarity"><%= drop.rarity_name %></p>
+                        <img class="img_skin" style="border-color: blueviolet;" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
+                    <% }else if (drop.rarity_name == "RARE") { %>
+                        <p style="color: rgb(87, 213, 255);" id="rarity"><%= drop.rarity_name %></p>
+                        <img class="img_skin" style="border-color: rgb(87, 213, 255);" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
+                    <% }else if (drop.rarity_name == "UNCOMMON") { %>
+                        <p style="color: rgb(113, 255, 113);" id="rarity"><%= drop.rarity_name %></p>
+                        <img class="img_skin" style="border-color: rgb(113, 255, 113);" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
+                    <% }else if (drop.rarity_name == "COMMON") { %>
+                        <p style="color: rgb(167, 167, 167);" id="rarity"><%= drop.rarity_name %></p>
+                        <img class="img_skin" style="border-color: rgb(167, 167, 167);" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
+                    <% } %>
+
+                    <p id="prix"><%= drop.price %></p>
+
+                    <p id="skin_name"><%= drop.name %></p>
+                    <p id="arme_name"><%= drop.arme_name %></p>
+                    <p id="droprate"><%= drop.droprate %>%</p>
+                    
+                </div>
+            <% }); %>
+        </div>
+    </div>
 
     <script>
         const wheelContainer = document.getElementById('wheel-container');
@@ -133,184 +271,185 @@
         const wheel = document.getElementById('wheel');
         const cursor = document.querySelector('.cursor');
         const slices = document.querySelectorAll('.wheel-slice');
-        
+
         let animationStartTime = null;
         let isAnimating = false;
         let slowdownStarted = false;
         let winningSliceIndex = -1;
-      
+
         function easeOutSlow(t) {
-          return 1 - Math.pow(1 - t, 6); // Ajustez le facteur d'accélération ici
+            return 1 - Math.pow(1 - t, 6); // Ajustez le facteur d'accélération ici
         }
-      
+
         function spinWheel(timestamp) {
             if (!animationStartTime) {
                 animationStartTime = timestamp;
             }
-      
-          const progress = timestamp - animationStartTime;
-          const duration = 10000; // Durée totale de l'animation en millisecondes
-      
-          if (progress < duration && isAnimating) {
-            // Défilement fluide avec ralentissement progressif
-            let scrollDistance;
-            
-            if (duration - progress <= 5000 && !slowdownStarted) {
-              // Ralentissement progressif avec une fonction d'accélération
-              slowdownStarted = true;
-              const remainingTime = duration - progress;
-              const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
-              scrollDistance = (progress / duration) * 3000 - 500 * easing;
+
+            const progress = timestamp - animationStartTime;
+            const duration = 10000; // Durée totale de l'animation en millisecondes
+
+            if (progress < duration && isAnimating) {
+                // Défilement fluide avec ralentissement progressif
+                let scrollDistance;
+
+                if (duration - progress <= 5000 && !slowdownStarted) {
+                    // Ralentissement progressif avec une fonction d'accélération
+                    slowdownStarted = true;
+                    const remainingTime = duration - progress;
+                    const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
+                    scrollDistance = (progress / duration) * 3000 - 500 * easing;
+                } else {
+                    scrollDistance = (progress / duration) * 3000;
+                }
+
+                // Met à jour la position de la roue
+                wheel.style.transform = `translateX(-${scrollDistance}px)`;
+
+                // Positionne le curseur au milieu de la roue
+                const cursorPosition = wheelContainer.offsetLeft + (wheel.offsetWidth / 2);
+                cursor.style.left = `${cursorPosition}px`;
+
+                // Continue l'animation
+                requestAnimationFrame(spinWheel);
             } else {
-              scrollDistance = (progress / duration) * 3000;
+                // Animation terminée, réinitialise les variables
+                animationStartTime = null;
+                isAnimating = false;
+                slowdownStarted = false;
+                displayResultUnderCursor();
+
+                if (winningSliceIndex !== -1) {
+                    timer = setTimeout(function () {
+                        console.log("oui");
+                        const resultContainer = document.getElementById('result');
+                        const resultContainers = document.getElementById('results');  // Modifié 'results' au lieu de 'result'
+                        resultContainer.style.display = "flex";
+                        resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
+                        wheelContainer.style.display = "none";
+                    }, 1000);
+                }
+                // Affiche le résultat sous le curseur
             }
-      
-            // Met à jour la position de la roue
-            wheel.style.transform = `translateX(-${scrollDistance}px)`;
-      
-            // Positionne le curseur au milieu de la roue
-            const cursorPosition = wheelContainer.offsetLeft + (wheel.offsetWidth / 2);
-            cursor.style.left = `${cursorPosition}px`;
-      
-            // Continue l'animation
-            requestAnimationFrame(spinWheel);
-          } else {
-            // Animation terminée, réinitialise les variables
-            animationStartTime = null;
-            isAnimating = false;
-            slowdownStarted = false;
-            displayResultUnderCursor();
-            
-            if (winningSliceIndex !== -1) {
-              timer = setTimeout(function () {
-                console.log("oui");
-                const resultContainer = document.getElementById('result');
-                const resultContainers = document.getElementById('results');  // Modifié 'results' au lieu de 'result'
-                resultContainer.style.display = "flex";
-                resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
-                wheelContainer.style.display = "none";
-            }, 1000);
-          }
-            // Affiche le résultat sous le curseur
-          }
-        }
-      
-        function startAnimation() {
-          // Réinitialise la variable de l'index de la slice gagnante
-          resetWinningSliceIndex();
-        
-          wheelContainer.style.display = "flex";
-          pack.style.display = "none";
-          // Réinitialise la position de la roue
-          wheel.style.transform = 'translateX(0)';
-          
-          // Active l'animation
-          isAnimating = true;
-          requestAnimationFrame(spinWheel);
-        }
-        
-      
-        function displayResultUnderCursor() {
-          const cursorRect = cursor.getBoundingClientRect();
-        
-          // Parcourez les slices pour trouver celle sous le curseur
-          slices.forEach((slice, index) => {
-            const sliceRect = slice.getBoundingClientRect();
-        
-            if (
-              cursorRect.left >= sliceRect.left &&
-              cursorRect.right <= sliceRect.right &&
-              cursorRect.top >= sliceRect.top &&
-              cursorRect.bottom <= sliceRect.bottom
-            ) {
-              // Stockez l'index de la slice sous le curseur
-              winningSliceIndex = index;
-            }
-          });
-        }
-        
-        function resetWinningSliceIndex() {
-          winningSliceIndex = -1;
         }
 
-        function buttonresult(){
-          const resultContainer = document.getElementById('result');
-          wheelContainer.style.display = "none";
-          resultContainer.style.display = "none";
-          pack.style.display = "flex";
+        function startAnimation() {
+            // Réinitialise la variable de l'index de la slice gagnante
+            resetWinningSliceIndex();
+
+            wheelContainer.style.display = "flex";
+            pack.style.display = "none";
+            // Réinitialise la position de la roue
+            wheel.style.transform = 'translateX(0)';
+
+            // Active l'animation
+            isAnimating = true;
+            requestAnimationFrame(spinWheel);
         }
-    
-      function openCase() {
-        const dropRates = {
-          "skin1": 0.01,
-          "skin2": 0.15,
-          "skin3": 0.10,
-          "skin4": 0.74
-          // Ajoutez d'autres skins avec leurs pourcentages
-        };
-    
-        const totalSkinsToGenerate = 100;
-        const generatedSkins = generateSkinList(dropRates, totalSkinsToGenerate);
-    
-        const resultContainer = document.getElementById('result');
-        resultContainer.innerHTML = ''; // Clear previous results
-    
-        // Affiche le nombre correspondant à chaque skin
-        for (let skin in dropRates) {
-          const count = count_element(generatedSkins, skin);
-          resultContainer.innerHTML += `<p>${skin}: ${count}</p>`;
+
+
+        function displayResultUnderCursor() {
+            const cursorRect = cursor.getBoundingClientRect();
+
+            // Parcourez les slices pour trouver celle sous le curseur
+            slices.forEach((slice, index) => {
+                const sliceRect = slice.getBoundingClientRect();
+
+                if (
+                    cursorRect.left >= sliceRect.left &&
+                    cursorRect.right <= sliceRect.right &&
+                    cursorRect.top >= sliceRect.top &&
+                    cursorRect.bottom <= sliceRect.bottom
+                ) {
+                    // Stockez l'index de la slice sous le curseur
+                    winningSliceIndex = index;
+                }
+            });
         }
-    
-        // Affiche les images correspondantes aux skins
-        for (let i = 0; i < Object.keys(dropRates).length; i++) {
-          const img = document.createElement('img');
-          const skin = generatedSkins[i];
-          img.src = `/image_user/hallexxx.jpg`; // Remplacez "path/to/" par le chemin réel
-          img.alt = skin;
-          resultContainer.appendChild(img);
+
+        function resetWinningSliceIndex() {
+            winningSliceIndex = -1;
         }
-      }
-    
-      function generateSkinList(dropRates, totalSkins) {
-        let skinList = [];
-    
-        const totalPercentage = Object.values(dropRates).reduce((acc, rate) => acc + rate, 0);
-        if (totalPercentage != 1) {
-          throw new Error("Le pourcentage doit être de 100 %");
+
+        function buttonresult() {
+            const resultContainer = document.getElementById('result');
+            wheelContainer.style.display = "none";
+            resultContainer.style.display = "none";
+            pack.style.display = "flex";
         }
-    
-        const skinCounts = Object.fromEntries(Object.entries(dropRates).map(([skin, rate]) => [skin, Math.round((rate / totalPercentage) * totalSkins)]));
-    
-        const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
-        if (diff !== 0) {
-          for (let skin in skinCounts) {
-            skinCounts[skin] += diff;
-            break;
-          }
+
+        function openCase() {
+            const dropRates = {
+                "skin1": 0.01,
+                "skin2": 0.15,
+                "skin3": 0.10,
+                "skin4": 0.74
+                // Ajoutez d'autres skins avec leurs pourcentages
+            };
+
+            const totalSkinsToGenerate = 100;
+            const generatedSkins = generateSkinList(dropRates, totalSkinsToGenerate);
+
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = ''; // Clear previous results
+
+            // Affiche le nombre correspondant à chaque skin
+            for (let skin in dropRates) {
+                const count = count_element(generatedSkins, skin);
+                resultContainer.innerHTML += `<p>${skin}: ${count}</p>`;
+            }
+
+            // Affiche les images correspondantes aux skins
+            for (let i = 0; i < Object.keys(dropRates).length; i++) {
+                const img = document.createElement('img');
+                const skin = generatedSkins[i];
+                img.src = `/image_user/hallexxx.jpg`; // Remplacez "path/to/" par le chemin réel
+                img.alt = skin;
+                resultContainer.appendChild(img);
+            }
         }
-    
-        for (let skin in skinCounts) {
-          for (let i = 0; i < skinCounts[skin]; i++) {
-            skinList.push(skin);
-          }
+
+        function generateSkinList(dropRates, totalSkins) {
+            let skinList = [];
+
+            const totalPercentage = Object.values(dropRates).reduce((acc, rate) => acc + rate, 0);
+            if (totalPercentage != 1) {
+                throw new Error("Le pourcentage doit être de 100 %");
+            }
+
+            const skinCounts = Object.fromEntries(Object.entries(dropRates).map(([skin, rate]) => [skin, Math.round((rate / totalPercentage) * totalSkins)]));
+
+            const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
+            if (diff !== 0) {
+                for (let skin in skinCounts) {
+                    skinCounts[skin] += diff;
+                    break;
+                }
+            }
+
+            for (let skin in skinCounts) {
+                for (let i = 0; i < skinCounts[skin]; i++) {
+                    skinList.push(skin);
+                }
+            }
+
+            skinList.sort(() => Math.random() - 0.5);
+
+            return skinList;
         }
-    
-        skinList.sort(() => Math.random() - 0.5);
-    
-        return skinList;
-      }
-    
-      function count_element(liste, element) {
-        let count = 0;
-        for (let i in liste) {
-          if (liste[i] == element) {
-            count++;
-          }
+
+        function count_element(liste, element) {
+            let count = 0;
+            for (let i in liste) {
+                if (liste[i] == element) {
+                    count++;
+                }
+            }
+            return count;
         }
-        return count;
-      }
-    </script>   
+    </script>
 
     <script src="script.js" defer></script>
-  </body>
+</body>
+
 </html>
