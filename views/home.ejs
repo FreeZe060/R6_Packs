@@ -13,13 +13,17 @@
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
-                <a id="lien" href="/">Cases</a>
+                <a id="lien" href="/inventaire">Cases</a>
                 <a id="lien" href="#">About</a>
                 <a id="lien" href="#">Contact</a>
                 <% if (profile != undefined) { %>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div class="profile-container" onclick="showpop_profile()"><!-- finir-->
-                        <p><%= profile.name %></p><img class="img_user" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                        <p><%= profile.name %></p><img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                        <div class="popup" id="popup" style="display: none;">
+                            <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="deconnexion" href="/"><span class="hover-underline-animation">Sign out</span></a>
+                        </div>
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->
@@ -27,10 +31,9 @@
                         <a class="case-button" href="/profiles">LogIn</a>
                     </div>
                 <% } %>
-                
             </div>
         </header>
-        
+
         <!-- <div class="search-bar">
             <input type="text" class="search" id="search" name="search" placeholder="Nom de la case">
             <button class="button" id="button">Rechercher</button>

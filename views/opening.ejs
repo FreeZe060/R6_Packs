@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/style.css">
-        <link rel="icon" href="/image_pack/AlphaPack.jpg" type="image/x-icon">
-    </head>
-    <body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="icon" href="r6_pack.png" type="image/x-icon">
+  </head>
+  <body>
 
     <header>
         <!-- Barre de navigation (navbar) -->
@@ -37,7 +37,7 @@
 
             <div class="container_result" id="result" style="display: none;">
               <p id="results">vous</p>
-              <button id="ok"> ok</button>
+              <button id="ok" onclick="buttonresult()"> ok</button>
             </div>
             
             <div id="wheel-container" style="display: none;">
@@ -223,6 +223,13 @@
         
         function resetWinningSliceIndex() {
           winningSliceIndex = -1;
+        }
+
+        function buttonresult(){
+          const resultContainer = document.getElementById('result');
+          wheelContainer.style.display = "none";
+          resultContainer.style.display = "none";
+          pack.style.display = "flex";
         }
     
       function openCase() {
