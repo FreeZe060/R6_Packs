@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="icon" href="r6_pack.png" type="image/x-icon">
+
+    <script src="javascript/com_serveur.js" defer></script>
+    <script src="javascript/popup_profile.js" defer></script>
+    <script src="javascript/anim_loterie.js" defer></script>
+    <script src="javascript/generate_skin.js" defer></script>
 </head>
 
 <body>
@@ -236,217 +241,39 @@
 
         <div class="container_skins">
             <% drops.forEach(function(drop) { %>
-                <div class="container_skin">
-                    <% if (drop.rarity_name == "LEGENDARY") { %>
+                <% if (drop.rarity_name == "LEGENDARY") { %>
+                    <div class="container_skin" style="border-color: orange;">
                         <p style="color: orange;" id="rarity"><%= drop.rarity_name %></p>
-                        <img class="img_skin" style="border-color: orange;" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
-                    <% }else if (drop.rarity_name == "EPIC") { %>
+                <% }else if (drop.rarity_name == "EPIC") { %>
+                    <div class="container_skin" style="border-color: blueviolet;">
                         <p style="color: blueviolet;" id="rarity"><%= drop.rarity_name %></p>
-                        <img class="img_skin" style="border-color: blueviolet;" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
-                    <% }else if (drop.rarity_name == "RARE") { %>
+                <% }else if (drop.rarity_name == "RARE") { %>
+                    <div class="container_skin" style="border-color: rgb(87, 213, 255);">
                         <p style="color: rgb(87, 213, 255);" id="rarity"><%= drop.rarity_name %></p>
-                        <img class="img_skin" style="border-color: rgb(87, 213, 255);" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
-                    <% }else if (drop.rarity_name == "UNCOMMON") { %>
+                <% }else if (drop.rarity_name == "UNCOMMON") { %>
+                    <div class="container_skin" style="border-color: rgb(113, 255, 113);">
                         <p style="color: rgb(113, 255, 113);" id="rarity"><%= drop.rarity_name %></p>
-                        <img class="img_skin" style="border-color: rgb(113, 255, 113);" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
-                    <% }else if (drop.rarity_name == "COMMON") { %>
+                <% }else if (drop.rarity_name == "COMMON") { %>
+                    <div class="container_skin" style="border-color: rgb(167, 167, 167);">
                         <p style="color: rgb(167, 167, 167);" id="rarity"><%= drop.rarity_name %></p>
-                        <img class="img_skin" style="border-color: rgb(167, 167, 167);" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
-                    <% } %>
+                <% } %>
 
-                    <p id="prix"><%= drop.price %></p>
+                        <p id="prix"><%= drop.price %></p>
 
-                    <p id="skin_name"><%= drop.name %></p>
-                    <p id="arme_name"><%= drop.arme_name %></p>
-                    <p id="droprate"><%= drop.droprate %>%</p>
+                        <img class="img_skin" src="/SkinR6/<%= drop.arme_name %>/<%= drop.image %>" alt="Skin Image">
+
+                        <p id="skin_name"><%= drop.name %></p>
+                        <p id="arme_name"><%= drop.arme_name %></p>
+                        <p id="droprate"><%= drop.droprate %>%</p>
                     
-                </div>
+                    </div>
             <% }); %>
+            <button onclick="print(<%= drops %>)">test</button>
         </div>
     </div>
 
     <script>
-        const wheelContainer = document.getElementById('wheel-container');
-        const pack = document.getElementById('open_packs');
-        const wheel = document.getElementById('wheel');
-        const cursor = document.querySelector('.cursor');
-        const slices = document.querySelectorAll('.wheel-slice');
-
-        let animationStartTime = null;
-        let isAnimating = false;
-        let slowdownStarted = false;
-        let winningSliceIndex = -1;
-
-        function easeOutSlow(t) {
-            return 1 - Math.pow(1 - t, 6); // Ajustez le facteur d'accélération ici
-        }
-
-        function spinWheel(timestamp) {
-            if (!animationStartTime) {
-                animationStartTime = timestamp;
-            }
-
-            const progress = timestamp - animationStartTime;
-            const duration = 10000; // Durée totale de l'animation en millisecondes
-
-            if (progress < duration && isAnimating) {
-                // Défilement fluide avec ralentissement progressif
-                let scrollDistance;
-
-                if (duration - progress <= 5000 && !slowdownStarted) {
-                    // Ralentissement progressif avec une fonction d'accélération
-                    slowdownStarted = true;
-                    const remainingTime = duration - progress;
-                    const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
-                    scrollDistance = (progress / duration) * 3000 - 500 * easing;
-                } else {
-                    scrollDistance = (progress / duration) * 3000;
-                }
-
-                // Met à jour la position de la roue
-                wheel.style.transform = `translateX(-${scrollDistance}px)`;
-
-                // Positionne le curseur au milieu de la roue
-                const cursorPosition = wheelContainer.offsetLeft + (wheel.offsetWidth / 2);
-                cursor.style.left = `${cursorPosition}px`;
-
-                // Continue l'animation
-                requestAnimationFrame(spinWheel);
-            } else {
-                // Animation terminée, réinitialise les variables
-                animationStartTime = null;
-                isAnimating = false;
-                slowdownStarted = false;
-                displayResultUnderCursor();
-
-                if (winningSliceIndex !== -1) {
-                    timer = setTimeout(function () {
-                        console.log("oui");
-                        const resultContainer = document.getElementById('result');
-                        const resultContainers = document.getElementById('results');  // Modifié 'results' au lieu de 'result'
-                        resultContainer.style.display = "flex";
-                        resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
-                        wheelContainer.style.display = "none";
-                    }, 1000);
-                }
-                // Affiche le résultat sous le curseur
-            }
-        }
-
-        function startAnimation() {
-            // Réinitialise la variable de l'index de la slice gagnante
-            resetWinningSliceIndex();
-
-            wheelContainer.style.display = "flex";
-            pack.style.display = "none";
-            // Réinitialise la position de la roue
-            wheel.style.transform = 'translateX(0)';
-
-            // Active l'animation
-            isAnimating = true;
-            requestAnimationFrame(spinWheel);
-        }
-
-
-        function displayResultUnderCursor() {
-            const cursorRect = cursor.getBoundingClientRect();
-
-            // Parcourez les slices pour trouver celle sous le curseur
-            slices.forEach((slice, index) => {
-                const sliceRect = slice.getBoundingClientRect();
-
-                if (
-                    cursorRect.left >= sliceRect.left &&
-                    cursorRect.right <= sliceRect.right &&
-                    cursorRect.top >= sliceRect.top &&
-                    cursorRect.bottom <= sliceRect.bottom
-                ) {
-                    // Stockez l'index de la slice sous le curseur
-                    winningSliceIndex = index;
-                }
-            });
-        }
-
-        function resetWinningSliceIndex() {
-            winningSliceIndex = -1;
-        }
-
-        function buttonresult() {
-            const resultContainer = document.getElementById('result');
-            wheelContainer.style.display = "none";
-            resultContainer.style.display = "none";
-            pack.style.display = "flex";
-        }
-
-        function openCase() {
-            const dropRates = {
-                "skin1": 0.01,
-                "skin2": 0.15,
-                "skin3": 0.10,
-                "skin4": 0.74
-                // Ajoutez d'autres skins avec leurs pourcentages
-            };
-
-            const totalSkinsToGenerate = 100;
-            const generatedSkins = generateSkinList(dropRates, totalSkinsToGenerate);
-
-            const resultContainer = document.getElementById('result');
-            resultContainer.innerHTML = ''; // Clear previous results
-
-            // Affiche le nombre correspondant à chaque skin
-            for (let skin in dropRates) {
-                const count = count_element(generatedSkins, skin);
-                resultContainer.innerHTML += `<p>${skin}: ${count}</p>`;
-            }
-
-            // Affiche les images correspondantes aux skins
-            for (let i = 0; i < Object.keys(dropRates).length; i++) {
-                const img = document.createElement('img');
-                const skin = generatedSkins[i];
-                img.src = `/image_user/hallexxx.jpg`; // Remplacez "path/to/" par le chemin réel
-                img.alt = skin;
-                resultContainer.appendChild(img);
-            }
-        }
-
-        function generateSkinList(dropRates, totalSkins) {
-            let skinList = [];
-
-            const totalPercentage = Object.values(dropRates).reduce((acc, rate) => acc + rate, 0);
-            if (totalPercentage != 1) {
-                throw new Error("Le pourcentage doit être de 100 %");
-            }
-
-            const skinCounts = Object.fromEntries(Object.entries(dropRates).map(([skin, rate]) => [skin, Math.round((rate / totalPercentage) * totalSkins)]));
-
-            const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
-            if (diff !== 0) {
-                for (let skin in skinCounts) {
-                    skinCounts[skin] += diff;
-                    break;
-                }
-            }
-
-            for (let skin in skinCounts) {
-                for (let i = 0; i < skinCounts[skin]; i++) {
-                    skinList.push(skin);
-                }
-            }
-
-            skinList.sort(() => Math.random() - 0.5);
-
-            return skinList;
-        }
-
-        function count_element(liste, element) {
-            let count = 0;
-            for (let i in liste) {
-                if (liste[i] == element) {
-                    count++;
-                }
-            }
-            return count;
-        }
+        
     </script>
 
     <script src="script.js" defer></script>

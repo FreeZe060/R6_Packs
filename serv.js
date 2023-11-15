@@ -90,12 +90,11 @@ app.get('/opening:id', (req, res) => {
         'JOIN rarity ON skins.id_rarity = rarity.id ' +
         'JOIN relations_skins_armes ON skins.id = relations_skins_armes.id_skin ' +
         'JOIN armes ON relations_skins_armes.id_arme = armes.id ' + 
-        'WHERE drops.id_pack =  ?',[id_pack], (error, Dropsresults) => {
+        'WHERE drops.id_pack =  ? ORDER BY rarity.id;',[id_pack], (error, Dropsresults) => {
             if (error) {
                 console.error('Erreur lors de la récupération des packs : ' + error.message);
                 return;
             }
-            console.log(Dropsresults);
             res.render('opening', { profile: logUser, pack: Packresults[0], drops: Dropsresults });
         });;
     });;
