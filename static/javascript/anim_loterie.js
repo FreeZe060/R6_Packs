@@ -23,7 +23,7 @@ const wheelContainer = document.getElementById('wheel-container');
             }
 
             const progress = timestamp - animationStartTime;
-            const duration = 10000; // Durée totale de l'animation en millisecondes
+            const duration = 9000; // Durée totale de l'animation en millisecondes
 
             if (progress < duration && isAnimating) {
                 // Défilement fluide avec ralentissement progressif
@@ -34,9 +34,9 @@ const wheelContainer = document.getElementById('wheel-container');
                     slowdownStarted = true;
                     const remainingTime = duration - progress;
                     const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
-                    scrollDistance = (progress / duration) * 3000 - 500 * easing;
+                    scrollDistance = (progress / duration) * 2962 - 500 * easing;
                 } else {
-                    scrollDistance = (progress / duration) * 3000;
+                    scrollDistance = (progress / duration) * 2962;
                 }
 
                 // Met à jour la position de la roue
@@ -59,7 +59,7 @@ const wheelContainer = document.getElementById('wheel-container');
                     timer = setTimeout(function () {
                         console.log("oui");
                         const resultContainer = document.getElementById('result');
-                        const resultContainers = document.getElementById('results');  // Modifié 'results' au lieu de 'result'
+                        const resultContainers = document.getElementById('results');
                         resultContainer.style.display = "flex";
                         resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
                         wheelContainer.style.display = "none";

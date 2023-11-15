@@ -10,7 +10,7 @@
     <script src="javascript/com_serveur.js" defer></script>
     <script src="javascript/popup_profile.js" defer></script>
     <script src="javascript/anim_loterie.js" defer></script>
-    <script src="javascript/generate_skin.js" defer></script>
+    <script src="javascript/generate_skin.js" defer>const dropsData = <%= JSON.stringify(drops) %>;</script>
 </head>
 
 <body>
@@ -268,15 +268,10 @@
                     
                     </div>
             <% }); %>
-            <button onclick="print(<%= drops %>)">test</button>
         </div>
+        <div id="dropsData" dropsData="<%= JSON.stringify(drops) %>"></div>
     </div>
 
-    <script>
-        
-    </script>
-
-    <script src="script.js" defer></script>
 </body>
 
 </html>
