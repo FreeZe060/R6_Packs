@@ -20,18 +20,18 @@ function openCase() {
     resultContainer.innerHTML = 'Congratulations! You got something awesome! U got ' + generatedSkins[randomIndex]; ;
 }
         
-function generateSkinList(dropRates, totalSkins) {
+function generateSkinList(dropsData, totalSkins) {
     // Initialisation de la liste des skins
     let skinList = [];
     
     // Calcul de la somme totale des pourcentages
-    const totalPercentage = Object.values(dropRates).reduce((acc, rate) => acc + rate, 0);
-    if (totalPercentage != 1){
-        throw new Error("Pourcentage must be 100 percent");
-    }
+    const totalPercentage = dropsData.reduce((acc, drop) => acc + drop.droprate/100, 0);
+    // if (totalPercentage != 1){
+    //     throw new Error("Pourcentage must be 100 percent");
+    // }
     
     // Calcul du nombre d'éléments à générer pour chaque skin ("skin4:74")
-    const skinCounts = Object.fromEntries(Object.entries(dropRates).map(([skin, rate]) => [skin, Math.round((rate / totalPercentage) * totalSkins)]));
+    const skinCounts = Object.fromEntries(dropsData.map(item => [item.name, Math.round((item.droprate / totalPercentage) * totalSkins)]));
     
     // Correction du nombre d'éléments pour s'assurer que le total est exactement égal à totalSkins
     const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
@@ -68,5 +68,21 @@ function count_element(liste, element){
     return count;
 }
 
-const dropsData = <%= JSON.stringify(drops) %>;
-console.log(dropsData);
+window.onload = function () {
+    const dropsData = JSON.parse(document.getElementById("dropsData").getAttribute("dropsData"));
+    console.log(dropsData);
+    const totalPercentage = dropsData.reduce((acc, drop) => acc + drop.droprate, 0);
+    console.log(totalPercentage);
+    const minDroprate = Math.min(...dropsData.map(item => item.droprate));
+    console.log(minDroprate);
+    let totalSkins = 1;
+    console.log(totalSkins);
+    while (dropsData.some(item => Math.round((item.droprate / minDroprate) * totalSkins) < 1)) {
+        totalSkins *= 2;
+    }
+    const skinCounts = Object.fromEntries(dropsData.map(item => [item.name, Math.round((item.droprate / minDroprate) * totalSkins)]));
+    console.log(skinCounts);
+
+    console.log(generateSkinList(dropsData))
+
+};
