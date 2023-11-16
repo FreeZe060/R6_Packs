@@ -30,23 +30,28 @@ function generateSkinList(dropsData) {
         totalSkins *= 2;
         console.log(totalSkins)
     }
-    const skinCounts = Object.fromEntries(dropsData.map(item => [ item.name + item.id.toString(), Math.round((item.droprate / minDroprate) * totalSkins)]));
+    const skinCounts = {};
+    index = 0;
+    dropsData.forEach(item => {
+        skinCounts[index] = Math.round((item.droprate / minDroprate) * totalSkins);
+        index++;
+    });
     console.log(skinCounts);
     
-    // Correction du nombre d'éléments pour s'assurer que le total est exactement égal à totalSkins
-    const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
-    if (diff !== 0) {
-        // Ajouter ou retirer la différence à un skin (le premier trouvé)
-        for (let skin in skinCounts) {
-            skinCounts[skin] += diff;
-            break;
-        }
-    }
+    // // Correction du nombre d'éléments pour s'assurer que le total est exactement égal à totalSkins
+    // const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
+    // if (diff !== 0) {
+    //     // Ajouter ou retirer la différence à un skin (le premier trouvé)
+    //     for (let skin in skinCounts) {
+    //         skinCounts[skin] += diff;
+    //         break;
+    //     }
+    // }
     
     // Génération de la liste finale
-    for (let skin in skinCounts) {
-        for (let i = 0; i < skinCounts[skin]; i++) {
-            skinList.push(skin);
+    for (let [index,nbr] in skinCounts) {
+        for (let i = 0; i < skinCounts[index]; i++) {
+            skinList.push(index);
         }
     }
     
@@ -76,13 +81,38 @@ window.onload = function () {
 
     const divSkins = document.getElementById("wheel")
 
-    ListeSkins.forEach(function(skin) {
+    ListeSkins.forEach(function(index) {
         var divContainer = document.createElement("div");
         divContainer.className = "wheel-slice";
+        
+        skin = dropsData[index]
+
+        if (skin.rarity_name == "LEGENDARY"){
+            divContainer.style.boxShadow = '0 0px 10px 4px orange';
+            divContainer.style.borderColor = 'orange'
+        } else if (skin.rarity_name == "EPIC"){
+            divContainer.style.boxShadow = 'inset 0 0px 0px 4px blueviolet';
+            divContainer.style.borderColor = 'blueviolet'
+        } else if (skin.rarity_name == "RARE"){
+            divContainer.style.boxShadow = 'inset 0 0px 0px 4px rgb(87, 213, 255)';
+            divContainer.style.borderColor = 'rgb(87, 213, 255)'
+        } else if (skin.rarity_name == "UNCOMMON"){
+            divContainer.style.boxShadow = 'inset 0 0px 0px 4px rgb(113, 255, 113)';
+            divContainer.style.borderColor = 'rgb(113, 255, 113)'
+        } else if (skin.rarity_name == "COMMON"){
+            divContainer.style.boxShadow = 'inset 0 0px 0px 4px gray';
+            divContainer.style.borderColor = 'gray' 
+        }
+
         var imgSkin = document.createElement("img");
-        imgSkin.src = "/SkinR6/L85A2/Black_Ice_L85A2_Skin.png";
+        imgSkin.className = "img_skin";
+        imgSkin.src = "/SkinR6/" + skin.arme_name + "/"+ skin.image;
+        imgSkin.alt = skin.name;
+
         divContainer.appendChild(imgSkin);
         divSkins.appendChild(divContainer);
+
+
     });
 
 };

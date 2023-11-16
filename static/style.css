@@ -393,7 +393,7 @@ a{
     justify-content: center;
     padding: 1vh;
     width: 800px;
-    height: 100px;
+    height: 125px;
     overflow: hidden;
     border: 3px solid #3498db;
 }
@@ -414,19 +414,15 @@ a{
     align-items: center;
     border-top: 5px solid;
     border-radius: 4px;
-    margin: 1vh;
-    padding: 0px;
-}
-
-.wheel-slice div {
-    width: 100px;
-    height: 100px;
+    margin: 0.5vh;
+    padding: 10px;
 }
 
 .cursor {
-    width: 2px;
-    height: 100px;
-    background-color: #3498db;
+    width: 5px;
+    height: 125px;
+    background-color: #ff000086;
+    border-radius: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -460,11 +456,12 @@ a{
     margin: 1vh;
     padding: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .container_skin:hover{
     transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
 }
 
 .img_skin{

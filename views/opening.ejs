@@ -64,9 +64,6 @@
                 <div class="cursor"></div>
                 <div id="wheel">
                     <div class="wheel-slice">
-                        <img class="img_skin" src="/SkinR6/L85A2/Black_Ice_L85A2_Skin.png" alt="Skin Image">
-                    </div>
-                    <div class="wheel-slice">
                         <div style="background-color: red;"></div>
                     </div>
                     <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
@@ -79,19 +76,29 @@
         <div class="container_skins">
             <% drops.forEach(function(drop) { %>
                 <% if (drop.rarity_name == "LEGENDARY") { %>
-                    <div class="container_skin" style="border-color: orange;">
+                    <div class="container_skin" style="border-color: orange;" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px orange';"
+                    onmouseout="this.style.boxShadow='';">
                         <p style="color: orange;" id="rarity"><%= drop.rarity_name %></p>
                 <% }else if (drop.rarity_name == "EPIC") { %>
-                    <div class="container_skin" style="border-color: blueviolet;">
+                    <div class="container_skin" style="border-color: blueviolet;" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px blueviolet';"
+                    onmouseout="this.style.boxShadow='';">
                         <p style="color: blueviolet;" id="rarity"><%= drop.rarity_name %></p>
                 <% }else if (drop.rarity_name == "RARE") { %>
-                    <div class="container_skin" style="border-color: rgb(87, 213, 255);">
+                    <div class="container_skin" style="border-color: rgb(87, 213, 255);" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px rgb(87, 213, 255)';"
+                    onmouseout="this.style.boxShadow='';">
                         <p style="color: rgb(87, 213, 255);" id="rarity"><%= drop.rarity_name %></p>
                 <% }else if (drop.rarity_name == "UNCOMMON") { %>
-                    <div class="container_skin" style="border-color: rgb(113, 255, 113);">
+                    <div class="container_skin" style="border-color: rgb(113, 255, 113);" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px rgb(113, 255, 113)';"
+                    onmouseout="this.style.boxShadow='';">
                         <p style="color: rgb(113, 255, 113);" id="rarity"><%= drop.rarity_name %></p>
                 <% }else if (drop.rarity_name == "COMMON") { %>
-                    <div class="container_skin" style="border-color: rgb(167, 167, 167);">
+                    <div class="container_skin" style="border-color: rgb(167, 167, 167);" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px rgb(167, 167, 167)';"
+                    onmouseout="this.style.boxShadow='';">
                         <p style="color: rgb(167, 167, 167);" id="rarity"><%= drop.rarity_name %></p>
                 <% } %>
 
