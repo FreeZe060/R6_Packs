@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `armes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.armes : ~7 rows (environ)
+-- Listage des données de la table r6_packs.armes : ~4 rows (environ)
 DELETE FROM `armes`;
 INSERT INTO `armes` (`id`, `name`) VALUES
 	(1, 'L85A2'),
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `drops` (
   CONSTRAINT `FK_drops_relations_skins_armes` FOREIGN KEY (`id_relations_skins_armes`) REFERENCES `relations_skins_armes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.drops : ~8 rows (environ)
+-- Listage des données de la table r6_packs.drops : ~3 rows (environ)
 DELETE FROM `drops`;
 INSERT INTO `drops` (`id_pack`, `id_relations_skins_armes`, `droprate`) VALUES
 	(1, 1, 0.01),
@@ -97,12 +97,14 @@ CREATE TABLE IF NOT EXISTS `packs` (
   `price` int DEFAULT NULL,
   `image` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.packs : ~1 rows (environ)
+-- Listage des données de la table r6_packs.packs : ~3 rows (environ)
 DELETE FROM `packs`;
 INSERT INTO `packs` (`id`, `name`, `price`, `image`) VALUES
-	(1, 'Alpha Pack', 2500, 'AlphaPack.png');
+	(1, 'Alpha Pack', 2500, 'AlphaPack.png'),
+	(2, 'Esports Alpha Pack', 10000, 'Siege_Esports_Alpha_Pack.png'),
+	(3, 'Outbreak Pack', 15000, 'Outbreak_Alpha_Pack.png');
 
 -- Listage de la structure de table r6_packs. profile
 DROP TABLE IF EXISTS `profile`;
@@ -188,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `skins` (
   CONSTRAINT `skins_ibfk_1` FOREIGN KEY (`id_rarity`) REFERENCES `rarity` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.skins : ~7 rows (environ)
+-- Listage des données de la table r6_packs.skins : ~3 rows (environ)
 DELETE FROM `skins`;
 INSERT INTO `skins` (`id`, `name`, `id_rarity`) VALUES
 	(1, 'Black Ice', 1),
