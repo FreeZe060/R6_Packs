@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `packs` (
 -- Listage des données de la table r6_packs.packs : ~1 rows (environ)
 DELETE FROM `packs`;
 INSERT INTO `packs` (`id`, `name`, `price`, `image`) VALUES
-	(1, 'Alpha Pack', 2500, 'AlphaPack.jpg');
+	(1, 'Alpha Pack', 2500, 'AlphaPack.png');
 
 -- Listage de la structure de table r6_packs. profile
 DROP TABLE IF EXISTS `profile`;
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.profile : ~1 rows (environ)
+-- Listage des données de la table r6_packs.profile : ~0 rows (environ)
 DELETE FROM `profile`;
 INSERT INTO `profile` (`id`, `name`, `money`, `image`) VALUES
 	(1, 'Hallexxx', 10000, 'hallexxx.jpg');
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `relations_skins_armes` (
   CONSTRAINT `relations_skins_armes_ibfk_2` FOREIGN KEY (`id_arme`) REFERENCES `armes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.relations_skins_armes : ~4 rows (environ)
+-- Listage des données de la table r6_packs.relations_skins_armes : ~0 rows (environ)
 DELETE FROM `relations_skins_armes`;
 INSERT INTO `relations_skins_armes` (`id_skin`, `id_arme`) VALUES
 	(1, 1),
@@ -179,10 +179,10 @@ CREATE TABLE IF NOT EXISTS `skins` (
 -- Listage des données de la table r6_packs.skins : ~4 rows (environ)
 DELETE FROM `skins`;
 INSERT INTO `skins` (`id`, `price`, `name`, `image`, `id_rarity`) VALUES
-	(1, 30000, 'Black Ice', 'Black_Ice_L85A2_Skin.webp', 2),
-	(2, 100, 'Oahu', 'Oahu_416C_Skin.PNG2.5k.webp', 5),
-	(3, 1000, 'Gator', 'Gator_P90_Skin.PNG1k.webp', 3),
-	(4, 3700, 'Glory', 'Glory_UMP45_Skin.PNG3.7.webp', 2);
+	(1, 30000, 'Black Ice', 'Black_Ice_L85A2_Skin.png', 2),
+	(2, 100, 'Oahu', 'Oahu_416C_Skin.PNG2.5k.png', 5),
+	(3, 1000, 'Gator', 'Gator_P90_Skin.PNG1k.jpg', 3),
+	(4, 3700, 'Glory', 'Glory_UMP45_Skin.PNG3.7.jpg', 2);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
