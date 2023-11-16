@@ -382,6 +382,7 @@ a{
     border-radius: 4px;
     margin: 1vh;
     padding: 20px;
+    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
@@ -469,4 +470,19 @@ a{
     text-align: center;
     font-size: 1em;
     color: black;
+}
+
+
+/* ================================= PAGE INVENTAIRE ========================================== */
+
+.all_contain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.for_title{
+    top: 0;
 }
