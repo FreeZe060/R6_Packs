@@ -88,19 +88,19 @@ window.onload = function () {
         skin = dropsData[index]
 
         if (skin.rarity_name == "LEGENDARY"){
-            divContainer.style.boxShadow = '0 0px 10px 4px orange';
+            divContainer.style.boxShadow = '0 0px 10px 0px orange';
             divContainer.style.borderColor = 'orange'
         } else if (skin.rarity_name == "EPIC"){
-            divContainer.style.boxShadow = 'inset 0 0px 0px 4px blueviolet';
+            divContainer.style.boxShadow = 'inset 0 0px 0px 0px blueviolet';
             divContainer.style.borderColor = 'blueviolet'
         } else if (skin.rarity_name == "RARE"){
-            divContainer.style.boxShadow = 'inset 0 0px 0px 4px rgb(87, 213, 255)';
+            divContainer.style.boxShadow = 'inset 0 0px 0px 0px rgb(87, 213, 255)';
             divContainer.style.borderColor = 'rgb(87, 213, 255)'
         } else if (skin.rarity_name == "UNCOMMON"){
-            divContainer.style.boxShadow = 'inset 0 0px 0px 4px rgb(113, 255, 113)';
+            divContainer.style.boxShadow = 'inset 0 0px 0px 0px rgb(113, 255, 113)';
             divContainer.style.borderColor = 'rgb(113, 255, 113)'
         } else if (skin.rarity_name == "COMMON"){
-            divContainer.style.boxShadow = 'inset 0 0px 0px 4px gray';
+            divContainer.style.boxShadow = 'inset 0 0px 0px 0px gray';
             divContainer.style.borderColor = 'gray' 
         }
 
