@@ -86,15 +86,17 @@ app.get('/opening:id', (req, res) => {
             console.error('Erreur lors de la récupération des packs : ' + error.message);
             return;
         }
-        connection.query('SELECT skins.*, rarity.name as rarity_name, armes.name as arme_name, drops.droprate FROM drops JOIN skins ON drops.id_skin = skins.id ' + 
+        connection.query('SELECT relations_skins_armes.id as id, skins.name, rarity.name as rarity_name, relations_skins_armes.image as image, relations_skins_armes.price as price, armes.name as arme_name, drops.droprate FROM drops ' + 
+        'JOIN relations_skins_armes ON drops.id_relations_skins_armes = relations_skins_armes.id ' + 
+        'JOIN skins ON skins.id = relations_skins_armes.id_skin ' +
         'JOIN rarity ON skins.id_rarity = rarity.id ' +
-        'JOIN relations_skins_armes ON skins.id = relations_skins_armes.id_skin ' +
         'JOIN armes ON relations_skins_armes.id_arme = armes.id ' + 
-        'WHERE drops.id_pack =  ? ORDER BY rarity.id;',[id_pack], (error, Dropsresults) => {
+        'WHERE drops.id_pack =  ? ORDER BY drops.droprate;',[id_pack], (error, Dropsresults) => {
             if (error) {
                 console.error('Erreur lors de la récupération des packs : ' + error.message);
                 return;
             }
+            console.log(Dropsresults);
             res.render('opening', { profile: logUser, pack: Packresults[0], drops: Dropsresults });
         });;
     });;

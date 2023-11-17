@@ -57,12 +57,13 @@ const wheelContainer = document.getElementById('wheel-container');
 
                 if (winningSliceIndex !== -1) {
                     timer = setTimeout(function () {
-                        console.log("oui");
+                        const button_loterie = document.getElementById('button_loterie');
                         const resultContainer = document.getElementById('result');
                         const resultContainers = document.getElementById('results');
                         resultContainer.style.display = "flex";
                         resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
                         wheelContainer.style.display = "none";
+                        button_loterie.style.display = "none";
                     }, 1000);
                 }
                 // Affiche le résultat sous le curseur
@@ -109,7 +110,9 @@ const wheelContainer = document.getElementById('wheel-container');
 
         function buttonresult() {
             const resultContainer = document.getElementById('result');
+            const button_loterie = document.getElementById('button_loterie');
             wheelContainer.style.display = "none";
             resultContainer.style.display = "none";
             pack.style.display = "flex";
+            button_loterie.style.display = "flex";
         }

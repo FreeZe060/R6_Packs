@@ -38,36 +38,42 @@ CREATE TABLE IF NOT EXISTS `armes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.armes : ~5 rows (environ)
+-- Listage des données de la table r6_packs.armes : ~4 rows (environ)
 DELETE FROM `armes`;
 INSERT INTO `armes` (`id`, `name`) VALUES
 	(1, 'L85A2'),
 	(2, '416-C'),
 	(3, 'MP5K'),
 	(4, 'P90'),
-	(5, 'UMP45');
+	(5, 'UMP45'),
+	(6, 'R4-C'),
+	(7, 'G36C');
 
 -- Listage de la structure de table r6_packs. drops
 DROP TABLE IF EXISTS `drops`;
 CREATE TABLE IF NOT EXISTS `drops` (
   `id_pack` int NOT NULL,
-  `id_skin` int NOT NULL,
-  `droprate` float NOT NULL,
-  KEY `skin` (`id_skin`),
+  `id_relations_skins_armes` int NOT NULL,
+  `droprate` double DEFAULT NULL,
   KEY `pack` (`id_pack`),
-  CONSTRAINT `drops_ibfk_1` FOREIGN KEY (`id_skin`) REFERENCES `skins` (`id`),
-  CONSTRAINT `drops_ibfk_2` FOREIGN KEY (`id_pack`) REFERENCES `packs` (`id`)
+  KEY `skin` (`id_relations_skins_armes`) USING BTREE,
+  CONSTRAINT `drops_ibfk_2` FOREIGN KEY (`id_pack`) REFERENCES `packs` (`id`),
+  CONSTRAINT `FK_drops_relations_skins_armes` FOREIGN KEY (`id_relations_skins_armes`) REFERENCES `relations_skins_armes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.drops : ~4 rows (environ)
+-- Listage des données de la table r6_packs.drops : ~3 rows (environ)
 DELETE FROM `drops`;
-INSERT INTO `drops` (`id_pack`, `id_skin`, `droprate`) VALUES
-	(1, 1, 0.05),
-	(1, 2, 20),
-	(1, 3, 10),
-	(1, 4, 4);
+INSERT INTO `drops` (`id_pack`, `id_relations_skins_armes`, `droprate`) VALUES
+	(1, 1, 0.01),
+	(1, 2, 0.27),
+	(1, 3, 0.16),
+	(1, 4, 0.01),
+	(1, 7, 0.2),
+	(1, 5, 0.1),
+	(1, 6, 0.17),
+	(1, 8, 0.08);
 
 -- Listage de la structure de table r6_packs. inventaire
 DROP TABLE IF EXISTS `inventaire`;
@@ -91,12 +97,14 @@ CREATE TABLE IF NOT EXISTS `packs` (
   `price` int DEFAULT NULL,
   `image` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.packs : ~1 rows (environ)
+-- Listage des données de la table r6_packs.packs : ~3 rows (environ)
 DELETE FROM `packs`;
 INSERT INTO `packs` (`id`, `name`, `price`, `image`) VALUES
-	(1, 'Alpha Pack', 2500, 'AlphaPack.jpg');
+	(1, 'Alpha Pack', 2500, 'AlphaPack.png'),
+	(2, 'Esports Alpha Pack', 10000, 'Siege_Esports_Alpha_Pack.png'),
+	(3, 'Outbreak Pack', 15000, 'Outbreak_Alpha_Pack.png');
 
 -- Listage de la structure de table r6_packs. profile
 DROP TABLE IF EXISTS `profile`;
@@ -147,42 +155,51 @@ DELETE FROM `relations_armes_agents`;
 -- Listage de la structure de table r6_packs. relations_skins_armes
 DROP TABLE IF EXISTS `relations_skins_armes`;
 CREATE TABLE IF NOT EXISTS `relations_skins_armes` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `id_skin` int NOT NULL,
   `id_arme` int NOT NULL,
+  `image` text,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `skin` (`id_skin`),
   KEY `arme` (`id_arme`),
   CONSTRAINT `relations_skins_armes_ibfk_1` FOREIGN KEY (`id_skin`) REFERENCES `skins` (`id`),
   CONSTRAINT `relations_skins_armes_ibfk_2` FOREIGN KEY (`id_arme`) REFERENCES `armes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.relations_skins_armes : ~4 rows (environ)
+-- Listage des données de la table r6_packs.relations_skins_armes : ~8 rows (environ)
 DELETE FROM `relations_skins_armes`;
-INSERT INTO `relations_skins_armes` (`id_skin`, `id_arme`) VALUES
-	(1, 1),
-	(2, 2),
-	(3, 4),
-	(4, 5);
+INSERT INTO `relations_skins_armes` (`id`, `id_skin`, `id_arme`, `image`, `price`) VALUES
+	(1, 1, 1, 'Black_Ice_L85A2_Skin.png', 30000),
+	(2, 2, 2, 'Oahu_416C_Skin.PNG2.5k.png', 100),
+	(3, 3, 4, 'Gator_P90_Skin.PNG1k.png', 1500),
+	(4, 1, 6, 'BlackIce_R4C_Skin.png', 32000),
+	(5, 4, 3, 'Fallen_Sun_MP5K_Skin10k.png', 2000),
+	(6, 5, 6, 'Nebula_R4C_Skin.png', 1000),
+	(7, 6, 1, 'Waves_L85A2_Skin2.5k.png', 700),
+	(8, 7, 7, 'Turbo_G36C_Skin.PNG2.5k.png', 2500);
 
 -- Listage de la structure de table r6_packs. skins
 DROP TABLE IF EXISTS `skins`;
 CREATE TABLE IF NOT EXISTS `skins` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `price` int NOT NULL,
   `name` text NOT NULL,
-  `image` text,
   `id_rarity` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `rarity` (`id_rarity`),
   CONSTRAINT `skins_ibfk_1` FOREIGN KEY (`id_rarity`) REFERENCES `rarity` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.skins : ~4 rows (environ)
+-- Listage des données de la table r6_packs.skins : ~3 rows (environ)
 DELETE FROM `skins`;
-INSERT INTO `skins` (`id`, `price`, `name`, `image`, `id_rarity`) VALUES
-	(1, 30000, 'Black Ice', 'Black_Ice_L85A2_Skin.webp', 2),
-	(2, 100, 'Oahu', 'Oahu_416C_Skin.PNG2.5k.webp', 5),
-	(3, 1000, 'Gator', 'Gator_P90_Skin.PNG1k.webp', 3),
-	(4, 3700, 'Glory', 'Glory_UMP45_Skin.PNG3.7.webp', 2);
+INSERT INTO `skins` (`id`, `name`, `id_rarity`) VALUES
+	(1, 'Black Ice', 1),
+	(2, 'Oahu', 5),
+	(3, 'Gator', 3),
+	(4, 'Fallen Sun', 2),
+	(5, 'Nebula', 4),
+	(6, 'Waves', 4),
+	(7, 'Turbo', 2);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

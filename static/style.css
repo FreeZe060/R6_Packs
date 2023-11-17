@@ -189,11 +189,11 @@ a{
 }
 
 .pack{
-    margin-right: 2ch 0 2vh 0;
+    margin-right: 2vh 0 2vh 0;
 }
 
 .img_pack{
-    width: 50%;
+    width: 60%;
 }
 
 /* ============================PROFILE =========================================*/
@@ -277,7 +277,7 @@ a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 0 auto;
+    margin-top: 100px;
 }
 
 .loterie {
@@ -300,14 +300,82 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-/* .img_packs{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-} */
+.img_pack {
+    max-width: 100%; /* Rend l'image responsive */
+    height: auto;
+    margin: 5vh 0 2vh 0; /* Ajoutez un espacement entre la navbar et l'image */
+}
+
+
+/* ===================== SIZE FOR HEIGHT ============================ */
+
+
+/* Utilisation de media queries pour rendre la mise en page plus responsive */
+@media screen and (max-height: 800px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 20vh; 
+    }
+}
+
+@media screen and (max-height: 680px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 40vh; 
+    }
+}
+
+@media screen and (max-height: 610px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 70vh; 
+    }
+}
+
+@media screen and (max-height: 520px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 80vh; 
+    }
+}
+
+@media screen and (max-height: 500px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 90vh; 
+    }
+}
+
+@media screen and (max-height: 460px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 120vh; 
+    }
+}
+
+@media screen and (max-height: 400px) {
+    
+    .open_packs {
+        position: relative;
+        top: 0;
+        margin-top: 150vh; 
+    }
+}
 
 
 /* ===================== LOTERIE/CURSOR/BUTTON ============================ */
@@ -325,7 +393,7 @@ a{
     justify-content: center;
     padding: 1vh;
     width: 800px;
-    height: 100px;
+    height: 125px;
     overflow: hidden;
     border: 3px solid #3498db;
 }
@@ -340,18 +408,21 @@ a{
 }
 
 .wheel-slice {
-    flex: 0 0 2%;
-}
-
-.wheel-slice div {
-    width: 100px;
-    height: 100px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border-top: 5px solid;
+    border-radius: 4px;
+    margin: 0.5vh;
+    padding: 10px;
 }
 
 .cursor {
-    width: 2px;
-    height: 100px;
-    background-color: #3498db;
+    width: 5px;
+    height: 125px;
+    background-color: #ff000086;
+    border-radius: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -364,6 +435,7 @@ a{
 
 .container_skins{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     border: 3px solid white;
@@ -371,6 +443,7 @@ a{
     border-radius: 20px;
     margin: 5vh 0 0 0;
     padding: 2vh;
+    width: 70%;
 }
 
 .container_skin{
@@ -383,16 +456,17 @@ a{
     margin: 1vh;
     padding: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .container_skin:hover{
     transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
 }
 
 .img_skin{
     width: 200px;
-    height: 98px;
+    height: 100px;
 }
 
 .container_skins #droprate{
@@ -446,8 +520,7 @@ a{
     background-color: white;
     border-radius: 20px;
     z-index: 9;
-    width: 30vh;
-    height: 30vh;
+    padding: 5%;
 }
 
 .container_result button {
