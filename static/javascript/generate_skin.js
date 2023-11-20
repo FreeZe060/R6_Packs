@@ -20,6 +20,7 @@ function generateSkinList(dropsData) {
     // Calcul de la somme totale des pourcentages
     const totalPercentage = dropsData.reduce((acc, drop) => acc + drop.droprate, 0);
     if (totalPercentage != 1){
+        
         throw new Error("Pourcentage must be 100 percent  (" + totalPercentage + ")");
     }
     

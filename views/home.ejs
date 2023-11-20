@@ -12,6 +12,7 @@
     </head>
     <body>
 
+        <!---------------------------- HEADER -------------------------------------->
         <header>
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
@@ -21,8 +22,9 @@
                 <a id="lien" href="#">Contact</a>
                 <% if (profile != undefined) { %>
                     <!-- Afficher l'image de l'utilisateur -->
-                    <div id="profile-container" class="profile-container"><!-- finir-->
-                        <p><%= profile.name %></p><img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                    <div id="profile-container" class="profile-container">
+                        <p><%= profile.name %></p>
+                        <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/<%= profile.image %>" alt="Image de l'utilisateur">
                         <div class="popup" id="popup" style="display: none;">
                             <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
                             <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
@@ -32,23 +34,60 @@
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->
                     <div class="log-container">
-                        <a class="case-button" href="/profiles">LogIn</a>
+                        <a id="loginButton" class="case-button">LogIn</a>
                     </div>
+                    <button href="/profiles">Se connecter</button>
                 <% } %>
             </div>
         </header>
 
+
+        <!---------------------------- POPUP / SEARCHBAR -------------------------------------->
+        
+        <div class="inscription" style="display: none;" id="inscription">
+            <form class="Formin" action="/register" method="post">
+
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+                
+                <label for="selectedImg">Choisir une image :</label>
+                <div class="image-selection-container">
+                    <div id="selected-image" class="selected-image"></div>
+                    <input type="file" id="selectedImg" name="selectedImg" accept="image/*" onchange="previewImage()">
+                </div>
+                <div id="image-scroll" class="image-scroll"></div>
+                
+                <button class="button_submit" type="submit">S'inscrire</button>
+            </form>
+        </div>
+        
+        <div id="loginPopup" style="display: none;">
+            <form id="loginForm" action="/login" method="post">
+                <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button class="button_login"  type="submit">Se connecter</button>
+                <a id="a_login" onclick="popUp()" href="#">Nouvel utilisateur inscrit toi</a>
+            </form>
+            <button id="closePopup">Fermer</button>
+        </div>
+        
         <!-- <div class="search-bar">
             <input type="text" class="search" id="search" name="search" placeholder="Nom de la case">
             <button class="button" id="button">Rechercher</button>
-        </div>
-        
-        <div class="case-container">
-            <h1 class="case-title">Dark Theme Case Opening</h1>
-            <p>Click the button to open the case!</p>
-            <button class="case-button" onclick="openCase()">Open Case</button>
-            <div id="result"></div>
         </div> -->
+
+        <!---------------------------- PACK -------------------------------------->
 
         <div class="pack-container-title">
             <h1>Tous nos Packs:</h1>
@@ -65,6 +104,7 @@
             </div>
         </div>
 
+        <!---------------------------- VIDEO -------------------------------------->
 
         <div class="video-container">
             <video autoplay muted loop id="video-background">

@@ -110,19 +110,6 @@ a{
     top: 0;
 }
 
-/******************************** search-bar **********************************************/
-
-.search-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.search {
-    border-radius: 5px;
-    margin: 0 10px; 
-}
-
 .button {
     border-radius: 5px;
     background-color: BLUE;
@@ -135,6 +122,169 @@ a{
     cursor: pointer;
     background-color: white;
 }
+
+
+/******************************** SEARCHBAR / LOGIN **********************************************/
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search {
+    border-radius: 5px;
+    margin: 0 10px; 
+}
+
+
+#loginPopup{
+    background-color: white;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    border-radius: 20px;
+    z-index: 9;
+    width: 25%;
+    height: 35%;
+}
+
+#loginForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#loginForm label{
+    color: black;
+    margin: 1vh 0 1vh 0;
+}
+
+#loginForm a{
+    color: black;
+    margin: 1vh 0 0 0;
+}
+
+.button_login{
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    margin: 2vh 0 2vh 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button_login:hover {
+    background-color: #2980b9;
+}
+
+#closePopup{
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#closePopup:hover {
+    background-color: #2980b9;
+}
+
+#loginForm input{
+    border-radius: 20px;
+    margin: 1vh 0 0 0;
+    border-color: #3498db;
+    
+}
+
+.inscription{
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    z-index: 9;
+    width: 30%;
+    height: 40%;
+}
+
+.Formin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2vh 0 0 0;
+}
+
+.Formin label{
+    color: black;
+    margin: 1vh 0 0 0;
+}
+
+.button_submit{
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button_submit:hover {
+    background-color: #2980b9;
+}
+
+.Formin input{
+    border-radius: 20px;
+    margin: 1vh 0 0 0;
+    border-color: #3498db;
+    
+}
+
+.image-selection-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.selected-image {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #000; /* Bordure pour l'image sélectionnée */
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.image-scroll {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+
+.image-scroll img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
 
 /******************************** case **********************************************/
 
@@ -189,11 +339,12 @@ a{
 }
 
 .pack{
-    margin-right: 2vh 0 2vh 0;
+    margin: 2vh 2vh 2vh 0;
 }
 
 .img_pack{
-    width: 60%;
+    width: 200px;
+    height: 200px;
 }
 
 /* ============================PROFILE =========================================*/

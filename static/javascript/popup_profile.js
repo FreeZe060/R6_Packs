@@ -22,4 +22,40 @@ document.addEventListener('DOMContentLoaded', function () {
         popup.style.display = 'none';
     });
 
+    const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
+
+    // Ajoutez un gestionnaire d'événements au clic sur le texte
+    function popUp() {
+        console.log("oui");
+        inscriptionPopup.style.display = "block";
+    }
+
+
+    function previewImage() {
+        const selectedImageContainer = document.getElementById('selected-image');
+        const imageScrollContainer = document.getElementById('image-scroll');
+    
+        // Réinitialiser l'image sélectionnée
+        selectedImageContainer.innerHTML = '';
+    
+        // Afficher l'image sélectionnée
+        const selectedImgInput = document.getElementById('selectedImg');
+        const selectedImg = document.createElement('img');
+        selectedImg.src = URL.createObjectURL(selectedImgInput.files[0]);
+        selectedImageContainer.appendChild(selectedImg);
+    
+        // Ajouter l'image sélectionnée à la barre de défilement
+        const scrollImage = document.createElement('img');
+        scrollImage.src = URL.createObjectURL(selectedImgInput.files[0]);
+        scrollImage.onclick = () => {
+            // Mettre à jour l'image sélectionnée lorsqu'on clique sur une miniature
+            selectedImageContainer.innerHTML = '';
+            selectedImageContainer.appendChild(scrollImage);
+        };
+        imageScrollContainer.appendChild(scrollImage);
+    }
+    
+    window.onload = function () {
+        popUp();
+    }
 });
