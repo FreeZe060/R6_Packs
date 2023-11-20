@@ -340,6 +340,7 @@ a{
 .pack-container{
     display: flex;
     text-align: center;
+    flex-wrap: wrap;
     align-items: flex-end;
     background-color: #1e1e1e;
     padding: 4vh 8vh;
