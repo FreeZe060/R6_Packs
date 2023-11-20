@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         // Récupérez les valeurs du formulaire et envoyez-les au serveur via une requête AJAX
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        const usernameLogin = document.getElementById('usernameLogin').value;
+        const passwordLogin = document.getElementById('passwordLogin').value;
 
         // Utilisez fetch ou XMLHttpRequest pour envoyer les informations de connexion au serveur
         fetch('/login', {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ usernameLogin, passwordLogin }),
         })
         .then(response => response.json())
         .then(data => {
@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Gérez la réponse du serveur ici
             if (data.success) {
                 loginPopup.style.display = 'none';
+                window.location.reload();
             } else {
                 alert('La connexion a échoué. Veuillez réessayer.');
             }
@@ -77,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('Erreur lors de la demande de connexion:', error);
         });
+
+
     });
 });
 

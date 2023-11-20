@@ -141,15 +141,13 @@ a{
 #loginPopup{
     background-color: white;
     display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    left: 37%;
+    top:30%;
+    padding: 3vh 10vh;
     flex-direction: column;
     border-radius: 20px;
-    z-index: 9;
-    width: 25%;
-    height: 35%;
+    z-index: 10;
 }
 
 #loginForm{
@@ -186,10 +184,13 @@ a{
 }
 
 #closePopup{
+    position: absolute;
+    top:0;
+    right:0;
     background-color: #3498db;
     color: #fff;
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 5px 10px;
+    font-size: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -201,7 +202,7 @@ a{
 }
 
 #loginForm input{
-    border-radius: 20px;
+    padding: 10px;
     margin: 1vh 0 0 0;
     border-color: #3498db;
     
@@ -209,16 +210,14 @@ a{
 
 .inscription{
     background-color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
+    position: fixed;
+    left: 32%;
+    top:25%;
+    padding: 3vh 10vh;
     flex-direction: column;
     border-radius: 20px;
     z-index: 9;
-    width: 30%;
-    height: 40%;
 }
 
 .Formin{
@@ -250,7 +249,7 @@ a{
 }
 
 .Formin input{
-    border-radius: 20px;
+    padding: 10px;
     margin: 1vh 0 0 0;
     border-color: #3498db;
     
@@ -263,11 +262,21 @@ a{
 }
 
 .selected-image {
-    width: 60px;
-    height: 60px;
-    border: 2px solid #000; /* Bordure pour l'image sélectionnée */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #3498db; /* Bordure pour l'image sélectionnée */
     margin-right: 10px;
+    border-radius: 50px;
     cursor: pointer;
+}
+
+.selected-image img{
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
 }
 
 .image-scroll {
