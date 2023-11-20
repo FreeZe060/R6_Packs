@@ -440,7 +440,7 @@ a{
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 5vh 0 0 0;
+    margin: 2vh 0 0 0;
 }
 
 .loterie:hover {
@@ -470,7 +470,7 @@ a{
     .open_packs {
         position: relative;
         top: 0;
-        margin-top: 20vh; 
+        margin-top: 30vh; 
     }
 }
 
@@ -545,6 +545,7 @@ a{
     padding: 1vh;
     width: 800px;
     height: 125px;
+    margin: 3vh 0 0 0;
     overflow: hidden;
     border: 3px solid #3498db;
 }

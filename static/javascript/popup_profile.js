@@ -21,35 +21,38 @@ document.addEventListener('DOMContentLoaded', function () {
     popup.addEventListener('mouseleave', function () {
         popup.style.display = 'none';
     });
+                
 
-    
-
-
-    function previewImage() {
-        const selectedImageContainer = document.getElementById('selected-image');
-        const imageScrollContainer = document.getElementById('image-scroll');
-    
-        // Réinitialiser l'image sélectionnée
-        selectedImageContainer.innerHTML = '';
-    
-        // Afficher l'image sélectionnée
-        const selectedImgInput = document.getElementById('selectedImg');
-        const selectedImg = document.createElement('img');
-        selectedImg.src = URL.createObjectURL(selectedImgInput.files[0]);
-        selectedImageContainer.appendChild(selectedImg);
-    
-        // Ajouter l'image sélectionnée à la barre de défilement
-        const scrollImage = document.createElement('img');
-        scrollImage.src = URL.createObjectURL(selectedImgInput.files[0]);
-        scrollImage.onclick = () => {
-            // Mettre à jour l'image sélectionnée lorsqu'on clique sur une miniature
-            selectedImageContainer.innerHTML = '';
-            selectedImageContainer.appendChild(scrollImage);
-        };
-        imageScrollContainer.appendChild(scrollImage);
-    }
-    
-    window.onload = function () {
-        popUp();
-    }
 });
+
+function previewImage() {
+    const selectedImageContainer = document.getElementById('selected-image');
+    const imageScrollContainer = document.getElementById('image-scroll');
+
+    // Réinitialiser l'image sélectionnée
+    selectedImageContainer.innerHTML = '';
+
+    // Afficher l'image sélectionnée
+    const selectedImgInput = document.getElementById('selectedImg');
+    const selectedImg = document.createElement('img');
+    selectedImg.src = URL.createObjectURL(selectedImgInput.files[0]);
+    selectedImageContainer.appendChild(selectedImg);
+
+    // Ajouter l'image sélectionnée à la barre de défilement
+    const scrollImage = document.createElement('img');
+    scrollImage.src = URL.createObjectURL(selectedImgInput.files[0]);
+    scrollImage.onclick = () => {
+        // Mettre à jour l'image sélectionnée lorsqu'on clique sur une miniature
+        selectedImageContainer.innerHTML = '';
+        selectedImageContainer.appendChild(scrollImage);
+    };
+    imageScrollContainer.appendChild(scrollImage);
+}
+
+function popUp() {
+    const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
+    const log = document.getElementById("loginPopup");
+    console.log("oui");
+    inscriptionPopup.style.display = "flex";
+    log.style.display = "none";
+}

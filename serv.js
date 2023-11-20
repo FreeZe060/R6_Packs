@@ -1,9 +1,11 @@
-//npm install express-session express mysql path ejs body-parser
+//npm install express-session express mysql path ejs body-parser bcrypt fs
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
+const bcrypt = require('bcrypt');
+const fs = require('fs');
 const app = express();
 const port = 8000;
 
@@ -129,53 +131,50 @@ app.post('/UserId', (req, res) => {
     }
 });
 
-app.post('/uploadImage', (req, res) => {
-    // Traitement du téléchargement d'image
-    console.log('Chemin de l\'image :', req.file.path);
-
-    // Autres traitements...
-});
-
-
-const bcrypt = require('bcrypt');
-
 app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const nom = req.body.nom;
-    const selectedImg = req.body.selectedImg; // L'image choisie par l'utilisateur
+
+    const selectedImg = req.body.selectedImg;
+    // Convertir la chaîne base64 en données binaires
+    const imageBuffer = Buffer.from(selectedImg, 'base64');
+    const fileName = `${username}_${Date.now()}.png`;
+    const filePath = `./assets/image_user/${fileName}`;
 
     // Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insérer l'utilisateur dans la base de données avec le nom, le mot de passe haché et l'image choisie
-    connection.query('INSERT INTO profile (username, hashed_password, name, image, money) VALUES (?, ?, ?, ?, ?)', [username, hashedPassword, nom, selectedImg || null, 0], (error, results) => {
+    connection.query('INSERT INTO profile (username, hashed_password, name, image, money) VALUES (?, ?, ?, ?, ?)', [username, hashedPassword, nom, fileName || null, 10000], (error, results) => {
         if (error) {
             console.error('Erreur lors de l\'inscription : ' + error.message);
             return res.json({ success: false, message: 'Erreur lors de l\'inscription' });
         }
 
-        // Enregistrement réussi
-        console.log('Utilisateur inscrit avec succès. ID de l\'utilisateur :', results.insertId);
-        
-        // Redirection vers la page home
-        res.redirect('/profiles');
-    });
+        fs.writeFile(filePath, imageBuffer, (writeError) => {
+            if (writeError) {
+                console.error('Erreur lors de l\'enregistrement de l\'image : ' + writeError.message);
+                return res.json({ success: false, message: 'Erreur lors de l\'enregistrement de l\'image' });
+            }
+
+            console.log('Image enregistrée avec succès sous le nom :', fileName);
+
+
+            // Enregistrement réussi
+            console.log('Utilisateur inscrit avec succès. ID de l\'utilisateur :', results.insertId);
+            
+            // // Redirection vers la page home
+            res.redirect('/profiles');
+        });
+    }); 
 });
-
-app.use((req, res, next) => {
-    res.locals.logUser = req.session.logUser;
-    next();
-});
-
-
 
 app.post('/login', async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.usernameLogin;
+    const password = req.body.passwordLogin;
 
-    // Récupérer le mot de passe haché de la base de données
-    connection.query('SELECT id, username, hashed_password FROM profile WHERE username = ?', [username], async (error, results) => {
+    connection.query('SELECT * FROM profile WHERE username = ?', [username], async (error, results) => {
         if (error) {
             console.error('Erreur lors de la récupération des informations d\'identification : ' + error.message);
             return res.json({ success: false, message: 'Erreur lors de la connexion' });
@@ -183,17 +182,14 @@ app.post('/login', async (req, res) => {
 
         if (results.length === 0) {
             // L'utilisateur n'existe pas
-            return res.json({ success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect' });
+            return res.json({ success: false, message: 'L\'utilisateur n\'existe pas' });
         }
 
         const hashedPassword = results[0].hashed_password;
-
-        // Vérifier le mot de passe
         const passwordMatch = await bcrypt.compare(password, hashedPassword);
 
         if (passwordMatch) {
-            // Authentification réussie, stockez les informations de l'utilisateur dans la session
-            req.session.logUser = { id: results[0].id, username: results[0].username };
+            req.session.logUser = results[0];
             return res.json({ success: true, message: 'Connexion réussie' });
         } else {
             // Mot de passe incorrect
