@@ -2,11 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var imgHover = document.getElementById('profile-container');
     var popup = document.getElementById('popup');
     var timer;
-    const sign = document.getElementById("inscription");
-
-    if (!sign) {
-        console.error("L'élément avec l'ID 'inscription' n'a pas été trouvé.");
-    }
 
     imgHover.addEventListener('mouseenter', function () {
         clearTimeout(timer); 
@@ -27,15 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         popup.style.display = 'none';
     });
     
-    document.addEventListener('click', function(event) {
-        // Vérifiez si la cible du clic n'est pas à l'intérieur de la popup
-        if (sign && !sign.contains(event.target)) {
-            console.log("oui");
-            sign.style.display = "none";
-        }
-    });
 });
-
 
 function previewImage() {
     const selectedImageContainer = document.getElementById('selected-image');
