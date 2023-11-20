@@ -36,7 +36,6 @@
                     <div class="log-container">
                         <a id="loginButton" class="case-button">LogIn</a>
                     </div>
-                    <button href="/profiles">Se connecter</button>
                 <% } %>
             </div>
         </header>
@@ -115,5 +114,15 @@
             <div class="gradient-overlay"></div>
             <div class="gradient-overlay2"></div>
         </div>
-
+            <script>
+                const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
+                const log = document.getElementById("loginPopup");
+                // Ajoutez un gestionnaire d'événements au clic sur le texte
+                function popUp() {
+                    console.log("oui");
+                    inscriptionPopup.style.display = "flex";
+                    log.style.display = "none";
+                }
+            </script>     
+    </body>
 </html>

@@ -22,13 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         popup.style.display = 'none';
     });
 
-    const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
-
-    // Ajoutez un gestionnaire d'événements au clic sur le texte
-    function popUp() {
-        console.log("oui");
-        inscriptionPopup.style.display = "block";
-    }
+    
 
 
     function previewImage() {
