@@ -128,7 +128,7 @@ a{
 
 .search-bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -719,4 +719,47 @@ a{
 
 .for_title{
     top: 0;
+}
+
+/* ================================= PAGE SKINS ========================================== */
+
+.for_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.TitleSkins{
+    color: white;
+    text-align: center;
+}
+
+.for_skins{
+    flex-wrap: wrap;
+    display: flex;
+    /* position: relative; */
+    justify-content: center;
+    align-items: center;
+}
+
+.skins-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 5px solid;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.skins-container:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+}
+
+.skins-container p{
+    color: white;
+    text-align: center;
 }

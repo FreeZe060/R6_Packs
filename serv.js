@@ -79,6 +79,21 @@ app.get('/profiles', (req, res) => {
     });;
 });
 
+app.get('/skins', (req, res) => {
+    // Assurez-vous de gérer les erreurs et autres opérations nécessaires
+    connection.query('SELECT skins.name, rarity.name as rarity_name, relations_skins_armes.image, armes.name as arme_name FROM relations_skins_armes ' +
+        'JOIN skins ON skins.id = relations_skins_armes.id_skin ' +
+        'JOIN rarity ON skins.id_rarity = rarity.id ' +
+        'JOIN armes ON relations_skins_armes.id_arme = armes.id', (error, results) => {
+            if (error) {
+                console.error('Erreur lors de la récupération des skins : ' + error.message);
+                return;
+            }
+
+            res.render('skins', { skins: results });
+        });
+});
+
 
 app.get('/opening:id', (req, res) => {
     const id_pack = req.params.id;
@@ -160,9 +175,9 @@ app.post('/register', async (req, res) => {
 
             console.log('Image enregistrée avec succès sous le nom :', fileName);
             console.log('Utilisateur inscrit avec succès. ID de l\'utilisateur :', results.insertId);
-            res.redirect('/profile');
             return res.json({ success: true, message: 'Inscription réussie' });
         });
+        res.redirect('/profile');
     }); 
 });
 
