@@ -33,9 +33,9 @@
                 slowdownStarted = true;
                 const remainingTime = duration - progress;
                 const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
-                scrollDistance = (progress / duration) * 2962 - 500 * easing;
+                scrollDistance = (progress / duration) * 3100 - 500 * easing;
             } else {
-                scrollDistance = (progress / duration) * 2962;
+                scrollDistance = (progress / duration) * 3100;
             }
 
             // Met à jour la position de la roue
@@ -82,7 +82,6 @@
         isAnimating = true;
         requestAnimationFrame(spinWheel);
     }
-
 
     function displayResultUnderCursor() {
         const cursorRect = cursor.getBoundingClientRect();

@@ -466,7 +466,6 @@ a{
 .img_pack {
     max-width: 100%; /* Rend l'image responsive */
     height: auto;
-    margin: 5vh 0 0 0; /* Ajoutez un espacement entre la navbar et l'image */
 }
 
 
@@ -479,7 +478,7 @@ a{
     .open_packs {
         position: relative;
         top: 0;
-        margin-top: 20vh; 
+        margin-top: 30vh; 
     }
 }
 
@@ -551,6 +550,7 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 5vh 0 0 0;
     padding: 1vh;
     width: 800px;
     height: 125px;
