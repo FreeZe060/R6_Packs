@@ -209,6 +209,29 @@ app.post('/login', async (req, res) => {
     });
 });
 
+app.post('/search-skins', async (req, res) => {
+    const searchTerm = req.body.searchTerm;
+
+    // Requête SQL pour la recherche par nom de skin
+    const query = "SELECT skins.name, rarity.name as rarity_name, relations_skins_armes.image, armes.name as arme_name " +
+                  "FROM relations_skins_armes " +
+                  "JOIN skins ON skins.id = relations_skins_armes.id_skin " +
+                  "JOIN rarity ON skins.id_rarity = rarity.id " +
+                  "JOIN armes ON relations_skins_armes.id_arme = armes.id " +
+                  "WHERE skins.name LIKE ?";
+
+    connection.query(query, [`%${searchTerm}%`], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la recherche des skins : ' + error.message);
+            return res.status(500).json({ success: false, message: 'Erreur lors de la recherche des skins' });
+        }
+
+        // Renvoie les résultats au client
+        res.json({ success: true, results });
+    });
+});
+
+
 
 /*END*/
 

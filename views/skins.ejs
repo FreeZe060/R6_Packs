@@ -90,11 +90,17 @@
         
         <!---------------------------- CONTAINER -------------------------------------->
         
-        <div class="for_container">
-            <div class="search-bar">
-                <input type="text" class="search" id="search" name="search" placeholder="Nom de la case">
-                <button class="button" id="button">Rechercher</button>
+        <div class="for_all">
+            <div class="loterie_container">
+                <div class="search-bar" id="searchForm">
+                    <input type="text" class="search" id="search" name="searchTerm" placeholder="Nom de la case">
+                    <button class="button" id="button">Rechercher</button>
+                </div>
             </div>
+            <ul id="searchResults">
+                <!-- Utilisez JavaScript pour remplir cette liste avec les résultats de la recherche -->
+            </ul>
+            
             <div class="for_skins">
                 <% for (const skin of skins) { %>
                     <div class="skin-container">
