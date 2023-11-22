@@ -90,12 +90,16 @@
         
         <!---------------------------- CONTAINER -------------------------------------->
         
-        <div class="for_all">
-            <div class="loterie_container">
-                <div class="search-bar" id="searchForm">
+        <div class="for_container">
+            <div class="search_container">
+                <!-- <div class="search-bar" id="searchForm">
                     <input type="text" class="search" id="search" name="searchTerm" placeholder="Nom de la case">
                     <button class="button" id="button">Rechercher</button>
-                </div>
+                </div> -->
+                <form action="" class="search-bar" id="searchForm">
+                    <input type="search" class="search" id="search" name="searchTerm" placeholder="Nom de la case" pattern=".*\S.*" required>
+                    <button class="button" id="button"><span>Search</span></button>
+                </form>
             </div>
             <ul id="searchResults">
                 <!-- Utilisez JavaScript pour remplir cette liste avec les résultats de la recherche -->
