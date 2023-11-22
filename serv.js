@@ -175,9 +175,10 @@ app.post('/register', async (req, res) => {
 
             console.log('Image enregistrée avec succès sous le nom :', fileName);
             console.log('Utilisateur inscrit avec succès. ID de l\'utilisateur :', results.insertId);
-            return res.json({ success: true, message: 'Inscription réussie' });
+            // return res.json({ success: true, message: 'Inscription réussie' });
+            res.redirect('/');
         });
-        res.redirect('/profile');
+        
     }); 
 });
 
