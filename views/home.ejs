@@ -19,7 +19,7 @@
                 <a id="lien" href="/">Home</a>
                 <a id="lien" href="/skins">Skins</a>
                 <a id="lien" href="/profiles">About</a>
-                <a id="lien" href="#">Contact</a>
+                <a id="lien" href="/profiles">Contact</a>
                 <% if (profile != undefined) { %>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div id="profile-container" class="profile-container">
@@ -95,12 +95,7 @@
                             <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="Image du Pack">
                         <!-- </a> -->
                         <p class="name"><%= pack.name %></p>
-                        <% if (profile != null && profile.money >= pack.price) { %>
-                            <a class="case-button" href="/opening<%= pack.id %>">Preview the Pack</a> <!--<%= pack.price %>¤-->
-                        <% } else { %>
-                            <p id="message" style="display: none;">Fonds insuffisants pour acheter ce pack</p>
-                            <a class="case-button" href="#">Preview the Pack</a> <!--<%= pack.price %>¤-->
-                        <% } %>
+                        <a class="case-button" href="/opening<%= pack.id %>">Preview the Pack</a> <!--<%= pack.price %>¤-->
                     </div>
                 <% }); %>
             </div>

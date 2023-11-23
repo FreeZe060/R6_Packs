@@ -129,8 +129,8 @@ app.get('/opening:id', (req, res) => {
                 console.error('Erreur lors de la récupération des packs : ' + error.message);
                 return;
             }
-            if (logUser.money >= pack.price) {
-                const newMoney = logUser.money - pack.price;
+            if (logUser.money >= packs.price) {
+                const newMoney = logUser.money - packs.price;
                 connection.query('UPDATE profile SET money = ? WHERE id = ?', [newMoney, logUser.id], (updateError) => {
                     if (updateError) {
                         console.error('Erreur lors de la mise à jour de l\'argent de l\'utilisateur : ' + updateError.message);
