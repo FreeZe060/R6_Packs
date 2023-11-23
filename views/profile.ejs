@@ -19,15 +19,22 @@
                 <a id="lien" href="#">About</a>
                 <a id="lien" href="#">Contact</a>
             </div>
+            <% if (logUser && logUser.isAdmin) { %>
+                <button onclick="ajouterUtilisateur()">Ajouter</button>
+            <% } %>
         </header>
 
         <div class="profiles-container">
             <% profiles.forEach(function(profile) { %>
-                <div id-user="<%= profile.id %>" onclick="choixUser(this)">
-
+                <div id-user="<%= profile.id %>" onclick="choixUser(this)" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)">
+            
+                    <!-- Bouton "Supprimer" -->
+                    <% if (logUser && logUser.isAdmin) { %>
+                        <button class="btn-supprimer" onclick="supprimerUtilisateur('<%= profile.id %>')">Supprimer</button>
+                    <% } %>
+            
                     <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image du profile">
                     <p id="name"><%= profile.username %></p>
-
                 </div>
             <% }); %>
         </div>

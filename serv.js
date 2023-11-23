@@ -69,15 +69,23 @@ app.get('/', (req, res) => {
     });
 });
 
+
+///////////////////////////////////// PROFILES ////////////////////////////////////////////////////////
+
+
 app.get('/profiles', (req, res) => {
     connection.query('SELECT profile.* FROM profile', (error, Profilesresults) => {
         if (error) {
-            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+            console.error('Erreur lors de la récupération des profils : ' + error.message);
             return;
         }
-        res.render('profile', { profiles: Profilesresults });
-    });;
+        res.render('profile', { profiles: Profilesresults, profile: res.locals.logUser });
+    });
 });
+
+
+///////////////////////////////////// SKINS ////////////////////////////////////////////////////////
+
 
 app.get('/skins', (req, res) => {
     // Assurez-vous de gérer les erreurs et autres opérations nécessaires
@@ -95,16 +103,24 @@ app.get('/skins', (req, res) => {
 });
 
 
+///////////////////////////////////// OPENING ////////////////////////////////////////////////////////
+
+
 app.get('/opening:id', (req, res) => {
     const id_pack = req.params.id;
     const logUser = res.locals.logUser;
+
+    if (!logUser) {
+        return res.status(403).send("Accès non autorisé");
+    }
+
     connection.query('SELECT packs.* FROM packs WHERE packs.id = ?',[id_pack], (error, Packresults) => {
         if (error) {
             console.error('Erreur lors de la récupération des packs : ' + error.message);
             return;
         }
         connection.query('SELECT relations_skins_armes.id as id, skins.name, rarity.name as rarity_name, relations_skins_armes.image as image, relations_skins_armes.price as price, armes.name as arme_name, drops.droprate FROM drops ' + 
-        'JOIN relations_skins_armes ON drops.id_relations_skins_armes = relations_skins_armes.id ' + 
+        'JOIN relations_skins_armes ON drops.id_relations_skins_armes = relations_skins_armes.id ' +
         'JOIN skins ON skins.id = relations_skins_armes.id_skin ' +
         'JOIN rarity ON skins.id_rarity = rarity.id ' +
         'JOIN armes ON relations_skins_armes.id_arme = armes.id ' + 
@@ -113,8 +129,21 @@ app.get('/opening:id', (req, res) => {
                 console.error('Erreur lors de la récupération des packs : ' + error.message);
                 return;
             }
-            console.log(Dropsresults);
-            res.render('opening', { profile: logUser, pack: Packresults[0], drops: Dropsresults });
+            if (logUser.money >= pack.price) {
+                const newMoney = logUser.money - pack.price;
+                connection.query('UPDATE profile SET money = ? WHERE id = ?', [newMoney, logUser.id], (updateError) => {
+                    if (updateError) {
+                        console.error('Erreur lors de la mise à jour de l\'argent de l\'utilisateur : ' + updateError.message);
+                        return res.status(500).send("Erreur lors de la mise à jour de l'argent de l'utilisateur");
+                    }
+    
+                    console.log(Dropsresults);
+                    res.render('opening', { profile: logUser, pack: Packresults[0], drops: Dropsresults });
+                });
+            } else {
+                // L'utilisateur n'a pas assez d'argent, vous pouvez également envoyer un message d'erreur ou rediriger ailleurs
+                res.status(403).send("Fonds insuffisants pour acheter ce pack");
+            }
         });;
     });;
 });
@@ -145,6 +174,10 @@ app.post('/UserId', (req, res) => {
         res.redirect('/');
     }
 });
+
+
+///////////////////////////////////// REGISTER ////////////////////////////////////////////////////////
+
 
 app.post('/register', async (req, res) => {
     const username = req.body.username;
@@ -182,6 +215,10 @@ app.post('/register', async (req, res) => {
     }); 
 });
 
+
+///////////////////////////////////// LOGIN ////////////////////////////////////////////////////////
+
+
 app.post('/login', async (req, res) => {
     const username = req.body.usernameLogin;
     const password = req.body.passwordLogin;
@@ -210,6 +247,10 @@ app.post('/login', async (req, res) => {
     });
 });
 
+
+///////////////////////////////////// SEARCH SKINS ////////////////////////////////////////////////////////
+
+
 app.post('/search-skins', async (req, res) => {
     const searchTerm = req.body.searchTerm;
 
@@ -229,6 +270,31 @@ app.post('/search-skins', async (req, res) => {
 
         // Renvoie les résultats au client
         res.json({ success: true, results });
+    });
+});
+
+
+///////////////////////////////////// DELETE USER ////////////////////////////////////////////////////////
+
+
+app.post('/deleteUser/:userId', (req, res) => {
+    // Assurez-vous que l'utilisateur est un administrateur
+    if (!req.session.logUser || !req.session.logUser.isAdmin) {
+        return res.status(403).send("Accès non autorisé");
+    }
+
+    const userIdToDelete = req.params.userId;
+
+    // Exemple avec la connexion MySQL
+    connection.query('DELETE FROM profiles WHERE id = ?', [userIdToDelete], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la suppression de l\'utilisateur : ' + error.message);
+            return res.status(500).send("Erreur lors de la suppression de l'utilisateur");
+        }
+
+        // Logique de suppression réussie
+        console.log("userIdToDelete :", userIdToDelete);
+        return res.status(200).send("Utilisateur supprimé avec succès");
     });
 });
 

@@ -33,6 +33,10 @@ async function decoProfile() {
     window.location.reload();
 }
 
+
+///////////////////////////////////// LOGIN POST ////////////////////////////////////////////////////////
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const loginButton = document.getElementById('loginButton');
     const loginPopup = document.getElementById('loginPopup');
@@ -82,6 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 });
+
+
+///////////////////////////////////// SEARCH SKINS ////////////////////////////////////////////////////////
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('searchForm');
@@ -141,8 +149,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // const messageElement = document.getElementById('message');
+    // messageElement.style.display = 'block';
+    // setTimeout(function () {
+    //     messageElement.style.display = 'none';
+    // }, 3000);
 });
 
+
+///////////////////////////////////// ADMIN ////////////////////////////////////////////////////////
+
+
+function isAdmin(req, res, next) {
+    if (req.session.logUser && req.session.logUser.isAdmin) {
+        return next(); // Autorisé
+    } else {
+        res.redirect('/'); // Rediriger vers la page d'accueil ou une page d'erreur
+    }
+}
+
+function afficherBoutonSupprimer(element) {
+    // Ajoutez une classe CSS pour afficher le bouton "Supprimer"
+    element.querySelector('.btn-supprimer').classList.add('visible');
+}
+
+function cacherBoutonSupprimer(element) {
+    // Supprimez la classe CSS pour cacher le bouton "Supprimer"
+    element.querySelector('.btn-supprimer').classList.remove('visible');
+}
     
 window.onload = function () {
     
