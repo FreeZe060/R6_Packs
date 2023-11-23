@@ -178,6 +178,40 @@ function cacherBoutonSupprimer(element) {
     // Supprimez la classe CSS pour cacher le bouton "Supprimer"
     element.querySelector('.btn-supprimer').classList.remove('visible');
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const userContainers = document.getElementById('.user-container');
+
+    userContainers.forEach(container => {
+        const userId = container.getAttribute('id-user');
+
+        container.querySelector('.btn-supprimer').addEventListener('click', async function () {
+            const confirmation = window.confirm("Voulez-vous vraiment supprimer cet utilisateur ?");
+
+            if (confirmation) {
+                await supprimerUtilisateur(userId);
+            }
+        });
+    });
+});
+
+
+async function supprimerUtilisateur(userId) {
+    try {
+        const response = await fetch(`/deleteUser/${userId}`, { method: 'POST' });
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`);
+        }
+
+        const result = await response.text();
+        console.log(result);
+        window.location.reload(); // Recharge la page après la suppression
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'utilisateur : ' + error.message);
+        // Gérer l'erreur ici (afficher un message à l'utilisateur, etc.)
+    }
+}
     
 window.onload = function () {
     

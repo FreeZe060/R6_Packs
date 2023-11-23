@@ -19,17 +19,16 @@
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
-                <a id="lien" href="/">Skins</a>
-                <a id="lien" href="/profiles">About</a>
-                <a id="lien" href="#">Contact</a>
-                <% if (typeof profile !== 'undefined' && profile !== null) { %>
-
+                <a id="lien" href="/skins">Skins</a>
+                <a id="lien" href="/profiles">about</a>
+                <% if (profile != undefined) { %>
+                    <a id="lien" href="/profiles">Les profiles</a>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div id="profile-container" class="profile-container">
                         <p><%= profile.username %></p>
                         <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                         <div class="popup" id="popup" style="display: none;">
-                            <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="profil" href="/profiles"><span class="hover-underline-animation">Profil</span></a>
                             <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
                             <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
                         </div>
@@ -45,7 +44,7 @@
             </div>
         </header>
         
-        <h1 class="TitleSkins">Liste des Skins</h1>
+        <!-- <h1 class="TitleSkins">Liste des Skins</h1> -->
         
         <!---------------------------- POPUP / SEARCHBAR -------------------------------------->
         
@@ -93,26 +92,20 @@
         
         <!---------------------------- CONTAINER -------------------------------------->
         
-        <div class="for_container">
-            <div class="search_container">
-                <!-- <div class="search-bar" id="searchForm">
-                    <input type="text" class="search" id="search" name="searchTerm" placeholder="Nom de la case">
-                    <button class="button" id="button">Rechercher</button>
-                </div> -->
-                <form action="" class="search-bar" id="searchForm">
-                    <input type="search" class="search" id="search" name="searchTerm" placeholder="Nom de la case" pattern=".*\S.*" required>
-                    <button class="button" id="button"><span>Search</span></button>
-                </form>
-            </div>
-            <ul id="searchResults"></ul>
-            <div class="for_skins">
-                <% for (const skin of skins) { %>
-                    <div class="skin-container">
-                        <img class="img_skin" src="/SkinR6/<%= skin.arme_name %>/<%= skin.image %>" alt="<%= skin.name %>">
-                        <p><%= skin.name %></p>
-                    </div>
-                <% } %>
-            </div>
+        <div class="search_container">
+            <form action="" class="search-bar" id="searchForm">
+                <input type="search" class="search" id="search" name="searchTerm" placeholder="Nom de la case" pattern=".*\S.*" required>
+                <button class="button" id="button"><span>Search</span></button>
+            </form>
+        </div>
+        <ul id="searchResults"></ul>
+        <div class="for_skins">
+            <% for (const skin of skins) { %>
+                <div class="skin-container">
+                    <img class="img_skin" src="/SkinR6/<%= skin.arme_name %>/<%= skin.image %>" alt="<%= skin.name %>">
+                    <p><%= skin.name %></p>
+                </div>
+            <% } %>
         </div>
     </body>
 </html>

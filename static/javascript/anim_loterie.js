@@ -1,50 +1,50 @@
     const wheelContainer = document.getElementById('wheel-container');
     const pack = document.getElementById('open_packs');
-    const wheel = document.getElementById('wheel');
     const cursor = document.querySelector('.cursor');
-
+    const wheel = document.getElementById('wheel');
+    
     let animationStartTime = null;
     let isAnimating = false;
     let slowdownStarted = false;
     let winningSliceIndex = -1;
-
+    
     function print(liste){
         console.log(liste);
     }
-
+    
     function easeOutSlow(t) {
         return 1 - Math.pow(1 - t, 6); // Ajustez le facteur d'accélération ici
     }
-
+    
     function spinWheel(timestamp) {
         if (!animationStartTime) {
             animationStartTime = timestamp;
         }
-
+        
         const progress = timestamp - animationStartTime;
         const duration = 9000; // Durée totale de l'animation en millisecondes
-
+        
         if (progress < duration && isAnimating) {
             // Défilement fluide avec ralentissement progressif
             let scrollDistance;
-
+            
             if (duration - progress <= 5000 && !slowdownStarted) {
                 // Ralentissement progressif avec une fonction d'accélération
                 slowdownStarted = true;
                 const remainingTime = duration - progress;
                 const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
-                scrollDistance = (progress / duration) * 2962 - 500 * easing;
+                scrollDistance = (progress / duration) * 3000 - 500 * easing;
             } else {
-                scrollDistance = (progress / duration) * 2962;
+                scrollDistance = (progress / duration) * 3000;
             }
-
+            
             // Met à jour la position de la roue
             wheel.style.transform = `translateX(-${scrollDistance}px)`;
-
+            
             // Positionne le curseur au milieu de la roue
             const cursorPosition = wheelContainer.offsetLeft + (wheel.offsetWidth / 2);
             cursor.style.left = `${cursorPosition}px`;
-
+            
             // Continue l'animation
             requestAnimationFrame(spinWheel);
         } else {
@@ -53,7 +53,7 @@
             isAnimating = false;
             slowdownStarted = false;
             displayResultUnderCursor();
-
+            
             if (winningSliceIndex !== -1) {
                 timer = setTimeout(function () {
                     const button_loterie = document.getElementById('button_loterie');
@@ -68,22 +68,23 @@
             // Affiche le résultat sous le curseur
         }
     }
-
+    
     function startAnimation() {
         // Réinitialise la variable de l'index de la slice gagnante
         resetWinningSliceIndex();
-
+        
         wheelContainer.style.display = "flex";
         pack.style.display = "none";
         // Réinitialise la position de la roue
         wheel.style.transform = 'translateX(0)';
-
+        button_loterie.style.display = "none";
+        
         // Active l'animation
         isAnimating = true;
         requestAnimationFrame(spinWheel);
     }
-
-
+    
+    
     function displayResultUnderCursor() {
         const cursorRect = cursor.getBoundingClientRect();
         const slices = document.querySelectorAll('.wheel-slice');
