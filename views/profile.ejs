@@ -8,6 +8,7 @@
         <link rel="icon" href="r6_profile.png" type="image/x-icon">
 
         <script src="javascript/com_serveur.js" defer></script>
+        <script src="javascript/popup_profile.js" defer></script>
     </head>
     <body>
 
@@ -23,6 +24,7 @@
 
         <div class="inscription" style="display: none;" id="inscription">
             <form class="Formin" action="/register" method="post">
+                <h1 class="title_creation">Creation du User</h1>
 
                 <label for="username">Nom d'utilisateur :</label>
                 <input type="text" id="username" name="username" required>
@@ -42,16 +44,16 @@
                 
                 <button class="button_submit" type="submit">Création du User</button>
             </form>
-            <button id="closePopup">Fermer</button>
+            <button id="closepopup">Fermer</button>
         </div>
         
+        <div class="add">
+            <% if (logUser && logUser.isAdmin) { %>
+                <button class="btn-add" onclick="Popup2()">Ajouter</button>
+            <% } %>
+        </div>
         
         <div class="profiles-container">
-            <div class="add">
-                <!-- <% if (logUser && logUser.isAdmin) { %> -->
-                    <button class="btn-add" onclick="ajouterUtilisateur()">Ajouter</button>
-                <!-- <% } %> -->
-            </div>
             <% profiles.forEach(function(profile) { %>
                 <!-- <div id-user="<%= profile.id %>" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)"> -->
                 <div id-user="<%= profile.id %>" class="user-container" id="user-container" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)">

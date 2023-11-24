@@ -712,20 +712,22 @@ h1{
 
 /* ========================= BUTTON ADD DELETE =============================== */
 
+.title_creation{
+    color: black;
+    z-index: 999;
+}
 
 .add{
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 99;
+    top: 15%;
+    right: 0;
     position: absolute;
-    top: 20%;
-    right: 0%;
-    background-color: white;
 }
 
 .btn-add {
-    display: none; /* Par défaut, le bouton est caché */
+    display: flex; /* Par défaut, le bouton est caché */
     margin: 0 0 2vh 0;
     background-color: #3498db;
     color: #fff;

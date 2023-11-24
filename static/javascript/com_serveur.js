@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginButton = document.getElementById('loginButton');
     const loginPopup = document.getElementById('loginPopup');
     const closePopup = document.getElementById('closePopup');
+    const closepopup = document.getElementById('closepopup');
+    const inscription = document.getElementById('inscription');
 
     loginButton.addEventListener('click', function () {
         loginPopup.style.display = 'block';
@@ -48,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closePopup.addEventListener('click', function () {
         loginPopup.style.display = 'none';
+    });
+
+    closepopup.addEventListener('click', function () {
+        inscription.style.display = 'none';
     });
 
     // Ajoutez un événement pour gérer la soumission du formulaire de connexion

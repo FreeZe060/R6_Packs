@@ -55,3 +55,8 @@ function popUp() {
     log.style.display = "none";
 
 }
+
+function Popup2() {
+    const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
+    inscriptionPopup.style.display = "flex";
+}

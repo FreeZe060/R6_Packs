@@ -47,6 +47,7 @@
         
         <div class="inscription" style="display: none;" id="inscription">
             <form class="Formin" action="/register" method="post">
+                <h1 class="title_creation">Inscrivez-vous</h1>
 
                 <label for="username">Nom d'utilisateur :</label>
                 <input type="text" id="username" name="username" required>
@@ -66,11 +67,12 @@
                 
                 <button class="button_submit" type="submit">S'inscrire</button>
             </form>
-            <button id="closePopup">Fermer</button>
+            <button id="closepopup">Fermer</button>
         </div>
         
         <div id="loginPopup" style="display: none;">
             <form id="loginForm" action="/login" method="post">
+                <h1 class="title_creation">Connectez-vous</h1>
                 <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
                 <label for="usernameLogin">Nom d'utilisateur:</label>
                 <input type="text" id="usernameLogin" name="usernameLogin" required>
