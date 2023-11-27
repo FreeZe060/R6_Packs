@@ -905,7 +905,7 @@ body, .search-bar {
 .search-bar input:valid + .buttont:active {
 	transform: translateY(1px);
 
-
+}
 /* #payment-form{
     display: flex;
     align-items: center;
@@ -974,5 +974,4 @@ body, .search-bar {
 
 .payment :hover {
     background-color: #45a049;
-}
 }
