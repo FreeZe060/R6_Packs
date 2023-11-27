@@ -93,12 +93,6 @@
             <div class="pack-container">
                 <% packs.forEach(function(pack) { %>
                     <div class="pack">
-
-                        <!-- Bouton "Supprimer" -->
-                        <% if (logUser && logUser.isAdmin) { %>
-                            <button class="btn-supprimer" onclick="supprimerUtilisateur('<%= pack.id %>')">Supprimer</button>
-                        <% } %>
-
                         <!-- <a href="/pack/<%= pack.id %>"> -->
                             <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="Image du Pack">
                         <!-- </a> -->

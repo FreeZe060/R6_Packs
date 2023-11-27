@@ -143,11 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ajoutez un gestionnaire d'événements pour mettre à jour les résultats en temps réel lors de la saisie
     document.querySelector('input[name="searchTerm"]').addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
-        const allSkins = allSkinsContainer.querySelectorAll('.skin-container');
+        const allSkins = allSkinsContainer.querySelectorAll('.container_skin');
 
         // Parcourez tous les skins et affichez ceux qui correspondent à la recherche
         allSkins.forEach(skin => {
-            const skinName = skin.querySelector('p').textContent.toLowerCase();
+            const skinName = skin.querySelector("#skin_name").textContent.toLowerCase();
             if (skinName.includes(searchTerm)) {
                 skin.style.display = 'block';
             } else {

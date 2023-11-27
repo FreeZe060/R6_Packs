@@ -84,10 +84,13 @@ window.onload = function () {
 
     ListeSkins.forEach(function(index) {
         var divContainer = document.createElement("div");
-        divContainer.className = "wheel-slice";
-        
         skin = dropsData[index]
 
+        divContainer.setAttribute("skin_name", skin.name);
+        divContainer.setAttribute("arme_name", skin.arme_name);
+        divContainer.setAttribute("image", skin.image);
+        divContainer.className = "wheel-slice";
+    
         if (skin.rarity_name == "LEGENDARY"){
             divContainer.style.boxShadow = '0 0px 10px 0px orange';
             divContainer.style.borderColor = 'orange'
