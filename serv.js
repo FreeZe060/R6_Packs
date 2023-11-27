@@ -139,9 +139,9 @@ app.get('/inventaire', (req, res) => {
     res.render('inventaire', {profile: logUser});
 });
 
-app.get('/test', (req, res) => {
+app.get('/payment', (req, res) => {
     const logUser = res.locals.logUser;
-    res.render('test', {profile: logUser});
+    res.render('payment', {profile: logUser});
 });
 
 /*Routes POST*/

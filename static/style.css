@@ -887,7 +887,7 @@ label {
 
 
 
-/* ================================= PAGE INVENTAIRE ========================================== */
+/* ================================= PAGE PAYMENT ========================================== */
 
 
 .test{
@@ -943,3 +943,54 @@ label {
 .payment :hover {
     background-color: #45a049;
 }
+
+/* ================================= PAGE INVENTAIRE ========================================== */
+
+
+.info_profile{
+    display: flex;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    border-radius: 10px;
+    flex-direction: column;
+    background-color: #333;
+    padding: 3vh 5vh;
+    text-align: left;
+}
+
+.titre_profile{
+    text-align: center;
+}
+
+.user_profile{
+    font-size: 2em;
+}
+
+.user_profile img{
+    margin: 0 0 0 2vh;
+}
+
+.money_profile{
+    font-size: 2em;
+    margin: 0 2vh 0 0;
+}
+
+.money_profile img{
+    margin: 0 0 0 2vh;
+}
+
+.name_profile
+{
+    font-size: 2em;
+}
+
+.container_invent
+{
+
+}
+
+.container_skins{
+    
+}
+

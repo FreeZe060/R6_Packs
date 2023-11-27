@@ -29,7 +29,7 @@
                             <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
                         </div>
                         <p class="money"><%= profile.money %></p>
-                        <img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur">
+                        <a href="/payment"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->
@@ -41,11 +41,10 @@
         </header>
             
         <div class="info_profile">
-            <p class="user_profile"><%= profile.username %></p>
-            <img class="img_user" id="imgHover" style="width: 100px; height: 100px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
-            <p class="money_profile"><%= profile.money %></p>
-            <p class="name_profile"><%= profile.name %></p>
-            <img class="img_user" style="width: 50px; height: 50px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur">
+            <h1 class="titre_pro">Information du profile</h1>
+            <p class="user_profile">Pseudo : <%= profile.username %><img class="img_user" id="imgHover" style="width: 80px; height: 80px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur"></p>
+            <p class="name_profile">Nom : <%= profile.name %></p>
+            <p class="money_profile">Monnaie : <%= profile.money %><img class="img_user" style="width: 35px; height: 35px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></p>
         </div>
     
             <div class="container_invent">  
