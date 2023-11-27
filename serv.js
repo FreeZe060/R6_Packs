@@ -150,18 +150,13 @@ app.post('/charge', async (req, res) => {
     try {
       const token = req.body.token;
   
-      // ... (autres étapes de traitement)
-  
       const charge = await stripe.charges.create({
         amount: 1000, // Montant en centimes (par exemple, 10,00 €)
         currency: 'EUR',
         source: token,
         description: 'Paiement pour votre site web',
       });
-  
-      // ... (autres étapes de traitement)
-  
-      // Envoyez une réponse réussie au client
+
       res.json({ success: true, message: 'Paiement réussi' });
     } catch (error) {
       // Gérez les erreurs
