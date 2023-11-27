@@ -887,28 +887,19 @@ label {
 
 /* ================================= PAGE INVENTAIRE ========================================== */
 
-.all_contain{
+.info_profile{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    width: 100%;
 }
 
-.for_title{
-    top: 0;
+.user_profile{
+    font-size: 3em;
+}
+
+.money_profile{
+    font-size: 1.5em;
 }
 
 
-/* .for_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
-}
 
-.TitleSkins{
-    color: white;
-    text-align: center;
-} */
