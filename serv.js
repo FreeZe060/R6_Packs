@@ -6,9 +6,12 @@ const mysql = require('mysql');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
+const stripe = require('stripe')('sk_test_51OGlUbJjPngOvvrw1zgffcUbkQoFplGBMNRGrHfxsGttXvp0sNcgMkStDxLuYRAUlp564BxZmv18MdGchifQZ4NC005QMUQG57');
 const app = express();
 const port = 8000;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const dir = path.join(__dirname, '/');
 app.use(express.static('static'));
 
@@ -125,7 +128,38 @@ app.get('/inventaire', (req, res) => {
     res.render('inventaire', {profile: logUser});
 });
 
+app.get('/test', (req, res) => {
+    const logUser = res.locals.logUser;
+    res.render('test', {profile: logUser});
+});
+
 /*Routes POST*/
+
+app.post('/charge', async (req, res) => {
+    try {
+      const token = req.body.token;
+  
+      // ... (autres étapes de traitement)
+  
+      const charge = await stripe.charges.create({
+        amount: 1000, // Montant en centimes (par exemple, 10,00 €)
+        currency: 'EUR',
+        source: token,
+        description: 'Paiement pour votre site web',
+      });
+  
+      // ... (autres étapes de traitement)
+  
+      // Envoyez une réponse réussie au client
+      res.json({ success: true, message: 'Paiement réussi' });
+    } catch (error) {
+      // Gérez les erreurs
+      console.error('Erreur de paiement:', error);
+      res.json({ success: false, message: 'Erreur de paiement - ' + error.message });
+    }
+});
+  
+
 
 app.post('/UserId', (req, res) => {
     const reqUserId = req.body.userId;
