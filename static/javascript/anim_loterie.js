@@ -7,6 +7,7 @@
     let isAnimating = false;
     let slowdownStarted = false;
     let winningSliceIndex = -1;
+    let winningSliceDiv = null;
     
     function print(liste){
         console.log(liste);
@@ -33,9 +34,9 @@
                 slowdownStarted = true;
                 const remainingTime = duration - progress;
                 const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
-                scrollDistance = (progress / duration) * 3000 - 500 * easing;
+                scrollDistance = (progress / duration) * 2890 - 500 * easing;
             } else {
-                scrollDistance = (progress / duration) * 3000;
+                scrollDistance = (progress / duration) * 2890;
             }
             
             // Met à jour la position de la roue
@@ -59,8 +60,22 @@
                     const button_loterie = document.getElementById('button_loterie');
                     const resultContainer = document.getElementById('result');
                     const resultContainers = document.getElementById('results');
+                    arme_name = winningSliceDiv.getAttribute("arme_name");
+                    skin_name = winningSliceDiv.getAttribute("skin_name");
+                    // skin_image = winningSliceDiv.getAttribute("skin_image");
+
                     resultContainer.style.display = "flex";
-                    resultContainers.innerHTML = `Vous avez gagné avec la div ${winningSliceIndex + 1}`;
+                    resultContainers.innerHTML = `Vous avez gagné avec le skin ${skin_name} sur la ${arme_name}`;
+                    skin
+
+                    const container_skin = document.createElement("div");
+                    container_skin.classList.add("container_skin");
+                    container_skin.appendChild(winningSliceDiv);
+                    resultContainer.appendChild(container_skin);
+
+
+
+
                     wheelContainer.style.display = "none";
                     button_loterie.style.display = "none";
                 }, 1000);
@@ -101,6 +116,7 @@
             ) {
                 // Stockez l'index de la slice sous le curseur
                 winningSliceIndex = index;
+                winningSliceDiv = slice;
             }
         });
     }

@@ -101,10 +101,40 @@
         <ul id="searchResults"></ul>
         <div class="for_skins">
             <% for (const skin of skins) { %>
-                <div class="skin-container">
-                    <img class="img_skin" src="/SkinR6/<%= skin.arme_name %>/<%= skin.image %>" alt="<%= skin.name %>">
-                    <p><%= skin.name %></p>
-                </div>
+                <% if (skin.rarity_name == "LEGENDARY") { %>
+                    <div class="container_skin" style="border-color: orange;" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px orange';"
+                    onmouseout="this.style.boxShadow='';">
+                        <p style="color: orange;" id="rarity"><%= skin.rarity_name %></p>
+                <% }else if (skin.rarity_name == "EPIC") { %>
+                    <div class="container_skin" style="border-color: blueviolet;" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px blueviolet';"
+                    onmouseout="this.style.boxShadow='';">
+                        <p style="color: blueviolet;" id="rarity"><%= skin.rarity_name %></p>
+                <% }else if (skin.rarity_name == "RARE") { %>
+                    <div class="container_skin" style="border-color: rgb(87, 213, 255);" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px rgb(87, 213, 255)';"
+                    onmouseout="this.style.boxShadow='';">
+                        <p style="color: rgb(87, 213, 255);" id="rarity"><%= skin.rarity_name %></p>
+                <% }else if (skin.rarity_name == "UNCOMMON") { %>
+                    <div class="container_skin" style="border-color: rgb(113, 255, 113);" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px rgb(113, 255, 113)';"
+                    onmouseout="this.style.boxShadow='';">
+                        <p style="color: rgb(113, 255, 113);" id="rarity"><%= skin.rarity_name %></p>
+                <% }else if (skin.rarity_name == "COMMON") { %>
+                    <div class="container_skin" style="border-color: rgb(167, 167, 167);" 
+                    onmouseover="this.style.boxShadow='inset 0 0px 0px 2px rgb(167, 167, 167)';"
+                    onmouseout="this.style.boxShadow='';">
+                        <p style="color: rgb(167, 167, 167);" id="rarity"><%= skin.rarity_name %></p>
+                <% } %>
+
+                        <p id="prix"><%= skin.price %></p>
+
+                        <img class="img_skin" src="/SkinR6/<%= skin.arme_name %>/<%= skin.image %>" alt="Skin Image">
+
+                        <p id="skin_name"><%= skin.name %></p>
+                        <p id="arme_name"><%= skin.arme_name %></p>
+                    </div>
             <% } %>
         </div>
     </body>
