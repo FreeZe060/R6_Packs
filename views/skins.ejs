@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>R6 Case</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <link rel="icon" href="r6_pack.png" type="image/x-icon">
+
+        <script src="javascript/com_serveur.js" defer></script>
+        <script src="javascript/popup_profile.js" defer></script>
+        <script src="javascript/anim_loterie.js" defer></script>
+        <script src="javascript/generate_skin.js" defer></script>
+    </head>
+    <body>
+
+        <!---------------------------- HEADER -------------------------------------->
+        <header>
+            <!-- Barre de navigation (navbar) -->
+            <div class="navbar">
+                <a id="lien" href="/">Home</a>
+                <a id="lien" href="/skins">Skins</a>
+                <a id="lien" href="/profiles">about</a>
+                <% if (profile != undefined) { %>
+                    <a id="lien" href="/profiles">Les profiles</a>
+                    <!-- Afficher l'image de l'utilisateur -->
+                    <div id="profile-container" class="profile-container">
+                        <p><%= profile.username %></p>
+                        <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                        <div class="popup" id="popup" style="display: none;">
+                            <a id="profil" href="/profiles"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
+                            <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
+                        </div>
+                        <p class="money"><%= profile.money %></p>
+                        <img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur">
+                    </div>
+                <% } else { %>
+                    <!-- Afficher le bouton de connexion -->
+                    <div class="log-container">
+                        <a id="loginButton" class="case-button">LogIn</a>
+                    </div>
+                <% } %>
+            </div>
+        </header>
+        
+        <!-- <h1 class="TitleSkins">Liste des Skins</h1> -->
+        
+        <!---------------------------- POPUP / SEARCHBAR -------------------------------------->
+        
+        
+        
+        <div class="inscription" style="display: none;" id="inscription">
+            <form class="Formin" action="/register" method="post">
+                
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+                
+                <label for="selectedImg">Choisir une image :</label>
+                <div class="image-selection-container">
+                    <div id="selected-image" class="selected-image"></div>
+                    <input type="file" id="selectedImg" name="selectedImg" accept="image/*" onchange="previewImage()">
+                </div>
+                <div id="image-scroll" class="image-scroll"></div>
+                
+                <button class="button_submit" type="submit">S'inscrire</button>
+            </form>
+            <button id="closePopup">Fermer</button>
+        </div>
+        
+        <div id="loginPopup" style="display: none;">
+            <form id="loginForm" action="/login" method="post">
+                <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
+                <label for="usernameLogin">Nom d'utilisateur:</label>
+                <input type="text" id="usernameLogin" name="usernameLogin" required>
+                
+                <label for="passwordLogin">Mot de passe:</label>
+                <input type="password" id="passwordLogin" name="passwordLogin" required>
+                
+                <button class="button_login"  type="submit">Se connecter</button>
+                <a id="a_login" onclick="popUp()" href="#">Nouvel utilisateur inscrit toi</a>
+            </form>
+            <button id="closePopup">Fermer</button>
+        </div>
+        
+        
+        <!---------------------------- CONTAINER -------------------------------------->
+        
+        <div class="search_container">
+            <form action="" class="search-bar" id="searchForm">
+                <input type="search" class="search" id="search" name="searchTerm" placeholder="Nom de la case" pattern=".*\S.*" required>
+                <button class="button" id="button"><span>Search</span></button>
+            </form>
+        </div>
+        <ul id="searchResults"></ul>
+        <div class="for_skins">
+            <% for (const skin of skins) { %>
+                <div class="skin-container">
+                    <img class="img_skin" src="/SkinR6/<%= skin.arme_name %>/<%= skin.image %>" alt="<%= skin.name %>">
+                    <p><%= skin.name %></p>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>

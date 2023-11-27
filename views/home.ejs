@@ -17,19 +17,21 @@
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
-                <a id="lien" href="/">Skins</a>
-                <a id="lien" href="/profiles">About</a>
-                <a id="lien" href="#">Contact</a>
+                <a id="lien" href="/skins">Skins</a>
+                <a id="lien" href="#">About</a>
                 <% if (profile != undefined) { %>
+                    <a id="lien" href="/profiles">Les profiles</a>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div id="profile-container" class="profile-container">
                         <p><%= profile.username %></p>
                         <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                         <div class="popup" id="popup" style="display: none;">
-                            <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="profil" href="/profiles"><span class="hover-underline-animation">Profil</span></a>
                             <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
                             <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
                         </div>
+                        <p class="money"><%= profile.money %></p>
+                        <img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur">
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->
@@ -45,6 +47,7 @@
         
         <div class="inscription" style="display: none;" id="inscription">
             <form class="Formin" action="/register" method="post">
+                <h1 class="title_creation">Inscrivez-vous</h1>
 
                 <label for="username">Nom d'utilisateur :</label>
                 <input type="text" id="username" name="username" required>
@@ -64,10 +67,12 @@
                 
                 <button class="button_submit" type="submit">S'inscrire</button>
             </form>
+            <button id="closepopup">Fermer</button>
         </div>
         
         <div id="loginPopup" style="display: none;">
             <form id="loginForm" action="/login" method="post">
+                <h1 class="title_creation">Connectez-vous</h1>
                 <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
                 <label for="usernameLogin">Nom d'utilisateur:</label>
                 <input type="text" id="usernameLogin" name="usernameLogin" required>
@@ -80,11 +85,6 @@
             </form>
             <button id="closePopup">Fermer</button>
         </div>
-        
-        <!-- <div class="search-bar">
-            <input type="text" class="search" id="search" name="search" placeholder="Nom de la case">
-            <button class="button" id="button">Rechercher</button>
-        </div> -->
 
         <!---------------------------- PACK -------------------------------------->
 
@@ -93,6 +93,12 @@
             <div class="pack-container">
                 <% packs.forEach(function(pack) { %>
                     <div class="pack">
+
+                        <!-- Bouton "Supprimer" -->
+                        <% if (logUser && logUser.isAdmin) { %>
+                            <button class="btn-supprimer" onclick="supprimerUtilisateur('<%= pack.id %>')">Supprimer</button>
+                        <% } %>
+
                         <!-- <a href="/pack/<%= pack.id %>"> -->
                             <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="Image du Pack">
                         <!-- </a> -->

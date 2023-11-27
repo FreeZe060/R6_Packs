@@ -69,15 +69,41 @@ app.get('/', (req, res) => {
     });
 });
 
+
+///////////////////////////////////// PROFILES ////////////////////////////////////////////////////////
+
+
 app.get('/profiles', (req, res) => {
     connection.query('SELECT profile.* FROM profile', (error, Profilesresults) => {
         if (error) {
-            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+            console.error('Erreur lors de la récupération des profils : ' + error.message);
             return;
         }
-        res.render('profile', { profiles: Profilesresults });
-    });;
+        res.render('profile', { profiles: Profilesresults, profile: res.locals.logUser });
+    });
 });
+
+
+///////////////////////////////////// SKINS ////////////////////////////////////////////////////////
+
+
+app.get('/skins', (req, res) => {
+    // Assurez-vous de gérer les erreurs et autres opérations nécessaires
+    connection.query('SELECT skins.name, rarity.name as rarity_name, relations_skins_armes.image, armes.name as arme_name FROM relations_skins_armes ' +
+    'JOIN skins ON skins.id = relations_skins_armes.id_skin ' +
+    'JOIN rarity ON skins.id_rarity = rarity.id ' +
+    'JOIN armes ON relations_skins_armes.id_arme = armes.id', (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la récupération des skins : ' + error.message);
+            return;
+        }
+        
+        res.render('skins', { skins: results, profile: res.locals.logUser });
+    });
+});
+
+
+///////////////////////////////////// OPENING ////////////////////////////////////////////////////////
 
 
 app.get('/opening:id', (req, res) => {
@@ -131,6 +157,10 @@ app.post('/UserId', (req, res) => {
     }
 });
 
+
+///////////////////////////////////// REGISTER ////////////////////////////////////////////////////////
+
+
 app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -160,11 +190,16 @@ app.post('/register', async (req, res) => {
 
             console.log('Image enregistrée avec succès sous le nom :', fileName);
             console.log('Utilisateur inscrit avec succès. ID de l\'utilisateur :', results.insertId);
-            
-            return res.json({ success: true, message: 'Inscription réussie' });
+            // return res.json({ success: true, message: 'Inscription réussie' });
+            res.redirect('/');
         });
+        
     }); 
 });
+
+
+///////////////////////////////////// LOGIN ////////////////////////////////////////////////////////
+
 
 app.post('/login', async (req, res) => {
     const username = req.body.usernameLogin;
@@ -193,6 +228,64 @@ app.post('/login', async (req, res) => {
         }
     });
 });
+
+
+///////////////////////////////////// SEARCH SKINS ////////////////////////////////////////////////////////
+
+
+app.post('/search-skins', async (req, res) => {
+    const searchTerm = req.body.searchTerm;
+
+    // Requête SQL pour la recherche par nom de skin
+    const query = "SELECT skins.name, rarity.name as rarity_name, relations_skins_armes.image, armes.name as arme_name " +
+                  "FROM relations_skins_armes " +
+                  "JOIN skins ON skins.id = relations_skins_armes.id_skin " +
+                  "JOIN rarity ON skins.id_rarity = rarity.id " +
+                  "JOIN armes ON relations_skins_armes.id_arme = armes.id " +
+                  "WHERE skins.name LIKE ?";
+
+    connection.query(query, [`%${searchTerm}%`], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la recherche des skins : ' + error.message);
+            return res.status(500).json({ success: false, message: 'Erreur lors de la recherche des skins' });
+        }
+
+        // Renvoie les résultats au client
+        res.json({ success: true, results });
+    });
+});
+
+
+///////////////////////////////////// DELETE USER ////////////////////////////////////////////////////////
+
+
+app.post('/deleteUser/:userId', (req, res) => {
+    // Assurez-vous que l'utilisateur est un administrateur
+    if (!req.session.logUser || !req.session.logUser.isAdmin) {
+        return res.status(403).send("Accès non autorisé");
+    }
+
+    const userIdToDelete = req.params.userId;
+
+    try {
+        // Exemple avec la connexion MySQL
+        connection.query('DELETE FROM profile WHERE id = ?', [userIdToDelete], (error, results) => {
+            if (error) {
+                console.error('Erreur lors de la suppression de l\'utilisateur : ' + error.message);
+                return res.status(500).send("Erreur lors de la suppression de l'utilisateur");
+            }
+
+            // Logique de suppression réussie
+            console.log("userIdToDelete :", userIdToDelete);
+            return res.status(200).send("Utilisateur supprimé avec succès");
+        });
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'utilisateur : ' + error.message);
+        return res.status(500).send("Erreur lors de la suppression de l'utilisateur");
+    }
+});
+
+
 
 
 /*END*/

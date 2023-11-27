@@ -15,23 +15,26 @@
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
-                <a id="lien" href="/">Skins</a>
-                <a id="lien" href="#">About</a>
-                <a id="lien" href="#">Contact</a>
+                <a id="lien" href="/skins">Skins</a>
+                <a id="lien" href="/profiles">about</a>
                 <% if (profile != undefined) { %>
+                    <a id="lien" href="/profiles">Les profiles</a>
                     <!-- Afficher l'image de l'utilisateur -->
-                    <div id="profile-container" class="profile-container" onclick="showpop_profile()"><!-- finir-->
-                        <p><%= profile.name %></p><img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                    <div id="profile-container" class="profile-container">
+                        <p><%= profile.username %></p>
+                        <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                         <div class="popup" id="popup" style="display: none;">
-                            <a id="profil" href="/"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="profil" href="/profiles"><span class="hover-underline-animation">Profil</span></a>
                             <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
-                            <a id="deconnexion" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
+                            <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
                         </div>
+                        <p class="money"><%= profile.money %></p>
+                        <img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur">
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->
                     <div class="log-container">
-                        <a class="case-button" href="/profiles">LogIn</a>
+                        <a id="loginButton" class="case-button">LogIn</a>
                     </div>
                 <% } %>
             </div>
@@ -44,16 +47,6 @@
     
             <div class="container_invent">  
                 <div class="container_skins">
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div> 
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
-                    <div><img class="img_pack" src="/image_pack/AlphaPack.jpg" alt=""><p>pourcentage de chance</p> <br> <p>Valeur Marchande</p></div>
                 </div>
             </div>     
         </div>

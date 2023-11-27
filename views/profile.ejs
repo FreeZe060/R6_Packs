@@ -8,6 +8,7 @@
         <link rel="icon" href="r6_profile.png" type="image/x-icon">
 
         <script src="javascript/com_serveur.js" defer></script>
+        <script src="javascript/popup_profile.js" defer></script>
     </head>
     <body>
 
@@ -15,19 +16,55 @@
             <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
-                <a id="lien" href="/">Skins</a>
+                <a id="lien" href="/skins">Skins</a>
                 <a id="lien" href="#">About</a>
                 <a id="lien" href="#">Contact</a>
             </div>
         </header>
 
+        <div class="inscription" style="display: none;" id="inscription">
+            <form class="Formin" action="/register" method="post">
+                <h1 class="title_creation">Creation du User</h1>
+
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+                
+                <label for="selectedImg">Choisir une image :</label>
+                <div class="image-selection-container">
+                    <div id="selected-image" class="selected-image"></div>
+                    <input type="file" id="selectedImg" name="selectedImg" accept="image/*" onchange="previewImage()">
+                </div>
+                <div id="image-scroll" class="image-scroll"></div>
+                
+                <button class="button_submit" type="submit">Création du User</button>
+            </form>
+            <button id="closepopup">Fermer</button>
+        </div>
+        
+        <div class="add">
+            <% if (logUser && logUser.isAdmin) { %>
+                <button class="btn-add" onclick="Popup2()">Ajouter</button>
+            <% } %>
+        </div>
+        
         <div class="profiles-container">
             <% profiles.forEach(function(profile) { %>
-                <div id-user="<%= profile.id %>" onclick="choixUser(this)">
-
-                    <img class="img_user" src="/image_user/<%= profile.image %>" alt="Image du profile">
+                <!-- <div id-user="<%= profile.id %>" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)"> -->
+                <div id-user="<%= profile.id %>" class="user-container" id="user-container" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)">
+            
+                    <!-- Bouton "Supprimer" -->
+                    <% if (logUser && logUser.isAdmin) { %>
+                        <button class="btn-supprimer" onclick="supprimerUtilisateur('<%= profile.id %>')">Supprimer</button>
+                    <% } %>
+            
+                    <img class="img_user" onclick="choixUser(this)" src="/image_user/<%= profile.image %>" alt="Image du profile">
                     <p id="name"><%= profile.username %></p>
-
                 </div>
             <% }); %>
         </div>
