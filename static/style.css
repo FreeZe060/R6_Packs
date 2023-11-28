@@ -143,6 +143,7 @@ a{
     z-index: 10;
 }
 
+
 #loginForm{
     display: flex;
     justify-content: center;
@@ -907,10 +908,11 @@ label {
 .container_payment{
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     background-color: #333;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 3vh 0 0 0;
     padding: 5vh 5vh;
     border: 3px solid rgb(187, 168, 0);
 }
@@ -1012,7 +1014,7 @@ label {
 }
 
 .container_achat div{
-    margin: 0 2vh 0 0;
+    margin: 2vh 2vh 0 2vh;
     display: flex;
     align-items: center;
     justify-content: center;
