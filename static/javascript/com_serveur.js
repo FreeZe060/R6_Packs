@@ -1,15 +1,6 @@
 async function choixUser(element) {
 
     const userId = element.getAttribute('id-user');
-
-    // fetch(`/UserId?userId=${userId}`, { method: 'POST'})
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data); // Vous pouvez gérer la réponse du serveur ici
-    //     })
-    //     .catch(error => {
-    //         console.error('Erreur lors de la communication avec le serveur:', error);
-    // });
         
     await fetch('/UserId', { 
         method: 'POST',
@@ -155,12 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // const messageElement = document.getElementById('message');
-    // messageElement.style.display = 'block';
-    // setTimeout(function () {
-    //     messageElement.style.display = 'none';
-    // }, 3000);
 });
 
 

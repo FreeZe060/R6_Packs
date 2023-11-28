@@ -56,8 +56,6 @@ function previewImage() {
         };
         imageScrollContainer.appendChild(scrollImage);
 
-        // Stocker l'image sur le serveur (vous devez ajouter cette partie selon votre backend)
-        // Exemple fictif de requête AJAX pour envoyer l'image au serveur
         const formData = new FormData();
         formData.append('profileImage', selectedImgFile);
 
@@ -81,7 +79,7 @@ function previewImage() {
 
 
 function popUp() {
-    const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
+    const inscriptionPopup = document.getElementById("inscription");
     const log = document.getElementById("loginPopup");
     inscriptionPopup.style.display = "flex";
     log.style.display = "none";
@@ -89,6 +87,6 @@ function popUp() {
 }
 
 function Popup2() {
-    const inscriptionPopup = document.getElementById("inscription"); // Modifié pour correspondre à votre ID
+    const inscriptionPopup = document.getElementById("inscription");
     inscriptionPopup.style.display = "flex";
 }

@@ -20,20 +20,23 @@
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
                 <a id="lien" href="/skins">Skins</a>
-                <a id="lien" href="/profiles">about</a>
+                <a id="lien" href="/about">About</a>
+                <a id="lien" href="/achat">Boutique</a>
                 <% if (profile != undefined) { %>
-                    <a id="lien" href="/profiles">Les profiles</a>
+                    <% if (logUser && logUser.isAdmin) { %>
+                        <a id="lien" href="/profiles">Les profiles</a>
+                    <% } %>
                     <!-- Afficher l'image de l'utilisateur -->
                     <div id="profile-container" class="profile-container">
                         <p><%= profile.username %></p>
                         <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
                         <div class="popup" id="popup" style="display: none;">
-                            <a id="profil" href="/profiles"><span class="hover-underline-animation">Profil</span></a>
+                            <a id="profil" href="/inventaire"><span class="hover-underline-animation">Profil</span></a>
                             <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
                             <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
                         </div>
-                        <p class="money"><%= profile.money %></p>
-                        <a href="/payment"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
+                        <p id="money-display" class="money"><%= profile.money %></p>
+                        <a href="/test"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
                     </div>
                 <% } else { %>
                     <!-- Afficher le bouton de connexion -->

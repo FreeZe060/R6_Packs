@@ -890,7 +890,7 @@ label {
 /* ================================= PAGE PAYMENT ========================================== */
 
 
-.test{
+.panier{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -898,6 +898,11 @@ label {
     padding: 3vh 5vh;
 }
 
+.titre_payment{
+    text-align: center;
+    top: 15%;
+    position: absolute;
+}
 
 .container_payment{
     display: flex;
@@ -994,3 +999,59 @@ label {
     
 }
 
+
+/* ================================= PAGE ACHAT ========================================== */
+
+.container_achat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    
+}
+
+.container_achat div{
+    margin: 0 2vh 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #333;
+    border: 3px solid white;
+    border-radius: 10px;
+    padding: 1vh 1vh;
+}
+
+.container_achat div p{
+    font-size: 2em;
+}
+
+.container_achat div img{
+    margin: 0 0 0 1vh;
+}
+
+
+.container_achat div button {
+    background-color: #3498db;
+    
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5vh 0 0 0;
+}
+
+.container_achat div button:hover {
+    background-color: #2980b9;
+}
+
+
+.titre_achat{
+    text-align: center;
+    top: 15%;
+    position: absolute;
+}

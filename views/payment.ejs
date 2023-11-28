@@ -88,8 +88,11 @@
     </div>
 
     <!-- Formulaire de paiement avec des éléments Stripe -->
-    <div class="test">
+    <div class="panier">
+        <h1 class="titre_payment">Votre panier</h1>
         <div class="container_payment">
+            <h1>Effectuer le paiement :</h1>
+            <p id="money-display">Montant : <%= montant %> euros</p>
             <form action="/charge" method="post" id="payment-form">
                 <!-- Les champs du formulaire -->
                 <input type="text" id="card-holder-name" placeholder="Nom du titulaire de la carte" required>
@@ -106,51 +109,52 @@
     <script>
         
         var elements = stripe.elements();
-
-        // Personnalisez le formulaire de paiement
         var style = {
             base: {
                 fontSize: '16px',
                 color: '#32325d',
             },
         };
-
         var card = elements.create('card', { style: style });
         card.mount('#card-element');
 
-        // Gérez la soumission du formulaire
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             stripe.createToken(card).then(function (result) {
                 if (result.error) {
-                    // Gestion des erreurs
                     console.error(result.error.message);
                 } else {
-                    // Envoi du token au serveur Node.js pour traitement
                     stripeTokenHandler(result.token);
                 }
             });
         });
 
         function stripeTokenHandler(token) {
-            // Envoyez le token au serveur Node.js pour le traitement
+            const montant = '<%= montant %>'; // Montant en euros
             fetch('/charge', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ token: token.id }),
+                body: JSON.stringify({ token: token.id, montant: montant }),
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                // Traitez la réponse du serveur
+                alert(data.message); // Afficher le message de confirmation
+                if (data.success) {
+                    // Mettre à jour la monnaie affichée sur la page
+                    document.getElementById('money-display').textContent = data.nouveauSolde;
+                    window.location.href = '/'; // Rediriger vers la page d'accueil après le paiement
+                } else {
+                    console.error('Erreur lors de la mise à jour de la monnaie:', data.message);
+                }
             })
             .catch(error => {
                 console.error('Erreur:', error);
             });
         }
+
     </script>
 </body>
 </html>

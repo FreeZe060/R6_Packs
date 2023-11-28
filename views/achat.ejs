@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>R6 Case</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <link rel="icon" href="r6_pack.png" type="image/x-icon">
+
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="javascript/com_serveur.js" defer></script>
+        <script src="javascript/popup_profile.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a id="lien" href="/">Home</a>
+            <a id="lien" href="/skins">Skins</a>
+            <a id="lien" href="/about">About</a>
+            <a id="lien" href="/achat">Boutique</a>
+            <% if (profile != undefined) { %>
+                <% if (logUser && logUser.isAdmin) { %>
+                    <a id="lien" href="/profiles">Les profiles</a>
+                <% } %>
+                <!-- Afficher l'image de l'utilisateur -->
+                <div id="profile-container" class="profile-container">
+                    <p><%= profile.username %></p>
+                    <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
+                    <div class="popup" id="popup" style="display: none;">
+                        <a id="profil" href="/inventaire"><span class="hover-underline-animation">Profil</span></a>
+                        <a id="inventaire" href="/inventaire"><span class="hover-underline-animation">Inventaire</span></a>
+                        <a id="deconnexion" href="#" onclick="decoProfile()"><span class="hover-underline-animation">Sign out</span></a>
+                    </div>
+                    <p id="money-display" class="money"><%= profile.money %></p>
+                    <a href="/test"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
+                </div>
+            <% } else { %>
+                <!-- Afficher le bouton de connexion -->
+                <div class="log-container">
+                    <a id="loginButton" class="case-button">LogIn</a>
+                </div>
+            <% } %>
+        </div>
+    </header>
+
+    <div class="container_achat">
+        <h1 class="titre_achat">Choisissez une option d'achat :</h1>
+        <div>
+            <p>Acheter 5 euros pour obtenir</p><br>
+            <p>5000 R6 Coin<img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></p>
+            <button onclick="acheter(5)">Acheter</button>
+        </div>
+        <div>
+            <p>Acheter 10 euros pour obtenir</p><br>
+            <p>10000 R6 Coin<img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></p>
+            <button onclick="acheter(10)">Acheter</button>
+        </div>
+        <div>
+            <p>Acheter 20 euros pour obtenir</p><br>
+            <p>20000 R6 Coin<img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></p>
+            <button onclick="acheter(20)">Acheter</button>
+        </div>
+        <div>
+            <p>Acheter 50 euros pour obtenir</p><br>
+            <p>50000 R6 Coin<img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></p>
+            <button onclick="acheter(50)">Acheter</button>
+        </div>
+    </div>
+
+    <script>
+        function acheter(montant) {
+            // Rediriger vers la page de paiement avec le montant choisi
+            window.location.href = `/paiement?montant=${montant}`;
+        }
+    </script>
+</body>
+</html>

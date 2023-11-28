@@ -1,6 +1,4 @@
 function openCase() {
-    
-    
     const totalSkinsToGenerate = 100;
     const generatedSkins = generateSkinList(dropRates, totalSkinsToGenerate);
     
@@ -38,16 +36,6 @@ function generateSkinList(dropsData) {
         index++;
     });
     console.log(skinCounts);
-    
-    // // Correction du nombre d'éléments pour s'assurer que le total est exactement égal à totalSkins
-    // const diff = totalSkins - Object.values(skinCounts).reduce((acc, count) => acc + count, 0);
-    // if (diff !== 0) {
-    //     // Ajouter ou retirer la différence à un skin (le premier trouvé)
-    //     for (let skin in skinCounts) {
-    //         skinCounts[skin] += diff;
-    //         break;
-    //     }
-    // }
     
     // Génération de la liste finale
     for (let [index,nbr] in skinCounts) {

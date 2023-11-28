@@ -59,7 +59,11 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-/* Routes GET*/
+
+//////////////////////////////////////////// ROUTE GET /////////////////////////////////////////////////////////////////
+
+///////////////////////////////////// HOME ////////////////////////////////////////////////////////
+
 
 app.get('/', (req, res) => {
     connection.query('SELECT packs.* FROM packs', (error, Packresults) => {
@@ -136,35 +140,24 @@ app.get('/opening:id', (req, res) => {
 
 app.get('/inventaire', (req, res) => {
     const logUser = res.locals.logUser;
-    res.render('inventaire', {profile: logUser});
+    res.render('inventaire', {profile: res.locals.logUser});
 });
 
-app.get('/payment', (req, res) => {
+app.get('/paiement', (req, res) => {
+    const montant = req.query.montant;
     const logUser = res.locals.logUser;
-    res.render('payment', {profile: logUser});
+    res.render('payment', { profile: logUser, montant });
 });
 
-/*Routes POST*/
-
-app.post('/charge', async (req, res) => {
-    try {
-      const token = req.body.token;
-  
-      const charge = await stripe.charges.create({
-        amount: 1000, // Montant en centimes (par exemple, 10,00 €)
-        currency: 'EUR',
-        source: token,
-        description: 'Paiement pour votre site web',
-      });
-
-      res.json({ success: true, message: 'Paiement réussi' });
-    } catch (error) {
-      // Gérez les erreurs
-      console.error('Erreur de paiement:', error);
-      res.json({ success: false, message: 'Erreur de paiement - ' + error.message });
-    }
+app.get('/achat', (req, res) => {
+    const logUser = res.locals.logUser;
+    res.render('achat', {profile: res.locals.logUser});
 });
-  
+
+
+//////////////////////////////////////////// ROUTE POST /////////////////////////////////////////////////////////////////
+
+///////////////////////////////////// USERID ////////////////////////////////////////////////////////
 
 
 app.post('/UserId', (req, res) => {
@@ -314,6 +307,86 @@ app.post('/deleteUser/:userId', (req, res) => {
     }
 });
 
+
+///////////////////////////////////// ACHAT ////////////////////////////////////////////////////////
+
+
+app.post('/charge', async (req, res) => {
+    try {
+        const token = req.body.token;
+        const montantEnEuros = parseFloat(req.body.montant);;
+
+        // Assurez-vous que l'utilisateur est connecté
+        if (!req.session.logUser) {
+            return res.json({ success: false, message: 'Utilisateur non connecté' });
+        }
+
+        const userId = req.session.logUser.id;
+
+        let quantiteMonnaie = 0;
+
+        if (montantEnEuros === 5) {
+            quantiteMonnaie = 5000;
+        } else if (montantEnEuros === 10) {
+            quantiteMonnaie = 10000;
+        } else if (montantEnEuros === 20) {
+            quantiteMonnaie = 20000;
+        } else if (montantEnEuros === 50) {
+            quantiteMonnaie = 50000;
+        } else {
+            // Gérer d'autres montants si nécessaire
+        }
+
+        // Récupérer l'utilisateur actuel
+        connection.query('SELECT * FROM profile WHERE id = ?', [userId], async (error, results) => {
+            if (error) {
+                console.error('Erreur lors de la récupération de l\'utilisateur : ' + error.message);
+                return res.json({ success: false, message: 'Erreur lors de la mise à jour de la monnaie' });
+            }
+
+            const user = results[0];
+
+            // Calculer le nouveau solde
+            const nouveauSolde = user.money + quantiteMonnaie;
+
+            // Mettre à jour la base de données avec le nouveau solde
+            connection.query('UPDATE profile SET money = ? WHERE id = ?', [nouveauSolde, userId], (updateError, updateResults) => {
+                if (updateError) {
+                    console.error('Erreur lors de la mise à jour de la monnaie : ' + updateError.message);
+                    return res.json({ success: false, message: 'Erreur lors de la mise à jour de la monnaie' });
+                }
+
+                res.json({ success: true, message: 'Paiement réussi', nouveauSolde: nouveauSolde });
+            });
+        });
+    } catch (error) {
+        // Gérer les erreurs
+        console.error('Erreur de paiement :', error);
+        res.json({ success: false, message: 'Erreur de paiement - ' + error.message });
+    }
+});
+
+
+///////////////////////////////////// SAVESKINS ////////////////////////////////////////////////////////
+
+
+app.post('/saveSelectedSkin', (req, res) => {
+    const selectedSkin = req.body.selectedSkin;
+    const userId = req.session.logUser.id;
+
+    console.log('Requête reçue sur /saveSelectedSkin');
+    console.log('Skin sélectionné reçu :', selectedSkin);
+
+    // Exemple simplifié : mettez à jour le profil de l'utilisateur dans la base de données
+    connection.query('UPDATE profile SET selectedSkin = ? WHERE id = ?', [selectedSkin, userId], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de l\'enregistrement du skin dans la base de données:', error);
+            return res.status(500).json({ success: false, error: 'Erreur lors de l\'enregistrement du skin dans la base de données' });
+        }
+
+        res.json({ success: true });
+    });
+});
 
 
 
