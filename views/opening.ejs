@@ -47,6 +47,49 @@
         </div>
     </header>
 
+    <!---------------------------- POPUP / SEARCHBAR -------------------------------------->
+    <div class="inscription" style="display: none;" id="inscription">
+        <form class="Formin" action="/register" method="post">
+            <h1 class="title_creation">Inscrivez-vous</h1>
+
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+            
+            <label for="selectedImg">Choisir une image :</label>
+            <div class="image-selection-container">
+                <div id="selected-image" class="selected-image"></div>
+                <input type="file" id="selectedImg" name="selectedImg" accept="image/*" onchange="previewImage()">
+            </div>
+            <div id="image-scroll" class="image-scroll"></div>
+            
+            <button class="button_submit" type="submit">S'inscrire</button>
+        </form>
+        <button id="closepopup">Fermer</button>
+    </div>
+    
+    <div id="loginPopup" style="display: none;">
+        <form id="loginForm" action="/login" method="post">
+            <h1 class="title_creation">Connectez-vous</h1>
+            <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
+            <label for="usernameLogin">Nom d'utilisateur:</label>
+            <input type="text" id="usernameLogin" name="usernameLogin" required>
+            
+            <label for="passwordLogin">Mot de passe:</label>
+            <input type="password" id="passwordLogin" name="passwordLogin" required>
+            
+            <button class="button_login"  type="submit">Se connecter</button>
+            <a id="a_login" onclick="popUp()" href="#">Nouvel utilisateur inscrit toi</a>
+        </form>
+        <button id="closePopup">Fermer</button>
+    </div>
+    <!---------------------------- LOTERIE -------------------------------------->
+
     <div class="for_all">
         <div class="loterie_container">
             <div class="open_packs" id="open_packs">
@@ -72,7 +115,11 @@
                     <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
                 </div>
             </div>
-            <button class="loterie" id="button_loterie" onclick="startAnimation()">Lancer l'animation</button>
+            <% if (logUser && profile.money >= pack.price) { %>
+                <button class="loterie" id="button_loterie" onclick="startAnimation()">Lancer l'animation</button>
+            <% } else { %>  
+                <button class="loterie" id="button_loterie" onclick="alerts()">Lancer l'animation</button>
+            <% } %>
         </div>
 
 
