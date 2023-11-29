@@ -86,6 +86,10 @@ function popUp() {
 
 }
 
+function alerts() {   
+    alert("Vous n'avez pas assez d'argent !"); 
+}
+
 function Popup2() {
     const inscriptionPopup = document.getElementById("inscription");
     inscriptionPopup.style.display = "flex";

@@ -328,6 +328,10 @@ h1{
     color: white;
 }
 
+.name img{ 
+    margin: 0 0 0 0.5vh; 
+}
+
 .pack-container-title {
     display: flex;
     margin-left: 10vh;
