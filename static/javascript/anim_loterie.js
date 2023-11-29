@@ -60,24 +60,35 @@
                     const button_loterie = document.getElementById('button_loterie');
                     const resultContainer = document.getElementById('result');
                     const resultContainers = document.getElementById('results');
-                    arme_name = winningSliceDiv.getAttribute("arme_name");
-                    skin_name = winningSliceDiv.getAttribute("skin_name");
-                    // skin_image = winningSliceDiv.getAttribute("skin_image");
+                    
+                    wheelContainer.style.display = "none";
+                    button_loterie.style.display = "none";
+                    
+                    const arme_name = winningSliceDiv.getAttribute("arme_name");
+                    const skin_name = winningSliceDiv.getAttribute("skin_name");
 
                     resultContainer.style.display = "flex";
                     resultContainers.innerHTML = `Vous avez gagné avec le skin ${skin_name} sur la ${arme_name}`;
                     skin
-
-                    const container_skin = document.createElement("div");
-                    container_skin.classList.add("container_skin");
+                    
+                    const container_skin = document.getElementById("container_skin_in_loterie");
+                    winningSliceDiv.classList.remove(...winningSliceDiv.classList);
                     container_skin.appendChild(winningSliceDiv);
-                    resultContainer.appendChild(container_skin);
+                    winningSliceDiv.classList.add("container_skin");
+                    
 
+                    const p_skinName = document.createElement("p");
+                    p_skinName.innerHTML = skin_name;
 
+                    const p_armeName = document.createElement("p");
+                    p_armeName.innerHTML = arme_name;
 
+                    p_armeName.setAttribute("id", "arme_name");
+                    p_skinName.setAttribute("id", "skin_name");
 
-                    wheelContainer.style.display = "none";
-                    button_loterie.style.display = "none";
+                    winningSliceDiv.appendChild(p_skinName);
+                    winningSliceDiv.appendChild(p_armeName);
+
                 }, 1000);
             }
             // Affiche le résultat sous le curseur
@@ -85,6 +96,7 @@
     }
     
     function startAnimation() {
+        startAchat();
         // Réinitialise la variable de l'index de la slice gagnante
         resetWinningSliceIndex();
         

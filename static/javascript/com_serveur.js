@@ -203,7 +203,34 @@ async function supprimerUtilisateur(userId) {
         // Gérer l'erreur ici (afficher un message à l'utilisateur, etc.)
     }
 }
-    
+
+function AdminAjoutMoney(){
+    fetch('/UpdateMoney', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ change : 5000 }),
+    })
+    window.location.reload();
+}
+
+
+///////////////////////////////GERER LE PRIX DU PACK AVEC LE SERV/////////////////////////////////////////
+
+async function startAchat() {
+    const pricepack = -JSON.parse(document.getElementById("prixData").getAttribute("prixData"));
+    await fetch('/UpdateMoney', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ change : pricepack }),
+    })
+    // const moneyDisplay = document.getElementById("money-display");
+    // moneyDisplay.innerHTML += pricepack;
+}
+
 window.onload = function () {
     
 };

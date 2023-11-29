@@ -37,6 +37,9 @@
                     </div>
                     <p id="money-display" class="money"><%= profile.money %></p>
                     <a href="/test"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
+                    <% if (logUser && logUser.isAdmin) { %>
+                        <button onclick="AdminAjoutMoney()">+</button>
+                    <% } %>
                 </div>
             <% } else { %>
                 <!-- Afficher le bouton de connexion -->
@@ -101,9 +104,8 @@
 
             <div class="container_result" id="result" style="display: none;">
                 <p id="results">vous</p>
-                <div class="container_skin">
-                </div>
-                <button id="ok" onclick="location.reload(true);"> OK</button>
+                <div id="container_skin_in_loterie"></div>
+                <button id="ok" onclick="location.reload(true);">Envoyé vers l'inventaire</button>
             </div>
 
             <div id="wheel-container" style="display: none;">
@@ -116,9 +118,11 @@
                 </div>
             </div>
             <% if (logUser && profile.money >= pack.price) { %>
-                <button class="loterie" id="button_loterie" onclick="startAnimation()">Lancer l'animation</button>
-            <% } else { %>  
-                <button class="loterie" id="button_loterie" onclick="alerts()">Lancer l'animation</button>
+                <button class="loterie" id="button_loterie" onclick="startAnimation()">Ouvrir le pack pour <%= pack.price %><img class="img_user" style="width: 20px; height: 20px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></button>
+            <% } else if (logUser) { %>  
+                <button class="loterie" style="background-color: rgba(255, 0, 0, 0.429);" id="button_loterie">Pas assez de renomée</button>
+            <% } else { %>
+                <button class="loterie" style="background-color: rgba(255, 0, 0, 0.429);" id="button_loterie">Besoin d'un compte</button>
             <% } %>
         </div>
 
@@ -164,6 +168,7 @@
             <% }); %>
         </div>
         <div id="dropsData" dropsData="<%= JSON.stringify(drops) %>"></div>
+        <div id="prixData" prixData="<%= JSON.stringify(pack.price) %>"></div>
     </div>
 </body>
 

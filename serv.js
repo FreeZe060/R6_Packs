@@ -131,7 +131,6 @@ app.get('/opening:id', (req, res) => {
                 console.error('Erreur lors de la récupération des packs : ' + error.message);
                 return;
             }
-            console.log(Dropsresults);
             res.render('opening', { profile: logUser, pack: Packresults[0], drops: Dropsresults });
         });;
     });;
@@ -388,7 +387,27 @@ app.post('/saveSelectedSkin', (req, res) => {
     });
 });
 
+////////////////////////////////// MONEY //////////////////////////////////////
 
+app.post('/UpdateMoney', (req, res) => {
+    const change = req.body.change;
+    const userId = req.session.logUser.id;
+    const userMoney = req.session.logUser.money;
+    resultMoney = userMoney + change;
+    if (resultMoney<0){
+        resultMoney = 0;
+    }
+    connection.query('UPDATE profile SET money = ? WHERE id = ?', [resultMoney, userId], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de l\'update de la money dans la base de données:', error);
+            return res.status(500).json({ success: false, error: 'Erreur lors de l\'update de la money dans la base de données' });
+        }
+
+        console.log('User money Updated:', resultMoney);
+        req.session.logUser.money = resultMoney;
+        res.json({ success: true });
+    });
+});
 
 /*END*/
 

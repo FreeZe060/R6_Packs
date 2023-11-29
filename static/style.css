@@ -413,6 +413,7 @@ h1{
     align-items: center;
     flex-direction: column;
     margin-top: 100px;
+    width: 100%;
 }
 
 .loterie {
@@ -656,7 +657,7 @@ div p#rarity{
     background-color: white;
     border-radius: 20px;
     z-index: 9;
-    padding: 5%;
+    padding: 2vh;
 }
 
 .container_result button {
@@ -668,7 +669,7 @@ div p#rarity{
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 5vh 0 0 0;
+    margin: 1vh 0 0 0;
 }
 
 .container_result button:hover {
@@ -995,16 +996,6 @@ label {
 {
     font-size: 2em;
 }
-
-.container_invent
-{
-
-}
-
-.container_skins{
-    
-}
-
 
 /* ================================= PAGE ACHAT ========================================== */
 
