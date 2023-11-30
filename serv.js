@@ -131,23 +131,60 @@ app.get('/opening:id', (req, res) => {
                 console.error('Erreur lors de la récupération des packs : ' + error.message);
                 return;
             }
+            console.log(Packresults[0]);
+            console.log(Dropsresults);
             res.render('opening', { profile: logUser, pack: Packresults[0], drops: Dropsresults });
         });;
     });;
 });
 
+/////////////////////////////INVENTARE///////////////////////////////////
+
+// app.get('/inventaire', (req, res) => {
+//     const userId = req.session.logUser.id;
+
+//     // Récupérer les informations sur le skin à partir de la table d'inventaire
+//     connection.query('SELECT relations_skins_armes.id_skin, skins.name, skins.image '+ 
+//     'FROM inventaire JOIN relations_skins_armes ON inventaire.id_skin = relations_skins_armes.id WHERE inventaire.id_profile = ?', [userId], (error, results) => {
+//         if (error) {
+//             console.error('Erreur lors de la récupération des skins de l\'inventaire:', error);
+//             return res.status(500).json({ success: false, error: 'Erreur lors de la récupération des skins de l\'inventaire' });
+//         }
+
+//         // Rendre la vue EJS avec les données de l'inventaire
+//         res.render('inventaire', { profile: res.locals.logUser, inventory: results });
+//     });
+// });
+
+///////////////////////////////////// SAVESKINS ////////////////////////////////////////////////////////
 
 
-
-app.get('/paiement', (req, res) => {
-    const montant = req.query.montant;
-    const logUser = res.locals.logUser;
-    res.render('payment', { profile: logUser, montant });
-});
-
-app.get('/achat', (req, res) => {
-    const logUser = res.locals.logUser;
-    res.render('achat', {profile: res.locals.logUser});
+app.post('/saveSelectedSkin', (req, res) => {
+    const selectedSkinName = req.body.selectedSkin;
+    const userId = req.session.logUser.id;
+    console.log('Requête reçue sur /saveSelectedSkin');
+    console.log('Skin sélectionné reçu :', selectedSkinName);
+    // Récupérer l'ID de la relation skins/armes en fonction du nom du skin sélectionné
+    connection.query('SELECT id FROM relations_skins_armes WHERE id_skin = (SELECT id FROM skins WHERE name = ?)', [selectedSkinName], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la récupération de l\'ID de la relation skins/armes:', error);
+            return res.status(500).json({ success: false, error: 'Erreur lors de la récupération de l\'ID de la relation skins/armes' });
+        }
+        if (results.length === 0) {
+            console.error('ID de la relation skins/armes non trouvé pour le skin sélectionné');
+            return res.status(500).json({ success: false, error: 'ID de la relation skins/armes non trouvé pour le skin sélectionné' });
+        }
+        const relationSkinsArmesId = results[0].id;
+        console.log(results[0].id);
+        // Mettre à jour la table inventaire avec l'ID de la relation skins/armes et l'ID du profil
+        connection.query('INSERT INTO inventaire (id_skin, id_profile) VALUES (?, ?) ON DUPLICATE KEY UPDATE id_skin = VALUES(id_skin)', [relationSkinsArmesId, userId], (inventaireError, inventaireResults) => {
+            if (inventaireError) {
+                console.error('Erreur lors de la mise à jour de la table inventaire:', inventaireError);
+                return res.status(500).json({ success: false, error: 'Erreur lors de la mise à jour de la table inventaire' });
+            }
+            res.json({ success: true });
+        });
+    });
 });
 
 
@@ -361,81 +398,6 @@ app.post('/charge', async (req, res) => {
         res.json({ success: false, message: 'Erreur de paiement - ' + error.message });
     }
 });
-
-
-///////////////////////////////////// SAVESKINS ////////////////////////////////////////////////////////
-
-
-app.post('/saveSelectedSkin', (req, res) => {
-    const selectedSkinName = req.body.selectedSkin;
-    const userId = req.session.logUser.id;
-
-    console.log('Requête reçue sur /saveSelectedSkin');
-    console.log('Skin sélectionné reçu :', selectedSkinName);
-
-    // Récupérer l'ID de la relation skins/armes en fonction du nom du skin sélectionné
-    connection.query('SELECT id FROM relations_skins_armes WHERE id_skin = (SELECT id FROM skins WHERE name = ?)', [selectedSkinName], (error, results) => {
-        if (error) {
-            console.error('Erreur lors de la récupération de l\'ID de la relation skins/armes:', error);
-            return res.status(500).json({ success: false, error: 'Erreur lors de la récupération de l\'ID de la relation skins/armes' });
-        }
-
-        if (results.length === 0) {
-            console.error('ID de la relation skins/armes non trouvé pour le skin sélectionné');
-            return res.status(500).json({ success: false, error: 'ID de la relation skins/armes non trouvé pour le skin sélectionné' });
-        }
-
-        const relationSkinsArmesId = results[0].id;
-
-        // Mettre à jour la table inventaire avec l'ID de la relation skins/armes et l'ID du profil
-        connection.query('INSERT INTO inventaire (id_skin, id_profile) VALUES (?, ?) ON DUPLICATE KEY UPDATE id_skin = VALUES(id_skin)', [relationSkinsArmesId, userId], (inventaireError, inventaireResults) => {
-            if (inventaireError) {
-                console.error('Erreur lors de la mise à jour de la table inventaire:', inventaireError);
-                return res.status(500).json({ success: false, error: 'Erreur lors de la mise à jour de la table inventaire' });
-            }
-
-            res.json({ success: true });
-        });
-    });
-});
-
-app.get('/inventaire', (req, res) => {
-    const userId = req.session.logUser.id;
-
-    console.log('Requête reçue sur /inventaire');
-
-    // Récupérer les informations sur le skin à partir de la table d'inventaire
-    connection.query('SELECT relations_skins_armes.id_skin, skins.name, skins.image FROM inventaire JOIN relations_skins_armes ON inventaire.id_skin = relations_skins_armes.id WHERE inventaire.id_profile = ?', [userId], (error, results) => {
-        if (error) {
-            console.error('Erreur lors de la récupération des skins de l\'inventaire:', error);
-            return res.status(500).json({ success: false, error: 'Erreur lors de la récupération des skins de l\'inventaire' });
-        }
-
-        // Rendre la vue EJS avec les données de l'inventaire
-        res.render('inventaire', { profile: res.locals.logUser, inventory: results });
-    });
-});
-
-
-// app.get('/userInventory', (req, res) => {
-//     const userId = req.session.logUser.id;
-
-//     console.log('Requête reçue sur /userInventory');
-
-//     // Récupérer les informations sur le skin à partir de la table d'inventaire
-//     connection.query('SELECT relations_skins_armes.id_skin, skins.name, skins.image FROM inventaire JOIN relations_skins_armes ON inventaire.id_skin = relations_skins_armes.id WHERE inventaire.id_profile = ?', [userId], (error, results) => {
-//         if (error) {
-//             console.error('Erreur lors de la récupération des skins de l\'inventaire:', error);
-//             return res.status(500).json({ success: false, error: 'Erreur lors de la récupération des skins de l\'inventaire' });
-//         }
-
-//         res.json({ success: true, profile: res.locals.logUser, inventory: results });
-//     });
-// });
-
-
-
-
 
 ////////////////////////////////// MONEY //////////////////////////////////////
 
