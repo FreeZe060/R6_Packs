@@ -16,12 +16,10 @@
 
 
 -- Listage de la structure de la base pour r6_packs
-DROP DATABASE IF EXISTS `r6_packs`;
 CREATE DATABASE IF NOT EXISTS `r6_packs` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `r6_packs`;
 
 -- Listage de la structure de table r6_packs. agents
-DROP TABLE IF EXISTS `agents`;
 CREATE TABLE IF NOT EXISTS `agents` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` int DEFAULT NULL,
@@ -33,14 +31,13 @@ CREATE TABLE IF NOT EXISTS `agents` (
 DELETE FROM `agents`;
 
 -- Listage de la structure de table r6_packs. armes
-DROP TABLE IF EXISTS `armes`;
 CREATE TABLE IF NOT EXISTS `armes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.armes : ~8 rows (environ)
+-- Listage des données de la table r6_packs.armes : ~7 rows (environ)
 DELETE FROM `armes`;
 INSERT INTO `armes` (`id`, `name`) VALUES
 	(1, 'L85A2'),
@@ -53,7 +50,6 @@ INSERT INTO `armes` (`id`, `name`) VALUES
 	(8, 'MPX');
 
 -- Listage de la structure de table r6_packs. drops
-DROP TABLE IF EXISTS `drops`;
 CREATE TABLE IF NOT EXISTS `drops` (
   `id_pack` int NOT NULL,
   `id_relations_skins_armes` int NOT NULL,
@@ -64,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `drops` (
   CONSTRAINT `FK_drops_relations_skins_armes` FOREIGN KEY (`id_relations_skins_armes`) REFERENCES `relations_skins_armes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.drops : ~29 rows (environ)
+-- Listage des données de la table r6_packs.drops : ~28 rows (environ)
 DELETE FROM `drops`;
 INSERT INTO `drops` (`id_pack`, `id_relations_skins_armes`, `droprate`) VALUES
 	(1, 1, 0.01),
@@ -98,7 +94,6 @@ INSERT INTO `drops` (`id_pack`, `id_relations_skins_armes`, `droprate`) VALUES
 	(2, 47, 0.13);
 
 -- Listage de la structure de table r6_packs. inventaire
-DROP TABLE IF EXISTS `inventaire`;
 CREATE TABLE IF NOT EXISTS `inventaire` (
   `id_skin` int NOT NULL,
   `id_profile` int NOT NULL,
@@ -108,11 +103,13 @@ CREATE TABLE IF NOT EXISTS `inventaire` (
   CONSTRAINT `inventaire_ibfk_1` FOREIGN KEY (`id_skin`) REFERENCES `skins` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.inventaire : ~0 rows (environ)
+-- Listage des données de la table r6_packs.inventaire : ~2 rows (environ)
 DELETE FROM `inventaire`;
+INSERT INTO `inventaire` (`id_skin`, `id_profile`) VALUES
+	(8, 1),
+	(2, 1);
 
 -- Listage de la structure de table r6_packs. packs
-DROP TABLE IF EXISTS `packs`;
 CREATE TABLE IF NOT EXISTS `packs` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
@@ -135,7 +132,6 @@ INSERT INTO `packs` (`id`, `name`, `price`, `image`) VALUES
 	(9, 'Apocalypse Pack', 22500, 'Siege_Apocalypse_Pack (2).png');
 
 -- Listage de la structure de table r6_packs. profile
-DROP TABLE IF EXISTS `profile`;
 CREATE TABLE IF NOT EXISTS `profile` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
@@ -144,21 +140,20 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `hashed_password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `username` varchar(50) DEFAULT NULL,
   `isAdmin` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `selectedSkin` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table r6_packs.profile : ~5 rows (environ)
+-- Listage des données de la table r6_packs.profile : ~4 rows (environ)
 DELETE FROM `profile`;
-INSERT INTO `profile` (`id`, `name`, `money`, `image`, `hashed_password`, `username`, `isAdmin`) VALUES
-	(1, 'Hallexxx', 10000, 'hallexxx.jpg', '$2b$10$6l8CZ1iOBXK5RYnlJlrkGubCY.X/3IJryTYIaiDPzNXyvCUaAQiSK', 'Hallexxx', 1),
-	(25, 'timv', 10000, 'tim_1700678168546.png', '$2b$10$QC8bjBYZxeIpdbKsS1khgeVUEfw4CSgxWn1ss2e8iIPNDl4QYXsEe', 'tim', 1),
-	(26, 'alex', 10000, 'Alexandre_1700678253981.png', '$2b$10$ZiGnVSaUhY7h64BBU/BBUef4vQPPk3k3wVLx7D2jLLHTPgKgAntKC', 'Alexandre', 0),
-	(29, 'dzdzdz', 10000, 'dzdz_1700912424893.png', '$2b$10$oAZDkHvzIX0WhNO4Qdu15OHyCY7usHaAQBhKLC6EK.GRdl8H.SrBe', 'dzdz', 0),
-	(30, 'alexp', 10000, 'alexp_1700912452950.png', '$2b$10$oODI.u2vRrcGcOX9XhPGk.5x13ZWawhxjhUEQ4C7PE3KllOE7tLy.', 'alexp', 0),
-	(31, 'alexa', 10000, 'alexa_1700912660923.png', '$2b$10$4WfFwekqOff/XDCKGL1AIeFXP.BZ2LXWdNlDd4Bjv2JDrwVgaY5bm', 'alexa', 0);
+INSERT INTO `profile` (`id`, `name`, `money`, `image`, `hashed_password`, `username`, `isAdmin`, `selectedSkin`) VALUES
+	(1, 'Hallexxx', 10005, 'hallexxx.jpg', '$2b$10$6l8CZ1iOBXK5RYnlJlrkGubCY.X/3IJryTYIaiDPzNXyvCUaAQiSK', 'Hallexxx', 1, '6'),
+	(25, 'timv', 10000, 'tim_1700678168546.png', '$2b$10$QC8bjBYZxeIpdbKsS1khgeVUEfw4CSgxWn1ss2e8iIPNDl4QYXsEe', 'tim', 1, NULL),
+	(26, 'alex', 10000, 'Alexandre_1700678253981.png', '$2b$10$ZiGnVSaUhY7h64BBU/BBUef4vQPPk3k3wVLx7D2jLLHTPgKgAntKC', 'Alexandre', 0, NULL),
+	(33, 'sasasas', 10000, 'sasasa_1701168190541.png', '$2b$10$1frgnVwQJW5lZGzOG5iQquqdJ28GNaLAHRyTQcfYYUBbID/dVQA8W', 'sasasa', 0, NULL);
 
 -- Listage de la structure de table r6_packs. rarity
-DROP TABLE IF EXISTS `rarity`;
 CREATE TABLE IF NOT EXISTS `rarity` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
@@ -175,7 +170,6 @@ INSERT INTO `rarity` (`id`, `name`) VALUES
 	(5, 'COMMON');
 
 -- Listage de la structure de table r6_packs. relations_armes_agents
-DROP TABLE IF EXISTS `relations_armes_agents`;
 CREATE TABLE IF NOT EXISTS `relations_armes_agents` (
   `id_agent` int NOT NULL,
   `id_arme` int NOT NULL,
@@ -189,7 +183,6 @@ CREATE TABLE IF NOT EXISTS `relations_armes_agents` (
 DELETE FROM `relations_armes_agents`;
 
 -- Listage de la structure de table r6_packs. relations_skins_armes
-DROP TABLE IF EXISTS `relations_skins_armes`;
 CREATE TABLE IF NOT EXISTS `relations_skins_armes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_skin` int NOT NULL,
@@ -257,7 +250,6 @@ INSERT INTO `relations_skins_armes` (`id`, `id_skin`, `id_arme`, `image`, `price
 	(54, 54, 6, 'Target_R4C_Skin.PNG.png', 0);
 
 -- Listage de la structure de table r6_packs. skins
-DROP TABLE IF EXISTS `skins`;
 CREATE TABLE IF NOT EXISTS `skins` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
