@@ -51,9 +51,14 @@
         </div>
     
             <div class="container_invent">  
-                <div class="container_skins">
-                </div>
+                <% inventory.forEach((item) => { %>
+                    <div class="container_skins">
+                      <img src="/SkinR6/<%= item.id_skin %>/<%= item.image %>" alt="Skin Image">
+                      <p>Nom du skin : <%= item.name %></p>
+                    </div>
+                  <% }); %>
             </div>
+           
 
     </body>
 </html>

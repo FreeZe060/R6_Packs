@@ -216,7 +216,7 @@ function AdminAjoutMoney(){
 }
 
 
-///////////////////////////////GERER LE PRIX DU PACK AVEC LE SERV/////////////////////////////////////////
+/////////////////////////////// GERER LE PRIX DU PACK AVEC LE SERV /////////////////////////////////////////
 
 async function startAchat() {
     const pricepack = -JSON.parse(document.getElementById("prixData").getAttribute("prixData"));
@@ -231,6 +231,43 @@ async function startAchat() {
     // moneyDisplay.innerHTML += pricepack;
 }
 
+async function saveSelectedSkin() {
+    const skinName = winningSliceDiv.getAttribute("skin_name");
+
+    await fetch('/saveSelectedSkin', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ selectedSkin: skinName }),
+    });
+}
+
+// Appel de l'API pour récupérer l'inventaire de l'utilisateur
+async function getUserInventory() {
+    const response = await fetch('/inventaire');
+    const data = await response.json();
+
+    if (data.success) {
+        const inventory = data.inventory;
+
+        // Afficher les skins dans votre interface utilisateur
+        inventory.forEach((item) => {
+            const skinName = item.name;
+            const skinImage = item.image;
+
+            // Faites quelque chose avec le nom et l'image du skin (par exemple, l'afficher dans une liste)
+            console.log(`Nom du skin : ${skinName}, Image du skin : ${skinImage}`);
+        });
+    } else {
+        console.error('Erreur lors de la récupération de l\'inventaire de l\'utilisateur');
+    }
+}
+
+
+
+
+
 window.onload = function () {
-    
+    getUserInventory();
 };

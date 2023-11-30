@@ -129,6 +129,7 @@
                 // Stockez l'index de la slice sous le curseur
                 winningSliceIndex = index;
                 winningSliceDiv = slice;
+                saveSelectedSkin();
             }
         });
     }
