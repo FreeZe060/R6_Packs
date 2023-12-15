@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, orderBy, setDoc, deleteDoc, query, where, getDoc, doc, addDoc, getDocs } from 'firebase/firestore';
 import bodyParser from 'body-parser';
 import path from 'path';
 import bcrypt from 'bcrypt';
@@ -94,10 +94,6 @@ app.get('/profiles', async (req, res) => {
         res.status(500).send('Erreur lors de la récupération des profils');
     }
 });
-/*Encodage de l'url*/
-
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 
 
 //////////////////////////////////////////// ROUTE GET /////////////////////////////////////////////////////////////////
@@ -192,21 +188,37 @@ app.get('/profiles', async (req, res) => {
 ///////////////////////////////////// SKINS NOSQL ////////////////////////////////////////////////////////
 
 
-app.get('/skins', (req, res) => {
-    db.collection('relations_skins_armes').get()
-        .then((snapshot) => {
-            const results = [];
-            snapshot.forEach((doc) => {
-                results.push(doc.data());
-            });
-            res.render('skins', { skins: results, profile: res.locals.logUser });
-        })
-        .catch((error) => {
-            console.error('Erreur lors de la récupération des skins :', error);
-            res.status(500).send('Erreur lors de la récupération des skins');
-        });
-});
+// app.get('/skins', (req, res) => {
+//     db.collection('relations_skins_armes').get()
+//         .then((snapshot) => {
+//             const results = [];
+//             snapshot.forEach((doc) => {
+//                 results.push(doc.data());
+//             });
+//             res.render('skins', { skins: results, profile: res.locals.logUser });
+//         })
+//         .catch((error) => {
+//             console.error('Erreur lors de la récupération des skins :', error);
+//             res.status(500).send('Erreur lors de la récupération des skins');
+//         });
+// });
 
+app.get('/skins', async (req, res) => {
+    try {
+        const skinsCollection = collection(db, 'relations_skins_armes');
+        const snapshot = await getDocs(skinsCollection);
+
+        const results = [];
+        snapshot.forEach((doc) => {
+            results.push(doc.data());
+        });
+
+        res.render('skins', { skins: results, profile: res.locals.logUser });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des skins :', error);
+        res.status(500).send('Erreur lors de la récupération des skins');
+    }
+});
 
 ///////////////////////////////////// OPENING SQL ////////////////////////////////////////////////////////
 
@@ -240,31 +252,54 @@ app.get('/skins', (req, res) => {
 ///////////////////////////////////// OPENING NOSQL ////////////////////////////////////////////////////////
 
 
-app.get('/opening/:id', (req, res) => {
-    const id_pack = req.params.id;
-    const logUser = res.locals.logUser;
+// app.get('/opening/:id', (req, res) => {
+//     const id_pack = req.params.id;
+//     const logUser = res.locals.logUser;
 
-    db.collection('packs').doc(id_pack).get()
-        .then((packDoc) => {
-            const Packresults = packDoc.data();
-            return db.collection('drops')
-                .where('id_pack', '==', id_pack)
-                .orderBy('droprate')
-                .get();
-        })
-        .then((dropsSnapshot) => {
-            const Dropsresults = [];
-            dropsSnapshot.forEach((doc) => {
-                Dropsresults.push(doc.data());
-            });
-            res.render('opening', { profile: logUser, pack: Packresults, drops: Dropsresults });
-        })
-        .catch((error) => {
-            console.error('Erreur lors de la récupération des packs ou des drops :', error);
-            res.status(500).send('Erreur lors de la récupération des packs ou des drops');
+//     db.collection('packs').doc(id_pack).get()
+//         .then((packDoc) => {
+//             const Packresults = packDoc.data();
+//             return db.collection('drops')
+//                 .where('id_pack', '==', id_pack)
+//                 .orderBy('droprate')
+//                 .get();
+//         })
+//         .then((dropsSnapshot) => {
+//             const Dropsresults = [];
+//             dropsSnapshot.forEach((doc) => {
+//                 Dropsresults.push(doc.data());
+//             });
+//             res.render('opening', { profile: logUser, pack: Packresults, drops: Dropsresults });
+//         })
+//         .catch((error) => {
+//             console.error('Erreur lors de la récupération des packs ou des drops :', error);
+//             res.status(500).send('Erreur lors de la récupération des packs ou des drops');
+//         });
+// });
+
+
+app.get('/opening/:id', async (req, res) => {
+    try {
+        const id_pack = req.params.id;
+        const logUser = res.locals.logUser;
+
+        const packDoc = await getDoc(collection(db, 'packs', id_pack));
+        const Packresults = packDoc.data();
+
+        const dropsQuery = query(collection(db, 'drops'), where('id_pack', '==', id_pack), orderBy('droprate'));
+        const dropsSnapshot = await getDocs(dropsQuery);
+
+        const Dropsresults = [];
+        dropsSnapshot.forEach((doc) => {
+            Dropsresults.push(doc.data());
         });
-});
 
+        res.render('opening', { profile: logUser, pack: Packresults, drops: Dropsresults });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des packs ou des drops :', error);
+        res.status(500).send('Erreur lors de la récupération des packs ou des drops');
+    }
+});
 
 /////////////////////////////INVENTARE///////////////////////////////////
 
@@ -316,13 +351,43 @@ app.get('/opening/:id', (req, res) => {
 
 ///////////////////////////////////// SAVESKINS NOSQL////////////////////////////////////////////////////////
 
+// app.post('/saveSelectedSkin', async (req, res) => {
+//     try {
+//         const selectedSkinName = req.body.selectedSkin;
+//         const userId = req.session.logUser.id;
+
+//         // Récupérer l'ID de la relation skins/armes en fonction du nom du skin sélectionné
+//         const snapshot = await db.collection('skins').where('name', '==', selectedSkinName).get();
+
+//         if (snapshot.empty) {
+//             console.error('ID de la relation skins/armes non trouvé pour le skin sélectionné');
+//             return res.status(500).json({ success: false, error: 'ID de la relation skins/armes non trouvé pour le skin sélectionné' });
+//         }
+
+//         const relationSkinsArmesId = snapshot.docs[0].id;
+
+//         // Mettre à jour la collection 'inventaire' avec l'ID de la relation skins/armes et l'ID du profil
+//         await db.collection('inventaire').doc(userId).set(
+//             { id_skin: relationSkinsArmesId },
+//             { merge: true }
+//         );
+
+//         res.json({ success: true });
+//     } catch (error) {
+//         console.error('Erreur lors de la mise à jour de la collection inventaire:', error);
+//         res.status(500).json({ success: false, error: 'Erreur lors de la mise à jour de la collection inventaire' });
+//     }
+// });
+
+
 app.post('/saveSelectedSkin', async (req, res) => {
     try {
         const selectedSkinName = req.body.selectedSkin;
         const userId = req.session.logUser.id;
 
         // Récupérer l'ID de la relation skins/armes en fonction du nom du skin sélectionné
-        const snapshot = await db.collection('skins').where('name', '==', selectedSkinName).get();
+        const skinQuery = query(collection(db, 'skins'), where('name', '==', selectedSkinName));
+        const snapshot = await getDocs(skinQuery);
 
         if (snapshot.empty) {
             console.error('ID de la relation skins/armes non trouvé pour le skin sélectionné');
@@ -332,10 +397,8 @@ app.post('/saveSelectedSkin', async (req, res) => {
         const relationSkinsArmesId = snapshot.docs[0].id;
 
         // Mettre à jour la collection 'inventaire' avec l'ID de la relation skins/armes et l'ID du profil
-        await db.collection('inventaire').doc(userId).set(
-            { id_skin: relationSkinsArmesId },
-            { merge: true }
-        );
+        const inventaireDocRef = doc(db, 'inventaire', userId);
+        await setDoc(inventaireDocRef, { id_skin: relationSkinsArmesId }, { merge: true });
 
         res.json({ success: true });
     } catch (error) {
@@ -372,14 +435,40 @@ app.post('/saveSelectedSkin', async (req, res) => {
 
 ///////////////////////////////////// USERID NOSQL ////////////////////////////////////////////////////////
 
+// app.post('/UserId', async (req, res) => {
+//     const reqUserId = req.body.userId;
+//     try {
+//         if (reqUserId != -1) {
+//             console.log(`{ message: 'Id utilisateur chargé : ${reqUserId}' }`);
+//             const userDoc = await db.collection('profile').doc(reqUserId).get();
+
+//             if (!userDoc.exists) {
+//                 console.error('Utilisateur non trouvé');
+//                 return res.status(404).send('Utilisateur non trouvé');
+//             }
+
+//             req.session.logUser = userDoc.data();
+//             res.redirect('/');
+//         } else {
+//             console.log("{ message: 'Utilisateur deco' }");
+//             req.session.logUser = undefined;
+//             res.redirect('/');
+//         }
+//     } catch (error) {
+//         console.error('Erreur lors de la récupération de l\'utilisateur :', error);
+//         res.status(500).send('Erreur lors de la récupération de l\'utilisateur');
+//     }
+// });
+
+
 app.post('/UserId', async (req, res) => {
     const reqUserId = req.body.userId;
     try {
         if (reqUserId != -1) {
             console.log(`{ message: 'Id utilisateur chargé : ${reqUserId}' }`);
-            const userDoc = await db.collection('profile').doc(reqUserId).get();
+            const userDoc = await getDoc(doc(db, 'profile', reqUserId));
 
-            if (!userDoc.exists) {
+            if (!userDoc.exists()) {
                 console.error('Utilisateur non trouvé');
                 return res.status(404).send('Utilisateur non trouvé');
             }
@@ -396,7 +485,6 @@ app.post('/UserId', async (req, res) => {
         res.status(500).send('Erreur lors de la récupération de l\'utilisateur');
     }
 });
-
 
 
 ///////////////////////////////////// REGISTER SQL ////////////////////////////////////////////////////////
@@ -439,6 +527,44 @@ app.post('/UserId', async (req, res) => {
 ///////////////////////////////////// REGISTER NOSQL ////////////////////////////////////////////////////////
 
 
+// app.post('/register', async (req, res) => {
+//     try {
+//         const username = req.body.username;
+//         const password = req.body.password;
+//         const nom = req.body.nom;
+
+//         const selectedImg = req.body.selectedImg;
+//         const imageBuffer = Buffer.from(selectedImg, 'base64');
+//         const fileName = `${username}_${Date.now()}.png`;
+//         const filePath = `./assets/image_user/${fileName}`;
+
+//         const hashedPassword = await bcrypt.hash(password, 10);
+
+//         const userRef = await db.collection('profile').add({
+//             username: username,
+//             hashed_password: hashedPassword,
+//             name: nom,
+//             image: fileName || null,
+//             money: 10000,
+//         });
+
+//         fs.writeFile(filePath, imageBuffer, (writeError) => {
+//             if (writeError) {
+//                 console.error('Erreur lors de l\'enregistrement de l\'image : ' + writeError.message);
+//                 return res.json({ success: false, message: 'Erreur lors de l\'enregistrement de l\'image' });
+//             }
+
+//             console.log('Image enregistrée avec succès sous le nom :', fileName);
+//             console.log('Utilisateur inscrit avec succès. ID de l\'utilisateur :', userRef.id);
+//             res.redirect('/');
+//         });
+//     } catch (error) {
+//         console.error('Erreur lors de l\'inscription :', error);
+//         res.status(500).json({ success: false, message: 'Erreur lors de l\'inscription' });
+//     }
+// });
+
+
 app.post('/register', async (req, res) => {
     try {
         const username = req.body.username;
@@ -449,13 +575,12 @@ app.post('/register', async (req, res) => {
         // Convertir la chaîne base64 en données binaires
         const imageBuffer = Buffer.from(selectedImg, 'base64');
         const fileName = `${username}_${Date.now()}.png`;
-        const filePath = `./assets/image_user/${fileName}`;
 
         // Hash du mot de passe
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insérer l'utilisateur dans la collection 'profile' avec le nom, le mot de passe haché et l'image choisie
-        const userRef = await db.collection('profile').add({
+        const userRef = await addDoc(collection(db, 'profile'), {
             username: username,
             hashed_password: hashedPassword,
             name: nom,
@@ -463,6 +588,7 @@ app.post('/register', async (req, res) => {
             money: 10000,
         });
 
+        const filePath = `./assets/image_user/${fileName}`;
         fs.writeFile(filePath, imageBuffer, (writeError) => {
             if (writeError) {
                 console.error('Erreur lors de l\'enregistrement de l\'image : ' + writeError.message);
@@ -513,13 +639,42 @@ app.post('/register', async (req, res) => {
 ///////////////////////////////////// LOGIN NOSQL////////////////////////////////////////////////////////
 
 
+// app.post('/login', async (req, res) => {
+//     try {
+//         const username = req.body.usernameLogin;
+//         const password = req.body.passwordLogin;
+
+//         const snapshot = await db.collection('profile').where('username', '==', username).get();
+
+//         if (snapshot.empty) {
+//             return res.json({ success: false, message: 'L\'utilisateur n\'existe pas' });
+//         }
+
+//         const userDoc = snapshot.docs[0];
+//         const userData = userDoc.data();
+
+//         const passwordMatch = await bcrypt.compare(password, userData.hashed_password);
+
+//         if (passwordMatch) {
+//             req.session.logUser = userData;
+//             return res.json({ success: true, message: 'Connexion réussie' });
+//         } else {
+//             return res.json({ success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect' });
+//         }
+//     } catch (error) {
+//         console.error('Erreur lors de la connexion :', error);
+//         res.status(500).json({ success: false, message: 'Erreur lors de la connexion' });
+//     }
+// });
+
 app.post('/login', async (req, res) => {
     try {
         const username = req.body.usernameLogin;
         const password = req.body.passwordLogin;
 
         // Rechercher l'utilisateur par nom d'utilisateur
-        const snapshot = await db.collection('profile').where('username', '==', username).get();
+        const userQuery = query(collection(db, 'profile'), where('username', '==', username));
+        const snapshot = await getDocs(userQuery);
 
         if (snapshot.empty) {
             // L'utilisateur n'existe pas
@@ -544,6 +699,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ success: false, message: 'Erreur lors de la connexion' });
     }
 });
+
 
 
 ///////////////////////////////////// SEARCH SKINS SQL ////////////////////////////////////////////////////////
@@ -572,23 +728,60 @@ app.post('/login', async (req, res) => {
 
 ///////////////////////////////////// SEARCH SKINS NOSQL ////////////////////////////////////////////////////////
 
+// app.post('/search-skins', async (req, res) => {
+//     try {
+//         const searchTerm = req.body.searchTerm.toLowerCase();
+
+//         const snapshot = await db.collection('skins')
+//             .where('name', '>=', searchTerm)
+//             .where('name', '<=', searchTerm + '\uf8ff')
+//             .get();
+
+//         const results = [];
+
+//         const promises = snapshot.docs.map(async (doc) => {
+//             const skinData = doc.data();
+//             const rarityData = await db.collection('rarity').doc(skinData.id_rarity).get();
+//             const armeData = await db.collection('armes').doc(skinData.id_arme).get();
+
+//             const result = {
+//                 name: skinData.name,
+//                 rarity_name: rarityData.data().name,
+//                 image: skinData.image,
+//                 arme_name: armeData.data().name
+//             };
+
+//             results.push(result);
+//         });
+
+//         await Promise.all(promises);
+
+//         res.json({ success: true, results });
+//     } catch (error) {
+//         console.error('Erreur lors de la recherche des skins :', error);
+//         res.status(500).json({ success: false, message: 'Erreur lors de la recherche des skins' });
+//     }
+// });
+
 app.post('/search-skins', async (req, res) => {
     try {
         const searchTerm = req.body.searchTerm.toLowerCase();
 
         // Requête Firestore pour la recherche par nom de skin
-        const snapshot = await db.collection('skins')
-            .where('name', '>=', searchTerm)
-            .where('name', '<=', searchTerm + '\uf8ff')
-            .get();
+        const skinQuery = query(collection(db, 'skins'),
+            where('name', '>=', searchTerm),
+            where('name', '<=', searchTerm + '\uf8ff')
+        );
+
+        const snapshot = await getDocs(skinQuery);
 
         const results = [];
 
         // Utilisez Promise.all pour traiter les opérations asynchrones en parallèle
         const promises = snapshot.docs.map(async (doc) => {
             const skinData = doc.data();
-            const rarityData = await db.collection('rarity').doc(skinData.id_rarity).get();
-            const armeData = await db.collection('armes').doc(skinData.id_arme).get();
+            const rarityData = await getDoc(doc(db, 'rarity', skinData.id_rarity));
+            const armeData = await getDoc(doc(db, 'armes', skinData.id_arme));
 
             const result = {
                 name: skinData.name,
@@ -609,8 +802,6 @@ app.post('/search-skins', async (req, res) => {
         res.status(500).json({ success: false, message: 'Erreur lors de la recherche des skins' });
     }
 });
-
-
 
 ///////////////////////////////////// DELETE USER SQL ////////////////////////////////////////////////////////
 
@@ -642,6 +833,24 @@ app.post('/search-skins', async (req, res) => {
 ///////////////////////////////////// DELETE USER NOSQL ////////////////////////////////////////////////////////
 
 
+// app.post('/deleteUser/:userId', async (req, res) => {
+//     if (!req.session.logUser || !req.session.logUser.isAdmin) {
+//         return res.status(403).send("Accès non autorisé");
+//     }
+
+//     const userIdToDelete = req.params.userId;
+
+//     try {
+//         await db.collection('profile').doc(userIdToDelete).delete();
+
+//         console.log("userIdToDelete :", userIdToDelete);
+//         return res.status(200).send("Utilisateur supprimé avec succès");
+//     } catch (error) {
+//         console.error('Erreur lors de la suppression de l\'utilisateur :', error);
+//         return res.status(500).send("Erreur lors de la suppression de l'utilisateur");
+//     }
+// });
+
 app.post('/deleteUser/:userId', async (req, res) => {
     // Assurez-vous que l'utilisateur est un administrateur
     if (!req.session.logUser || !req.session.logUser.isAdmin) {
@@ -652,7 +861,7 @@ app.post('/deleteUser/:userId', async (req, res) => {
 
     try {
         // Supprimer l'utilisateur de la collection 'profile'
-        await db.collection('profile').doc(userIdToDelete).delete();
+        await deleteDoc(doc(db, 'profile', userIdToDelete));
 
         // Logique de suppression réussie
         console.log("userIdToDelete :", userIdToDelete);
@@ -720,6 +929,45 @@ app.post('/deleteUser/:userId', async (req, res) => {
 ///////////////////////////////////// ACHAT NOSQL ////////////////////////////////////////////////////////
 
 
+// app.post('/charge', async (req, res) => {
+//     try {
+//         const token = req.body.token;
+//         const montantEnEuros = parseFloat(req.body.montant);
+
+//         if (!req.session.logUser) {
+//             return res.json({ success: false, message: 'Utilisateur non connecté' });
+//         }
+
+//         const userId = req.session.logUser.id;
+
+//         let quantiteMonnaie = 0;
+
+//         if (montantEnEuros === 5) {
+//             quantiteMonnaie = 5000;
+//         } else if (montantEnEuros === 10) {
+//             quantiteMonnaie = 10000;
+//         } else if (montantEnEuros === 20) {
+//             quantiteMonnaie = 20000;
+//         } else if (montantEnEuros === 50) {
+//             quantiteMonnaie = 50000;
+//         } else {
+//         }
+
+//         const userDoc = await db.collection('profile').doc(userId).get();
+//         const user = userDoc.data();
+
+//         const nouveauSolde = user.money + quantiteMonnaie;
+
+//         await db.collection('profile').doc(userId).update({ money: nouveauSolde });
+
+//         res.json({ success: true, message: 'Paiement réussi', nouveauSolde: nouveauSolde });
+//     } catch (error) {
+//         console.error('Erreur de paiement :', error);
+//         res.json({ success: false, message: 'Erreur de paiement - ' + error.message });
+//     }
+// });
+
+
 app.post('/charge', async (req, res) => {
     try {
         const token = req.body.token;
@@ -747,14 +995,20 @@ app.post('/charge', async (req, res) => {
         }
 
         // Récupérer l'utilisateur actuel
-        const userDoc = await db.collection('profile').doc(userId).get();
+        const userDocRef = doc(db, 'profile', userId);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists()) {
+            return res.json({ success: false, message: 'Utilisateur non trouvé' });
+        }
+
         const user = userDoc.data();
 
         // Calculer le nouveau solde
         const nouveauSolde = user.money + quantiteMonnaie;
 
         // Mettre à jour la base de données avec le nouveau solde
-        await db.collection('profile').doc(userId).update({ money: nouveauSolde });
+        await updateDoc(userDocRef, { money: nouveauSolde });
 
         res.json({ success: true, message: 'Paiement réussi', nouveauSolde: nouveauSolde });
     } catch (error) {
@@ -791,19 +1045,54 @@ app.post('/charge', async (req, res) => {
 ////////////////////////////////// MONEY NOSQL//////////////////////////////////////
 
 
+// app.post('/UpdateMoney', async (req, res) => {
+//     try {
+//         const change = req.body.change;
+//         const userId = req.session.logUser.id;
+//         const userMoney = req.session.logUser.money;
+//         let resultMoney = userMoney + change;
+
+//         if (resultMoney < 0) {
+//             resultMoney = 0;
+//         }
+
+//         // Récupérer l'utilisateur actuel
+//         const userDoc = await db.collection('profile').doc(userId).get();
+//         const user = userDoc.data();
+
+//         // Calculer le nouveau solde
+//         const nouveauSolde = user.money + change;
+
+//         if (nouveauSolde < 0) {
+//             return res.status(400).json({ success: false, message: 'Le solde ne peut pas être négatif' });
+//         }
+
+//         // Mettre à jour la base de données avec le nouveau solde
+//         await db.collection('profile').doc(userId).update({ money: nouveauSolde });
+
+//         console.log('User money Updated:', nouveauSolde);
+//         req.session.logUser.money = nouveauSolde;
+//         res.json({ success: true });
+//     } catch (error) {
+//         console.error('Erreur lors de la mise à jour de la money dans la base de données:', error);
+//         return res.status(500).json({ success: false, error: 'Erreur lors de la mise à jour de la money dans la base de données' });
+//     }
+// });
+
+
 app.post('/UpdateMoney', async (req, res) => {
     try {
         const change = req.body.change;
         const userId = req.session.logUser.id;
-        const userMoney = req.session.logUser.money;
-        let resultMoney = userMoney + change;
-
-        if (resultMoney < 0) {
-            resultMoney = 0;
-        }
 
         // Récupérer l'utilisateur actuel
-        const userDoc = await db.collection('profile').doc(userId).get();
+        const userDocRef = doc(db, 'profile', userId);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists()) {
+            return res.json({ success: false, message: 'Utilisateur non trouvé' });
+        }
+
         const user = userDoc.data();
 
         // Calculer le nouveau solde
@@ -814,7 +1103,7 @@ app.post('/UpdateMoney', async (req, res) => {
         }
 
         // Mettre à jour la base de données avec le nouveau solde
-        await db.collection('profile').doc(userId).update({ money: nouveauSolde });
+        await updateDoc(userDocRef, { money: nouveauSolde });
 
         console.log('User money Updated:', nouveauSolde);
         req.session.logUser.money = nouveauSolde;
@@ -824,7 +1113,6 @@ app.post('/UpdateMoney', async (req, res) => {
         return res.status(500).json({ success: false, error: 'Erreur lors de la mise à jour de la money dans la base de données' });
     }
 });
-
 
 /*END*/
 
