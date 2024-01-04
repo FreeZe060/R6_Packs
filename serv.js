@@ -138,6 +138,17 @@ app.get('/opening:id', (req, res) => {
     });;
 });
 
+app.get('/achat', (req, res) => {
+    const logUser = res.locals.logUser;
+    res.render('achat', { profile: logUser });
+});
+
+app.get('/paiement', (req, res) => {
+    const montant = req.query.montant;
+    const logUser = res.locals.logUser;
+    res.render('payment', { profile: logUser, montant });
+});
+
 /////////////////////////////INVENTARE///////////////////////////////////
 
 // app.get('/inventaire', (req, res) => {
@@ -186,6 +197,7 @@ app.post('/saveSelectedSkin', (req, res) => {
         });
     });
 });
+
 
 
 //////////////////////////////////////////// ROUTE POST /////////////////////////////////////////////////////////////////
