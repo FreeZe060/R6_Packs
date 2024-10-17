@@ -151,25 +151,24 @@ app.get('/paiement', (req, res) => {
 
 /////////////////////////////INVENTARE///////////////////////////////////
 
-app.get('/inventaire', (req, res) => {
-    const userId = req.session.logUser.id; // Use req.session.logUser.id here
+// app.get('/inventaire', (req, res) => {
+//     const userId = req.session.logUser.id; 
 
-    // Récupérer les informations sur le skin à partir de la table d'inventaire
-    connection.query('SELECT relations_skins_armes.id_skin, skins.name, skins.image '+ 
-    'FROM inventaire '+
-    'JOIN relations_skins_armes ON inventaire.id_skin = relations_skins_armes.id '+
-    'JOIN skins ON relations_skins_armes.id_skin = skins.id '+
-    'WHERE inventaire.id_profile = ?', [userId], (error, results) => {
+  
+//     connection.query('SELECT relations_skins_armes.id_skin, skins.name, skins.image '+ 
+//     'FROM inventaire '+
+//     'JOIN relations_skins_armes ON inventaire.id_skin = relations_skins_armes.id '+
+//     'JOIN skins ON relations_skins_armes.id_skin = skins.id '+
+//     'WHERE inventaire.id_profile = ?', [userId], (error, results) => {
 
-        if (error) {
-            console.error('Erreur lors de la récupération des skins de l\'inventaire:', error);
-            return res.status(500).json({ success: false, error: 'Erreur lors de la récupération des skins de l\'inventaire' });
-        }
+//         if (error) {
+//             console.error('Erreur lors de la récupération des skins de l\'inventaire:', error);
+//             return res.status(500).json({ success: false, error: 'Erreur lors de la récupération des skins de l\'inventaire' });
+//         }
 
-        // Rendre la vue EJS avec les données de l'inventaire
-        res.render('inventaire', { profile: req.session.logUser, inventory: results }); // Use req.session.logUser here
-    });
-});
+//         res.render('inventaire', { profile: req.session.logUser, inventory: results }); 
+//     });
+// });
 
 
 ///////////////////////////////////// SAVESKINS ////////////////////////////////////////////////////////
