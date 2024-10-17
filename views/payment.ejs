@@ -8,21 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="icon" href="r6_pack.png" type="image/x-icon">
-    <!-- Inclure le script Stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="javascript/com_serveur.js" defer></script>
     <script src="javascript/popup_profile.js" defer></script>
 </head>
 <body>
     <header>
-        <!-- Barre de navigation (navbar) -->
         <div class="navbar">
             <a id="lien" href="/">Home</a>
             <a id="lien" href="/skins">Skins</a>
             <a id="lien" href="/test">About</a>
             <% if (profile != undefined) { %>
                 <a id="lien" href="/profiles">Les profiles</a>
-                <!-- Afficher l'image de l'utilisateur -->
                 <div id="profile-container" class="profile-container">
                     <p><%= profile.username %></p>
                     <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
@@ -35,7 +32,6 @@
                     <img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur">
                 </div>
             <% } else { %>
-                <!-- Afficher le bouton de connexion -->
                 <div class="log-container">
                     <a id="loginButton" class="case-button">LogIn</a>
                 </div>
@@ -74,7 +70,6 @@
     <div id="loginPopup" style="display: none;">
         <form id="loginForm" action="/login" method="post">
             <h1 class="title_creation">Connectez-vous</h1>
-            <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
             <label for="usernameLogin">Nom d'utilisateur:</label>
             <input type="text" id="usernameLogin" name="usernameLogin" required>
             
@@ -87,13 +82,11 @@
         <button id="closePopup">Fermer</button>
     </div>
 
-    <!-- Formulaire de paiement avec des éléments Stripe -->
     <div class="panier">
         <h1 class="titre_payment">Votre panier</h1>
         <div class="container_payment">
             <h1>Effectuer le paiement : <%= montant %> euros</h1>
             <form action="/charge" method="post" id="payment-form">
-                <!-- Les champs du formulaire -->
                 <input type="text" id="card-holder-name" placeholder="Nom du titulaire de la carte" required>
                 <div id="card-element"></div>
                 <button class="payment" type="submit">Payer</button>
@@ -104,7 +97,6 @@
     <script>
         var stripe = Stripe('pk_test_51OGlUbJjPngOvvrwWcAhhoygGj6zit4X6ofFfmrM1aHHxqLtCy7ahnnTh7w2UT4EQcNoh5zv6Oeb7UNPGlJ3JMO200MdhezJYv');
     </script>
-    <!-- Script JavaScript pour gérer les paiements avec Stripe -->
     <script>
         
         var elements = stripe.elements();
@@ -130,7 +122,7 @@
         });
 
         function stripeTokenHandler(token) {
-            const montant = '<%= montant %>'; // Montant en euros
+            const montant = '<%= montant %>'; 
             fetch('/charge', {
                 method: 'POST',
                 headers: {
@@ -140,11 +132,10 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message); // Afficher le message de confirmation
+                alert(data.message); 
                 if (data.success) {
-                    // Mettre à jour la monnaie affichée sur la page
                     document.getElementById('money-display').textContent = data.nouveauSolde;
-                    window.location.href = '/'; // Rediriger vers la page d'accueil après le paiement
+                    window.location.href = '/'; 
                 } else {
                     console.error('Erreur lors de la mise à jour de la monnaie:', data.message);
                 }

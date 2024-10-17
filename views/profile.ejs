@@ -13,7 +13,6 @@
     <body>
 
         <header>
-            <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
                 <a id="lien" href="/skins">Skins</a>
@@ -58,7 +57,6 @@
                 <!-- <div id-user="<%= profile.id %>" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)"> -->
                 <div id-user="<%= profile.id %>" class="user-container" id="user-container" onmouseover="afficherBoutonSupprimer(this)" onmouseout="cacherBoutonSupprimer(this)">
             
-                    <!-- Bouton "Supprimer" -->
                     <% if (logUser && logUser.isAdmin) { %>
                         <button class="btn-supprimer" onclick="supprimerUtilisateur('<%= profile.id %>')">Supprimer</button>
                     <% } %>

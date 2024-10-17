@@ -16,7 +16,6 @@
 <body>
 
     <header>
-        <!-- Barre de navigation (navbar) -->
         <div class="navbar">
             <a id="lien" href="/">Home</a>
             <a id="lien" href="/skins">Skins</a>
@@ -26,7 +25,6 @@
                 <% if (logUser && logUser.isAdmin) { %>
                     <a id="lien" href="/profiles">Les profiles</a>
                 <% } %>
-                <!-- Afficher l'image de l'utilisateur -->
                 <div id="profile-container" class="profile-container">
                     <p><%= profile.username %></p>
                     <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
@@ -42,7 +40,6 @@
                     <% } %>
                 </div>
             <% } else { %>
-                <!-- Afficher le bouton de connexion -->
                 <div class="log-container">
                     <a id="loginButton" class="case-button">LogIn</a>
                 </div>
@@ -79,7 +76,6 @@
     <div id="loginPopup" style="display: none;">
         <form id="loginForm" action="/login" method="post">
             <h1 class="title_creation">Connectez-vous</h1>
-            <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
             <label for="usernameLogin">Nom d'utilisateur:</label>
             <input type="text" id="usernameLogin" name="usernameLogin" required>
             
@@ -114,7 +110,6 @@
                     <div class="wheel-slice">
                         <div style="background-color: red;"></div>
                     </div>
-                    <!-- ... Ajoutez d'autres divs selon vos besoins ... -->
                 </div>
             </div>
             <% if (logUser && profile.money >= pack.price) { %>

@@ -14,7 +14,6 @@
 
         <!---------------------------- HEADER -------------------------------------->
         <header>
-            <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
                 <a id="lien" href="/skins">Skins</a>
@@ -24,7 +23,6 @@
                     <% if (logUser && logUser.isAdmin) { %>
                         <a id="lien" href="/profiles">Les profiles</a>
                     <% } %>
-                    <!-- Afficher l'image de l'utilisateur -->
                     <div id="profile-container" class="profile-container">
                         <p><%= profile.username %></p>
                         <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
@@ -37,7 +35,6 @@
                         <a href="/test"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
                     </div>
                 <% } else { %>
-                    <!-- Afficher le bouton de connexion -->
                     <div class="log-container">
                         <a id="loginButton" class="case-button">LogIn</a>
                     </div>
@@ -76,7 +73,6 @@
         <div id="loginPopup" style="display: none;">
             <form id="loginForm" action="/login" method="post">
                 <h1 class="title_creation">Connectez-vous</h1>
-                <!-- Ajoutez les champs nécessaires pour le formulaire de connexion -->
                 <label for="usernameLogin">Nom d'utilisateur:</label>
                 <input type="text" id="usernameLogin" name="usernameLogin" required>
                 
@@ -96,9 +92,7 @@
             <div class="pack-container">
                 <% packs.forEach(function(pack) { %>
                     <div class="pack">
-                        <!-- <a href="/pack/<%= pack.id %>"> -->
                             <img class="img_pack" src="/image_pack/<%= pack.image %>" alt="Image du Pack">
-                        <!-- </a> -->
                         <p class="name"><%= pack.name %></p>
                         <p class="name"><%= pack.price %><img class="img_user" style="width: 20px; height: 20px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></p> 
                         <a class="case-button" href="/opening<%= pack.id %>">Preview the Pack</a> <!--<%= pack.price %>¤-->
@@ -112,7 +106,6 @@
         <div class="video-container">
             <video autoplay muted loop id="video-background">
                 <source src="mylivewallpapers.com-Rainbow-6-Siege.mp4" type="video/mp4">
-                <!-- Ajoutez des sources supplémentaires pour la compatibilité avec différents navigateurs -->
                 Votre navigateur ne prend pas en charge la balise vidéo.
             </video>
             <div class="gradient-overlay"></div>

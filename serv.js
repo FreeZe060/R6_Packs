@@ -95,7 +95,6 @@ app.get('/profiles', (req, res) => {
 
 
 app.get('/skins', (req, res) => {
-    // Assurez-vous de gérer les erreurs et autres opérations nécessaires
     connection.query('SELECT skins.name, rarity.name as rarity_name, relations_skins_armes.image, armes.name as arme_name FROM relations_skins_armes ' +
     'JOIN skins ON skins.id = relations_skins_armes.id_skin ' +
     'JOIN rarity ON skins.id_rarity = rarity.id ' +
@@ -179,7 +178,6 @@ app.post('/saveSelectedSkin', (req, res) => {
     const userId = req.session.logUser.id;
     console.log('Requête reçue sur /saveSelectedSkin');
     console.log('Skin sélectionné reçu :', selectedSkinName);
-    // Récupérer l'ID de la relation skins/armes en fonction du nom du skin sélectionné
     connection.query('SELECT id FROM relations_skins_armes WHERE id_skin = (SELECT id FROM skins WHERE name = ?)', [selectedSkinName], (error, results) => {
         if (error) {
             console.error('Erreur lors de la récupération de l\'ID de la relation skins/armes:', error);
@@ -191,7 +189,6 @@ app.post('/saveSelectedSkin', (req, res) => {
         }
         const relationSkinsArmesId = results[0].id;
         console.log(results[0].id);
-        // Mettre à jour la table inventaire avec l'ID de la relation skins/armes et l'ID du profil
         connection.query('INSERT INTO inventaire (id_skin, id_profile) VALUES (?, ?) ON DUPLICATE KEY UPDATE id_skin = VALUES(id_skin)', [relationSkinsArmesId, userId], (inventaireError, inventaireResults) => {
             if (inventaireError) {
                 console.error('Erreur lors de la mise à jour de la table inventaire:', inventaireError);
@@ -238,15 +235,12 @@ app.post('/register', async (req, res) => {
     const nom = req.body.nom;
 
     const selectedImg = req.body.selectedImg;
-    // Convertir la chaîne base64 en données binaires
     const imageBuffer = Buffer.from(selectedImg, 'base64');
     const fileName = `${username}_${Date.now()}.png`;
     const filePath = `./assets/image_user/${fileName}`;
 
-    // Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insérer l'utilisateur dans la base de données avec le nom, le mot de passe haché et l'image choisie
     connection.query('INSERT INTO profile (username, hashed_password, name, image, money) VALUES (?, ?, ?, ?, ?)', [username, hashedPassword, nom, fileName || null, 10000], (error, results) => {
         if (error) {
             console.error('Erreur lors de l\'inscription : ' + error.message);
@@ -283,7 +277,6 @@ app.post('/login', async (req, res) => {
         }
 
         if (results.length === 0) {
-            // L'utilisateur n'existe pas
             return res.json({ success: false, message: 'L\'utilisateur n\'existe pas' });
         }
 
@@ -294,7 +287,6 @@ app.post('/login', async (req, res) => {
             req.session.logUser = results[0];
             return res.json({ success: true, message: 'Connexion réussie' });
         } else {
-            // Mot de passe incorrect
             return res.json({ success: false, message: 'Nom d\'utilisateur ou mot de passe incorrect' });
         }
     });
@@ -307,7 +299,6 @@ app.post('/login', async (req, res) => {
 app.post('/search-skins', async (req, res) => {
     const searchTerm = req.body.searchTerm;
 
-    // Requête SQL pour la recherche par nom de skin
     const query = "SELECT skins.name, rarity.name as rarity_name, relations_skins_armes.image, armes.name as arme_name " +
                   "FROM relations_skins_armes " +
                   "JOIN skins ON skins.id = relations_skins_armes.id_skin " +
@@ -321,7 +312,6 @@ app.post('/search-skins', async (req, res) => {
             return res.status(500).json({ success: false, message: 'Erreur lors de la recherche des skins' });
         }
 
-        // Renvoie les résultats au client
         res.json({ success: true, results });
     });
 });
@@ -331,7 +321,6 @@ app.post('/search-skins', async (req, res) => {
 
 
 app.post('/deleteUser/:userId', (req, res) => {
-    // Assurez-vous que l'utilisateur est un administrateur
     if (!req.session.logUser || !req.session.logUser.isAdmin) {
         return res.status(403).send("Accès non autorisé");
     }
@@ -339,14 +328,12 @@ app.post('/deleteUser/:userId', (req, res) => {
     const userIdToDelete = req.params.userId;
 
     try {
-        // Exemple avec la connexion MySQL
         connection.query('DELETE FROM profile WHERE id = ?', [userIdToDelete], (error, results) => {
             if (error) {
                 console.error('Erreur lors de la suppression de l\'utilisateur : ' + error.message);
                 return res.status(500).send("Erreur lors de la suppression de l'utilisateur");
             }
 
-            // Logique de suppression réussie
             console.log("userIdToDelete :", userIdToDelete);
             return res.status(200).send("Utilisateur supprimé avec succès");
         });
@@ -365,7 +352,6 @@ app.post('/charge', async (req, res) => {
         const token = req.body.token;
         const montantEnEuros = parseFloat(req.body.montant);;
 
-        // Assurez-vous que l'utilisateur est connecté
         if (!req.session.logUser) {
             return res.json({ success: false, message: 'Utilisateur non connecté' });
         }
@@ -383,10 +369,8 @@ app.post('/charge', async (req, res) => {
         } else if (montantEnEuros === 50) {
             quantiteMonnaie = 50000;
         } else {
-            // Gérer d'autres montants si nécessaire
         }
 
-        // Récupérer l'utilisateur actuel
         connection.query('SELECT * FROM profile WHERE id = ?', [userId], async (error, results) => {
             if (error) {
                 console.error('Erreur lors de la récupération de l\'utilisateur : ' + error.message);
@@ -395,10 +379,8 @@ app.post('/charge', async (req, res) => {
 
             const user = results[0];
 
-            // Calculer le nouveau solde
             const nouveauSolde = user.money + quantiteMonnaie;
 
-            // Mettre à jour la base de données avec le nouveau solde
             connection.query('UPDATE profile SET money = ? WHERE id = ?', [nouveauSolde, userId], (updateError, updateResults) => {
                 if (updateError) {
                     console.error('Erreur lors de la mise à jour de la monnaie : ' + updateError.message);
@@ -409,7 +391,6 @@ app.post('/charge', async (req, res) => {
             });
         });
     } catch (error) {
-        // Gérer les erreurs
         console.error('Erreur de paiement :', error);
         res.json({ success: false, message: 'Erreur de paiement - ' + error.message });
     }

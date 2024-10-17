@@ -14,42 +14,36 @@
     }
     
     function easeOutSlow(t) {
-        return 1 - Math.pow(1 - t, 6); // Ajustez le facteur d'accélération ici
+        return 1 - Math.pow(1 - t, 6); 
     }
-    
+    document.getElementsByClassName
     function spinWheel(timestamp) {
         if (!animationStartTime) {
             animationStartTime = timestamp;
         }
         
         const progress = timestamp - animationStartTime;
-        const duration = 9000; // Durée totale de l'animation en millisecondes
+        const duration = 9000; 
         
         if (progress < duration && isAnimating) {
-            // Défilement fluide avec ralentissement progressif
             let scrollDistance;
             
             if (duration - progress <= 5000 && !slowdownStarted) {
-                // Ralentissement progressif avec une fonction d'accélération
                 slowdownStarted = true;
                 const remainingTime = duration - progress;
-                const easing = easeOutSlow(1 - remainingTime / 5000); // Ajustez la fonction d'accélération si nécessaire
+                const easing = easeOutSlow(1 - remainingTime / 5000); 
                 scrollDistance = (progress / duration) * 2890 - 500 * easing;
             } else {
                 scrollDistance = (progress / duration) * 2890;
             }
             
-            // Met à jour la position de la roue
             wheel.style.transform = `translateX(-${scrollDistance}px)`;
             
-            // Positionne le curseur au milieu de la roue
             const cursorPosition = wheelContainer.offsetLeft + (wheel.offsetWidth / 2);
             cursor.style.left = `${cursorPosition}px`;
             
-            // Continue l'animation
             requestAnimationFrame(spinWheel);
         } else {
-            // Animation terminée, réinitialise les variables
             animationStartTime = null;
             isAnimating = false;
             slowdownStarted = false;
@@ -91,22 +85,18 @@
 
                 }, 1000);
             }
-            // Affiche le résultat sous le curseur
         }
     }
     
     function startAnimation() {
         startAchat();
-        // Réinitialise la variable de l'index de la slice gagnante
         resetWinningSliceIndex();
         
         wheelContainer.style.display = "flex";
         pack.style.display = "none";
-        // Réinitialise la position de la roue
         wheel.style.transform = 'translateX(0)';
         button_loterie.style.display = "none";
         
-        // Active l'animation
         isAnimating = true;
         requestAnimationFrame(spinWheel);
     }
@@ -116,7 +106,6 @@
         const cursorRect = cursor.getBoundingClientRect();
         const slices = document.querySelectorAll('.wheel-slice');
 
-        // Parcourez les slices pour trouver celle sous le curseur
         slices.forEach((slice, index) => {
             const sliceRect = slice.getBoundingClientRect();
 
@@ -126,7 +115,6 @@
                 cursorRect.top >= sliceRect.top &&
                 cursorRect.bottom <= sliceRect.bottom
             ) {
-                // Stockez l'index de la slice sous le curseur
                 winningSliceIndex = index;
                 winningSliceDiv = slice;
                 saveSelectedSkin();

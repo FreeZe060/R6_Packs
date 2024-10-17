@@ -25,32 +25,24 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function previewImage() {
-    // Récupérer les éléments HTML nécessaires
     const selectedImageContainer = document.getElementById('selected-image');
     const imageScrollContainer = document.getElementById('image-scroll');
 
-    // Réinitialiser l'image sélectionnée
     selectedImageContainer.innerHTML = '';
 
-    // Récupérer le fichier d'image sélectionné par l'utilisateur
     const selectedImgInput = document.getElementById('selectedImg');
     const selectedImgFile = selectedImgInput.files[0];
 
-    // Vérifier s'il y a un fichier sélectionné
     if (selectedImgFile) {
-        // Créer une URL objet pour l'image sélectionnée
         const selectedImgURL = URL.createObjectURL(selectedImgFile);
 
-        // Afficher l'image sélectionnée dans la popup
         const selectedImg = document.createElement('img');
         selectedImg.src = selectedImgURL;
         selectedImageContainer.appendChild(selectedImg);
 
-        // Ajouter l'image sélectionnée à la barre de défilement (miniature)
         const scrollImage = document.createElement('img');
         scrollImage.src = selectedImgURL;
         scrollImage.onclick = () => {
-            // Mettre à jour l'image principale lorsqu'on clique sur une miniature
             selectedImageContainer.innerHTML = '';
             selectedImageContainer.appendChild(scrollImage);
         };
@@ -65,7 +57,6 @@ function previewImage() {
         })
         .then(response => response.json())
         .then(data => {
-            // Traiter la réponse du serveur (par exemple, mettre à jour la photo de profil dans la base de données)
             console.log('Image stockée avec succès', data);
             selectedImg.src = data.url;
         })

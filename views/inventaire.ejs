@@ -12,7 +12,6 @@
     
     <body>
         <header>
-            <!-- Barre de navigation (navbar) -->
             <div class="navbar">
                 <a id="lien" href="/">Home</a>
                 <a id="lien" href="/skins">Skins</a>
@@ -22,7 +21,6 @@
                     <% if (logUser && logUser.isAdmin) { %>
                         <a id="lien" href="/profiles">Les profiles</a>
                     <% } %>
-                    <!-- Afficher l'image de l'utilisateur -->
                     <div id="profile-container" class="profile-container">
                         <p><%= profile.username %></p>
                         <img class="img_user" id="imgHover" style="width: 60px; height: 60px;" src="/image_user/<%= profile.image %>" alt="Image de l'utilisateur">
@@ -35,7 +33,6 @@
                         <a href="/test"><img class="img_user" style="width: 30px; height: 30px;" src="/SkinR6//RenoR6/R6S-renown-icon.jpg" alt="Image de l'utilisateur"></a>
                     </div>
                 <% } else { %>
-                    <!-- Afficher le bouton de connexion -->
                     <div class="log-container">
                         <a id="loginButton" class="case-button">LogIn</a>
                     </div>
