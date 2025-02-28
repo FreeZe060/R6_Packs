@@ -25,10 +25,10 @@ app.set('views', path.join(__dirname, 'views'));
 /* Base de données SQL*/
 
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'r6_packs'
+    host: 'sql7.freesqldatabase.com',
+    user: 'sql7765245',
+    password: '16Bfxd19En',
+    database: 'sql7765245'
 };
 
 const connection = mysql.createConnection(dbConfig);
