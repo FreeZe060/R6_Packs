@@ -28,7 +28,7 @@ const dbConfig = {
     host: 'sql7.freesqldatabase.com',
     user: 'sql7765245',
     password: '16Bfxd19En',
-    database: 'sql7765245'
+    database: 'sql7765245',
 };
 
 const connection = mysql.createConnection(dbConfig);
