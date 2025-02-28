@@ -4,7 +4,6 @@
     "description": "Case opening but in r6",
     "main": "serv.js",
     "scripts": {
-        "postinstall": "npm rebuild bcrypt --unsafe-perm",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
