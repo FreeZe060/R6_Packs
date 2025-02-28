@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 const stripe = require('stripe')('sk_test_51OGlUbJjPngOvvrw1zgffcUbkQoFplGBMNRGrHfxsGttXvp0sNcgMkStDxLuYRAUlp564BxZmv18MdGchifQZ4NC005QMUQG57');
 const app = express();
-const port = 3306;
+const port = 8000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +28,7 @@ const dbConfig = {
     host: 'sql7.freesqldatabase.com',
     user: 'sql7765245',
     password: '16Bfxd19En',
-    database: 'sql7765245'
+    database: 'sql7765245',
 };
 
 const connection = mysql.createConnection(dbConfig);
